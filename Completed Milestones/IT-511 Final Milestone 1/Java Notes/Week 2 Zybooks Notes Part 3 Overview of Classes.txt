@@ -1,0 +1,412 @@
+
+#############################################
+CLASSES: AN INTRODUCTION
+
+The class construct defines a new type that can group data and methods to form an object. 
+
+The below code defines and uses a class named RunnerInfo. This section first focuses on how to use a class:
+
+Figure 3.1.1: Simple class example: RunnerInfo.
+
+public class RunnerInfo {
+
+   // The class' private internal fields
+   private int timeRun;
+   private double distRun;
+
+   // The class' public methods
+
+   // Set time run in seconds
+   public void setTime(int timeRunSecs) {
+      timeRun = timeRunSecs;  // timeRun refers to class member
+      return;
+   }
+
+   // Set distance run in miles
+   public void setDist(double distRunMiles) {
+      distRun = distRunMiles;
+      return;
+   }
+
+   // Get speed in miles/hour
+   public double getSpeedMph() {
+      // miles / (sec / (3600sec/hr))
+      return distRun / (timeRun / 3600.0);
+   }
+}
+import java.util.Scanner;
+
+public class RunnerTimes {
+   public static void main(String[] args) {
+      Scanner scnr = new Scanner(System.in);
+      // User-created object of class type RunnerInfo
+      RunnerInfo runner1 = new RunnerInfo();
+      // A second object
+      RunnerInfo runner2 = new RunnerInfo();   
+
+      runner1.setTime(360);
+      runner1.setDist(1.2);
+
+      runner2.setTime(200);
+      runner2.setDist(0.5);
+
+      System.out.println("Runner1's speed in MPH: " + runner1.getSpeedMph());
+      System.out.println("Runner2's speed in MPH: " + runner2.getSpeedMph());
+
+      return;
+   }
+}
+
+An object involves data and methods, whereas a typical variable is just data. Like an engineer building multiple bridges 
+from a single blueprint, a programmer can create multiple objects from a single class definition.
+
+Calling a class member method for an object:
+
+objectName.memberMthd();
+
+A member method is a method that is part of (a "member of") a class. The member methods are (typically) listed after the 
+public access modifier in the class definition. A member-method call uses the "." operator, known as the member access 
+operator.
+
+The class user need only use a class' public member methods, called the class interface, and need not directly access 
+internal variables of the class.
+
+Creating an object actually consists of two steps. The first is to declare a variable of class type, known as a reference 
+variable, or reference type. The second is to explicitly allocate an instance of the class type, known as an object. The 
+new operator is used to explicitly allocate an object.
+
+Creating an object using the new operator:
+
+ClassName variableName = new ClassName();
+Example:
+RunnerInfo winningRunner = new RunnerInfo();
+      
+winningRunner.setTime(1080);
+winningRunner.setDist(3.0);
+      
+System.out.print("Winner's speed in MPH: ");
+System.out.println(winningRunner.getSpeedMph());
+
+Q/AN
+In a single statement, type a variable declaration that creates a reference variable named runnerJoe and creates a new 
+object of class type RunnerInfo:
+
+RunnerInfo runnerJoe = new RunnerInfo();
+
+Type a statement that creates an object firstRunner, followed by a statement that creates an object secondRunner, both of 
+class type RunnerInfo:
+
+RunnerInfo firstRunner = new RunnerInfo();
+RunnerInfo secondRunner = new RunnerInfo();
+
+Object runner1 is of type RunnerInfo. Type a statement that sets runner1's time to 100.
+
+runner1.setTime(100);
+
+######################################################
+
+Defining a class
+
+To define a class, a programmer starts by naming the class, declaring private member variables, and declaring public member 
+methods, as in the initial highlighted text for the RunnerInfo class above. A class' member variables are known as fields. 
+A class' fields and methods are collectively called class members. The programmer declares each field after the private 
+access modifier, making clear that a class user cannot directly access the fields. 
+
+Defining a class by naming the class and declaring its members.
+
+public class ClassName {
+   // Private fields
+   private type fieldName;
+
+   // Public member methods
+   public type memberMthd(parameters) {
+   }
+}
+
+Next, the programmer defines the details of each member method, sometimes called the class' implementation. 
+An example from above is shown again below:
+
+Defining a member method setTime for class RunnerInfo.
+public class RunnerInfo {
+   // ...
+   
+   // Set time run in seconds
+   public void setTime(int timeRunSecs) { 
+      timeRun = timeRunSecs;  // timeRun refers to class member
+      return;
+   }
+
+   // ...
+}
+
+Type the first line of a class definition for a class named Employee, ending with {:
+	public class Employee {
+
+Declare a private field named salary of type int:
+	private int salary; (Just like a normal variable declaration)
+	
+Type the first line for a public member method named setSalary, having parameter int salaryAmount and returning void, 
+ending with {:
+
+public void setSalary(int salaryAmount) {
+
+The method definition starts with the access modifier, return type, method name, and parameters.
+
+Type the statement within member method setSalary that assigns the value of parameter salaryAmount to field salary.
+salary = salaryAmount;
+
+Type the first line for a public member method getSalary, having no parameters and returning int, ending with {.
+	public int getSalary() { 
+
+This method declaration should include keyword public to inform the compiler that the method can be called by a class user.
+
+Suppose a user declared: Employee clerk1 = new Employee();. Using information from earlier questions, type a statement that 
+sets clerk1's salary to 20000.
+	clerk1.setSalary(20000);
+	
+The user can use the member method to set the employee's salary.
+
+###################################################################
+To compile a Java program consisting of multiple source files, the programmer must provide a complete list of all Java 
+source files to the Java compiler. For example, to compile the above program, which consists of two source files named 
+RunnerInfo.java and RunnerTimes.java, the programmer would run the command javac RunnerInfo.java RunnerTimes.java. A user 
+can then run the program using the command java RunnerTimes. When running a Java program, the user must provide the name 
+of the class containing main().
+
+Write a command using the Java compiler to compile a program consisting of classes Ingredient, Recipe, and FamilyCookbook. 
+Preserve this class ordering.
+	javac Ingredient.java Recipe.java FamilyCookbook.java
+
+Assuming the FamilyCookbook class contains a main method(), write a command to run the program.
+	java FamilyCookbook	
+
+3.1.6: Class example: Right triangle.
+
+
+import java.lang.Math;
+
+public class RightTriangle {
+   private double side1;
+   // FIXME: Declare side2
+
+   public void setSide1(double side1Val) {
+      side1 = side1Val;
+
+      return;
+   }
+
+   // FIXME: Define setSide2()
+
+   public double getHypotenuse() {
+      return -1.0; // FIXME: temporary until side2 defined
+      // return Math.sqrt((side1 * side1) + (side2 * side2));
+   }
+}
+
+
+import java.util.Scanner;
+
+public class HypotenuseCalc {
+   public static void main(String[] args) {
+      Scanner scnr = new Scanner(System.in);
+      RightTriangle triangleA = new RightTriangle();
+
+      triangleA.setSide1(3.0);
+      // FIXME: Set side2 to 4.0
+
+      System.out.println("Hypotenuse: " + triangleA.getHypotenuse());
+      // Should output 5 for the above side values
+
+      return;
+   }
+}
+
+This section taught the common use of classes. The class construct is actually more general. For example, fields could be 
+made public. However, good practice is to make ALL fields of a class private, using member methods to access those fields.
+
+More Examples:
+
+public class CallPerson {
+   public static void main(String [] args) {
+      String userName = "Ron";
+      Person person1 = new Person();
+   
+      person1.setFirstName(userName);
+      System.out.print("I am " + person1.getFirstName());
+   
+      return;
+   }
+
+ EXAMPLES: TWO SOURCE FILES
+CallPerson.java 
+   }
+public class CallPerson {
+   public static void main(String [] args) {
+      String userFirstName = "Ron";
+      String userLastName = "Rogers";
+      Person person1 = new Person();
+   
+      person1.setFirstName(userFirstName);
+      person1.setLastName(userLastName);
+      System.out.print("I am " + person1.getFullName());
+   
+      return;
+   }
+}
+Person.java
+public class Person {
+   private String firstName;
+   private String lastName;
+   
+   public void setFirstName(String firstNameToSet) {
+      firstName = firstNameToSet;
+   }
+   
+   public void setLastName(String lastNameToSet) {
+      lastName = lastNameToSet;
+   }
+   
+   public String getFullName() {
+      return firstName + " " + lastName;
+   }
+}
+
+public class CallPerson {
+   public static void main(String [] args) {
+      String userName = "Joe";
+      String differentUserName = "Sam";
+      Person person1 = new Person();
+   
+      person1.setFirstName(userName);
+      System.out.println("He is not " + person1.getFirstName());
+      person1.setFirstName(differentUserName);
+      System.out.println("He is " + person1.getFirstName());
+   
+      return;
+   }
+}
+
+public class Person {
+   private String firstName;
+
+   public void setFirstName(String firstNameToSet) {
+      firstName = firstNameToSet;
+   }
+   
+   public String getFirstName() {
+      return firstName;
+   }
+}
+
+public class CallPerson {
+   public static void main(String [] args) {
+      String aFirstName = "Ann";
+      String anotherFirstName = "Ron";
+      String aLastName = "Stark";
+      String anotherLastName = "Rogers";
+
+      Person person1 = new Person();
+      Person person2 = new Person();
+      
+      person1.setLastName(aLastName);
+      person1.setFirstName(aFirstName);
+      person2.setLastName(anotherLastName);
+      person2.setFirstName(anotherFirstName);
+
+      System.out.println("You are " + person1.getFullName());
+      System.out.println("I am " + person2.getFullName());
+   
+      return;
+   }
+}
+
+public class Person {
+   private String firstName;
+   private String lastName;
+
+   public void setFirstName(String firstNameToSet) {
+      firstName = firstNameToSet;
+   }
+   
+   public void setLastName(String lastNameToSet) {
+      lastName = lastNameToSet;
+   }
+   
+   public String getFullName() {
+      return firstName + "_" + lastName;
+   }
+}
+// ===== Code from file PersonInfo.java =====
+public class PersonInfo {
+   private int numKids;
+
+   public void setNumKids(int personsKids) {
+      numKids = personsKids;
+      return;
+   }
+
+   public void incNumKids() {
+      numKids = numKids + 1;
+      return;
+   }
+
+   public int getNumKids() {
+      return numKids;
+   }
+}
+// ===== end =====
+
+// ===== Code from file CallPersonInfo.java =====
+public class CallPersonInfo {
+   public static void main (String [] args) {
+      PersonInfo person1 = new PersonInfo();
+
+      person1.setNumKids(3);
+
+      System.out.println("Kids: " + person1.getNumKids());
+      person1.incNumKids();
+      System.out.println("New baby, kids now: " + person1.getNumKids());
+      
+      return;
+   }
+}
+// ===== end =====
+
+// ===== Code from file DogLicense.java =====
+public class DogLicense {
+   private int licenseYear;
+   private int licenseNum;
+
+   public void setYear(int yearRegistered) {
+      licenseYear = yearRegistered;
+      return;
+   }
+
+   // FIXME: Write createLicenseNum()
+
+   public void createLicenseNum(int customID){
+      licenseNum = (customID * 100000) + licenseYear;
+   }
+   
+   public int getLicenseNum() {
+      return licenseNum;
+   }
+}
+// ===== end =====
+
+// ===== Code from file CallDogLicense.java =====
+public class CallDogLicense {
+   public static void main (String [] args) {
+      DogLicense dog1 = new DogLicense();
+
+      dog1.setYear(2014);
+      dog1.createLicenseNum(777);
+      System.out.println("Dog license: " + dog1.getLicenseNum());
+
+      return;
+   }
+}
+// ===== end =====
+
+
+

@@ -1,0 +1,516 @@
+Module 8: Inheritance
+Inheritance is one of the key concepts of object-oriented programming. In simplest terms, inheritance is 
+the principle that a new subclass, also called a derived class, is built that acquires, or inherits, all 
+the features of the parent, also known as a superclass or base class. 
+
+The key concept here is that a programmer can then modify the new class with more specialized attributes 
+and/or behaviors, while at the same time having the existing features of the superclass. 
+
+The key concept here is that a programmer can then modify the new class with more specialized attributes 
+and/or behaviors, while at the same time having the existing features of the superclass. 
+
+11.1 Derived classes
+
+Commonly, one class is similar to another class but with some additions or variations. 
+Such similarity among classes is supported by indicating that a class is derived from another class, as 
+shown below:
+
+GenericItem.java:
+public class GenericItem {
+   public void setName(String newName) {
+      itemName = newName;
+      return;
+   }
+
+   public void setQuantity(int newQty) {
+      itemQuantity = newQty;
+      return;
+   }
+
+   public void printItem() {
+      System.out.println(itemName + " " + itemQuantity);
+      return;
+   }
+
+   protected String itemName;
+   protected int itemQuantity;
+}
+
+ProduceItem.java:
+public class ProduceItem extends GenericItem { // ProduceItem derived from GenericItem
+   public void setExpiration(String newDate) {
+      expirationDate = newDate;
+      return;
+   }
+
+   public String getExpiration() {
+      return expirationDate;
+   }
+
+   private String expirationDate;
+
+   @Override
+   public void printItem() {
+      System.out.println(itemName + " " + itemQuantity
+                                 + " (Expires: " + expirationDate + ")");
+      return;
+   }
+
+}
+
+ClassDerivationEx.java:
+public class ClassDerivationEx {
+   public static void main(String[] args) {
+      GenericItem miscItem = new GenericItem();
+      ProduceItem perishItem = new ProduceItem();
+
+      miscItem.setName("Smith Cereal");
+      miscItem.setQuantity(9);
+      miscItem.printItem();
+
+      perishItem.setName("Apples");
+      perishItem.setQuantity(40);
+      perishItem.setExpiration("May 5, 2012");
+      perishItem.printItem();
+
+      System.out.println("  (Expires: " + perishItem.getExpiration() + ")");
+
+      return;
+   }
+}
+
+The term derived class (or subclass) refers to a class that is derived from another class that is known 
+as a base class (or superclass). Any class may serve as a base class; no changes to the declaration of 
+that class are required. The derived class is said to inherit the properties of its base class, a concept 
+commonly called inheritance. An object defined of a derived class type has access to all the public 
+members of the derived class as well as the public members of the base class. The following animation 
+illustrates the relationship between a derived class and a base class.
+
+11.1.1: Basic inheritance.
+Assign courseStudent's name with Smith, age with 20, and ID with 9999. Use the print member method and 
+a separate println statement to output courseStudents's data. Sample output from the given program:
+
+// ===== Code from file PersonData.java =====
+public class PersonData {
+   private int ageYears;
+   private String lastName;
+
+   public void setName(String userName) {
+      lastName  = userName;
+      return;
+   }
+
+   public void setAge(int numYears) {
+      ageYears = numYears;
+      return;
+   }
+
+   // Other parts omitted
+
+   public void printAll() {
+      System.out.print("Name: " + lastName);
+      System.out.print(", Age: "  + ageYears);
+      return;
+   }
+}
+// ===== end =====
+
+// ===== Code from file StudentData.java =====
+public class StudentData extends PersonData {
+   private int idNum;
+
+   public void setID(int studentId) {
+      idNum = studentId;
+      return;
+   }
+
+   public int getID() {
+      return idNum;
+   }
+}
+// ===== end =====
+
+// ===== Code from file StudentDerivationFromPerson.java =====
+public class StudentDerivationFromPerson {
+   public static void main (String [] args) {
+      StudentData courseStudent = new StudentData();
+
+      courseStudent.setName("Smith");
+      courseStudent.setAge(20);
+      courseStudent.setID(9999);
+      
+      courseStudent.printAll();
+      System.out.println(", ID: " + courseStudent.getID());
+     
+      return;
+   }
+}
+// ===== end =====
+
+11.2 Access by members of derived classes
+The members of a derived class have access to the public members of the base class, but not to the 
+private members of the base class. This is logical—allowing access to all private members of a class 
+merely by creating a derived class would circumvent the idea of private members. Thus, adding the 
+following member method to the earlier ProduceItem class yields a compiler error.
+
+
+public class ProduceItem extends GenericItem {
+
+   ...
+   
+   public void displayProduceItem() {
+      System.out.println(itemName + " " + itemQuantity + 
+                         " (Expires: " + expirationDate + ")");
+   }
+   
+   ...
+}
+Recall that members of a class may have their access specified as public or private. A third access 
+specifier is protected, which provides access to derived classes and other classes in the same package 
+but not by anyone else.
+
+Figure 11.2.2: Access specifiers—Protected allows access by derived classes and classes in the same 
+package but not by others.
+
+BaseClass.java:
+public class BaseClass {
+   public void printMembers() { // Member accessible by anyone
+      // Print information ...
+   }
+   
+   protected String baseName;   // Member accessible by self and derived classes
+   private int baseCount;       // Member accessible only by self
+}
+
+DerivedClass.java:
+public class DerivedClass extends BaseClass {
+   public void someOperation() {
+      // Attempted accesses
+      printMembers();                 // OK
+      baseName = "Mike";              // OK    ("protected" above made this possible)
+      baseCount = 1;                  // ERROR
+   }
+   
+   // Other class members ...
+}
+
+
+Code contains intended errors to demonstrate protected accesses.
+
+BaseClass.java:
+public class BaseClass {
+   public void printMembers() { // Member accessible by anyone
+      // Print information ...
+   }
+   
+   protected String baseName;   // Member accessible by self and derived classes
+   private int baseCount;       // Member accessible only by self
+}
+ 
+DerivedClass.java:
+public class DerivedClass extends BaseClass {
+   public void someOperation() {
+      // Attempted accesses
+      printMembers();                 // OK
+      baseName = "Mike";              // OK    ("protected" above made this possible)
+      baseCount = 1;                  // ERROR
+   }
+   
+   // Other class members ...
+}
+ 
+InheritanceAccessEx.java
+public class InheritanceAccessEx {
+   public static void main (String[] args) {
+      BaseClass baseObj = new BaseClass();
+      DerivedClass derivedObj = new DerivedClass();
+      
+      // Attempted accesses
+      baseObj.printMembers();         // OK
+      baseObj.baseName = "Mike";      // OK (protected also applies to other classes in the same package)
+      baseObj.baseCount = 1;          // ERROR
+      
+      derivedObj.printMembers();      // OK
+      derivedObj.baseName = "Mike";   // OK (protected also applies to other classes in the same package)
+      derivedObj.baseCount = 1;       // ERROR
+      
+      // Other instructions ...
+      
+      return;
+   }
+}
+
+Table 11.2.1: Access specifiers for class members.
+Specifier	    Description
+private	        Accessible by self.
+protected	    Accessible by self, derived classes, and other classes in the same package.
+public	        Accessible by self, derived classes, and everyone else.
+no specifier	Accessible by self and other classes in the same package.
+
+11.3 Overriding member methods
+A derived class may define a member method having the same name as the base class. Such a member method 
+overrides the method of the base class. The following example shows the earlier GenericItem/ProduceItem 
+example where the ProduceItem class has its own printItem() member method that overrides the printItem() 
+method of the GenericItem class.
+
+
+GenericItem.java:
+public class GenericItem {
+   public void setName(String newName) {
+      itemName = newName;
+      return;
+   }
+
+   public void setQuantity(int newQty) {
+      itemQuantity = newQty;
+      return;
+   }
+
+   public void printItem() {
+      System.out.println(itemName + " " + itemQuantity);
+      return;
+   }
+
+   protected String itemName;
+   protected int itemQuantity;
+}
+
+ProduceItem.java:
+public class ProduceItem extends GenericItem { 
+   public void setExpiration(String newDate) {
+      expirationDate = newDate;
+      return;
+   }
+
+   public String getExpiration() {
+      return expirationDate;
+   }
+
+   @Override
+   public void printItem() {
+      System.out.println(itemName + " " + itemQuantity
+              + " (Expires: " + expirationDate + ")");
+      return;
+   }
+   
+   private String expirationDate;
+}
+
+ClassOverridingEx.java:
+public class ClassOverridingEx {
+   public static void main(String[] args) {
+      GenericItem miscItem = new GenericItem();
+      ProduceItem perishItem = new ProduceItem();
+
+      miscItem.setName("Smith Cereal");
+      miscItem.setQuantity(9);
+      miscItem.printItem();    // Calls GenericItem's printItem()
+
+      perishItem.setName("Apples");
+      perishItem.setQuantity(40);
+      perishItem.setExpiration("May 5, 2012");
+      perishItem.printItem(); // Calls ProduceItem's printItem()
+
+      return;
+   }
+}
+
+Overriding differs from overloading. In overloading, methods with the same name must have different 
+parameter types. In overriding, a derived class member method takes precedence over base class member 
+method with the same name and parameter types. Overloading is performed if derived and base member 
+methods have different parameter types; the member method of the derived class does not hide the member 
+method of the base class.
+
+Notice that the annotation @Override appears above the printItem() method definition in the ProduceItem 
+class. Annotations are optional notes beginning with the '@' symbol that can provide the compiler with 
+useful information in order to help the compiler detect errors better. The override annotation lets the 
+compiler know that the programmer intends to define a method that will override a method in a base class. 
+This annotation will cause the compiler to produce an error when a programmer mistakenly specifies 
+parameters that are different from the parameters of the method that should be overridden. 
+
+A good practice is to always include an override annotation with methods that are meant to override 
+methods in a base class.
+
+Challenge Activity11.3.1: Basic derived class member override.
+Define a method printAll() for class PetData that prints output as follows. Hint: Make use of the base 
+class' printAll() method.
+Name: Fluffy, Age: 5, ID: 4444
+
+// ===== Code from file AnimalData.java =====
+public class AnimalData {
+   private int ageYears;
+   private String fullName;
+
+   public void setName(String givenName) {
+      fullName = givenName;
+      return;
+   }
+
+   public void setAge(int numYears) {
+      ageYears = numYears;
+      return;
+   }
+
+   // Other parts omitted
+
+   public void printAll() {
+      System.out.print("Name: "  + fullName);
+      System.out.print(", Age: " + ageYears);
+      return;
+   }
+}
+// ===== end =====
+
+// ===== Code from file PetData.java =====
+public class PetData extends AnimalData {
+   private int idNum;
+
+   public void setID(int petID) {
+      idNum = petID;
+      return;
+   }
+
+   // FIXME: Add printAll() member function
+
+      public void printAll(){
+      super.printAll();
+      System.out.print(", ID: " + idNum);
+}
+}
+// ===== end =====
+
+// ===== Code from file BasicDerivedOverride.java =====
+public class BasicDerivedOverride {
+   public static void main (String [] args) {
+      PetData userPet = new PetData();
+
+      userPet.setName("Fluffy");
+      userPet.setAge (5);
+      userPet.setID  (4444);
+      userPet.printAll();
+      System.out.println("");
+
+      return;
+   }
+}
+// ===== end =====
+
+11.4 The Object class
+Java's built-in Object class serves as the base class for all other classes and does not have a 
+superclass—i.e., the Object class is located at the root of the Java class hierarchy. Thus, all classes, 
+including user-defined classes, implement Object's methods:
+
+toString() --Returns a String representation of the Object. By default, the toString() method returns a 
+String containing the name of the class of which the object is an instance (e.g., the Object class) 
+followed by the object's hexadecimal address in memory.
+
+equals(otherObject) --Compares an Object to another otherObject and returns true if both variables 
+reference the same object. Otherwise, the equals() method returns false. By default, the equals() method 
+tests the equality of the two Object references, not the equality of their contents.
+
+Figure 11.4.1: Using the Object class's toString() method with various class types.
+IntegerWithBase.java:
+public class IntegerWithBase {
+   private int decimalValue;
+   private int baseFormat;
+
+   public IntegerWithBase(int inDecimal, int inBase) {
+      this.decimalValue = inDecimal;
+      this.baseFormat = inBase;
+   }
+
+   @Override
+   public String toString() {
+      int quotientVal = 0;
+      int remainderVal = 0;
+      int dividendVal = 0 ;
+      String resultVal = "";
+
+      dividendVal = decimalValue;
+      
+      if (baseFormat > 1) {
+
+         // Loop iteratively determines each digit
+         do {
+            quotientVal = dividendVal / baseFormat;
+            remainderVal = dividendVal % baseFormat;
+
+            // Append remainder to the result as the new digit
+            resultVal = remainderVal + resultVal;
+
+            dividendVal = quotientVal;
+
+         } while (quotientVal > 0);
+      }
+      else {
+         resultVal = String.valueOf(decimalValue);
+      }
+
+      return resultVal;
+   }
+}
+
+ObjectPrinter.java:
+public class ObjectPrinter {
+   public static void main(String[] args) {
+      Integer tempNum = new Integer(100);
+      IntegerWithBase tempNumInBase4 = new IntegerWithBase(100, 4);
+      Object myObj = new Object();
+
+      // Call toString on each object and print
+      System.out.println("tempNum = " + tempNum.toString());
+      System.out.println("tempNum (base 4) = " + tempNumInBase4.toString());
+      System.out.println("myObj = " + myObj.toString());
+
+      return;
+   }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

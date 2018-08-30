@@ -1,0 +1,128 @@
+/* The following critical elements of the final project are addressed:
+ * Data Types:
+ * A. Utilize appropriate numerical and string data types to represent values for variables and attributes in your program.
+ * B. Populate a list or array that allows the management of a set of values as a single unit in your program.
+ * 
+ * Algorithms and Control Structure:  
+ * A. Utilize expressions or statements that carry out appropriate actions or that make appropriate changes to 
+ * your program’s state as represented in your program’s variables.
+ * B. Employ the appropriate conditional control structures that enable choosing between options in your program.
+ * C. Utilize iterative control structures that repeat actions as needed to achieve the program’s goal.
+ *
+ * Methods: 
+ * A. Use formal parameters that provide local variables in a function’s definition.
+ * B. Use actual parameters that send data as arguments in function calls.
+ * C. Create both value-returning and void functions to be parts of expressions or stand-alone statements in your program.
+ * D. Invoke methods that access the services provided by an object.
+ * E. Describe a user-defined method that provides custom services for an object.
+ * F. Create unit tests that ensure validity of the methods.
+ *
+ * Classes: 
+ * A. Include attributes that allow for encapsulation and information hiding in your program.
+ * B. Include appropriate methods that provide an object’s behaviors.
+ *
+ * Documentation: Utilize inline comments directed toward software engineers for the ongoing maintenance of your program 
+ * that explain the decisions you made in the construction of the classes in your program.
+ *
+ */
+ 
+ #############################################################################################################
+ 
+ //Package Info (will come from netbeans)
+ //Turn in as Recipe.Java
+ 
+ import java.util.Scanner;
+ 
+ import java.util.Arraylist;
+ 
+ //Class Declaration with Instance Variables 
+ 
+ public class Recipe { 
+    
+	private String recipeName;
+    
+    private int servings;
+    
+    ArrayList<String> recipeIngredients = new ArrayList();
+    
+    private int totalRecipeCalories;
+ 
+//Accessors and Mutators for the Instance Variables
+ 
+     public void setRecipeName(String recipeName) {
+        this.recipeName = recipeName;
+    }
+    
+    public String getRecipeName() {
+        return recipeName;
+    }
+    
+    public void setServings(int servings) {
+        this.servings = servings;
+    }
+    
+    public int getServings() {
+        return servings;
+    }
+    
+    public void setRecipeIngredients(ArrayList<String> recipeIngredients) {
+    this.recipeIngredients = recipeIngredients;
+    }
+    
+    public ArrayList<String> getRecipeIngredients() {
+        return recipeIngredients;
+    }
+    
+    public void setTotalRecipeCalories(int totalRecipeCalories) {
+        this.totalRecipeCalories = totalRecipeCalories;
+    }
+    
+    public int getTotalRecipeCalories() {
+        return totalRecipeCalories;
+    }
+	
+//Constructors 
+	/*
+	 * FINISH ME
+	 */
+	 
+//Print Recipe Method
+    /*
+	 * FINISH ME
+	 */
+ 
+ //Create New Recipe Method to Build Recipes Based on User Input
+    /*
+	 * FINISH ME
+	 */
+ 
+ //Pseudocode for the Custom Method (List in Stepping Stone 5)
+    /*
+	 * FINISH ME
+	 */
+ 
+ ###########################################################################################################
+ 
+ /*
+  * Recipe_Test.java File:
+  * Separate class with Main() Method
+  *
+  */
+  
+//Use Constructor to Create a New Recipe 
+    /*
+	 * FINISH ME
+	 */
+	 
+//Invokes the createNewRecipe() Method to Accept User Input
+    /*
+	 * FINISH ME
+	 */
+
+//Invokes the printRecipe() Method to Print Recipe Details
+    /*
+	 * FINISH ME
+	 */
+ 
+ 
+ 

@@ -1,0 +1,375 @@
+/*Chapter 5: Data Types
+ *5.1: Constant Variables
+ */
+ 
+ A good practice is to minimize the use of literal numbers in code.
+ When a variable represents a literal, the variable's value should not be changed in the code. If the programmer precedes 
+ the variable definition with the keyword final, then the compiler will report an error if a later statement tries to change 
+ that variable's value. An initialized variable whose value cannot change is called a constant variable. A constant variable 
+ is also known as a final variable. 
+ 
+ A common convention, or good practice, is to name constant variables using upper case letters with words separated by 
+ underscores, to make constant variables clearly visible in code.
+ 
+ Final variable example: Lightning distance:
+ 
+ 
+import java.util.Scanner;
+
+// Estimates distance of lightning based on seconds
+// between lightning and thunder
+
+public class LightningDist {
+   public static void main (String[] args) {
+      Scanner scnr = new Scanner(System.in);
+      final double SPEED_OF_SOUND   = 761.207; // Miles/hour (sea level)
+      final double SECONDS_PER_HOUR = 3600.0;  // Secs/hour
+      double secondsBetween = 0.0;
+      double timeInHours    = 0.0;
+      double distInMiles    = 0.0;
+
+      System.out.println("Enter seconds between");
+      System.out.println("lightning strike and thunder:");
+      secondsBetween = scnr.nextDouble();
+
+      timeInHours = secondsBetween / SECONDS_PER_HOUR;
+      distInMiles = SPEED_OF_SOUND * timeInHours;
+
+      System.out.println("Lightning strike was approximately");
+      System.out.println(distInMiles + " miles away.");
+
+      return;
+   }
+}
+ 
+Using constants in expressions:
+1. Declare a const named CENTS_PER_POUND and initialize with 25. 
+2. Using FLAT_FEE_CENTS and CENTS_PER_POUND constants, assign shipCostCents with the cost of shipping a package weighing 
+shipWeightPounds. 
+ 
+import java.util.Scanner;
+
+public class ShippingCalculator {
+   public static void main (String [] args) {
+      int shipWeightPounds = 10;
+      int shipCostCents = 0;
+      final int FLAT_FEE_CENTS = 75;
+      final int CENTS_PER_POUND = 25;
+      
+      shipCostCents = (CENTS_PER_POUND * shipWeightPounds) + FLAT_FEE_CENTS;
+
+      System.out.print("Weight(lb): " + shipWeightPounds);
+      System.out.print(", Flat fee(cents): " + FLAT_FEE_CENTS);
+      System.out.print(", Cents per pound: " + CENTS_PER_POUND);
+      System.out.println(", Shipping cost(cents): " + shipCostCents);
+
+      return;
+   }
+}
+
+/* 5.2: Math Methods */
+Java comes with a standard Math class that has about 30 math operations available, listed later in this section. 
+ As shown below, the programmer first imports the class at the top of a file and then can use math operations:
+ 
+import java.lang.Math;
+
+...
+
+double sideSquare = 0.0;
+double areaSquare = 49.0;
+
+sideSquare = Math.sqrt(areaSquare);
+ 
+sqrt is a method. A method is a list of statements that can be executed by referring to the method's name. 
+An input value to a method appears between parentheses and is known as an argument, such as areaSquare above. 
+The method executes and returns a new value. In the example above, Math.sqrt(areaSquare) returns 7.0, which is assigned to 
+sideSquare. Invoking a method is a method call.
+
+Some methods have multiple arguments. For example, Math.pow(b, e) returns the value of be.
+
+Math method example: Mass growth:
+
+import java.util.Scanner;
+import java.lang.Math;
+
+public class MassGrowth {
+   public static void main(String[] args) {
+      Scanner scnr = new Scanner(System.in);
+      double initMass   = 0.0;  // Initial mass of a substance
+      double growthRate = 0.0;  // Annual growth rate
+      double yearsGrow  = 0.0;  // Years of growth
+      double finalMass  = 0.0;  // Final mass after those years
+
+      System.out.print("Enter initial mass: ");
+      initMass = scnr.nextDouble();
+
+      System.out.print("Enter growth rate (Ex: 0.05 is 5%/year): ");
+      growthRate = scnr.nextDouble();
+
+      System.out.print("Enter years of growth: ");
+      yearsGrow = scnr.nextDouble();
+
+      finalMass = initMass * Math.pow(1.0 + growthRate, yearsGrow);
+      // Ex: Rate of 0.05 yields initMass * 1.05^yearsGrow
+   
+      System.out.print(" Final mass after ");
+      System.out.print(yearsGrow);
+      System.out.print(" years is: ");
+      System.out.println(finalMass);
+
+      return;
+   }
+}
+
+Select the three statements that calculate the value of x in the following:
+
+x = square-root-of(y2 + z2)
+temp1 = Math.pow(y , 2.0);
+temp2 = Math.pow(z , 2.0);
+x = Math.sqrt(temp1 + temp2);
+
+-----
+
+Determine the distance between point (x1, y1) and point (x2, y2), and assign the result to pointsDistance. 
+
+The calculation is: 
+Distance = SquareRootOf( (x2 - x1)2 + (y2 - y1)2 )
+You may declare additional variables. 
+Ex: For points (1.0, 2.0) and (1.0, 5.0), pointsDistance is 3.0. 
+
+import java.util.Scanner;
+import java.lang.Math;
+
+public class CoordinateGeometry {
+   public static void main(String [] args) {
+      double x1 = 1.0;
+      double y1 = 2.0;
+      double x2 = 1.0;
+      double y2 = 5.0;
+      double pointsDistance = 0.0;
+      
+      double xVals = Math.pow((x2-x1), 2);
+      double yVals = Math.pow((y2-y1), 2);
+      
+      pointsDistance = Math.sqrt(xVals + yVals);
+
+      System.out.print("Points distance: ");
+      System.out.println(pointsDistance);
+
+      return;
+   }
+}
+
+Challenge Activity5.2.2: Tree Height.
+Simple geometry can compute the height of an object from the object's shadow length and shadow angle using the formula: 
+tan(angleElevation) = treeHeight / shadowLength. 
+1. Using simple algebra, rearrange that equation to solve for treeHeight. 
+2. Write a statement to assign treeHeight with the height calculated from an expression using angleElevation and 
+shadowLength. 
+
+import java.util.Scanner;
+import java.lang.Math;
+
+public class TreeHeight {
+   public static void main(String [] args) {
+      double treeHeight     = 0.0;
+      double shadowLength   = 0.0;
+      double angleElevation = 0.0;
+
+      angleElevation = 0.11693706; // 0.11693706 radians = 6.7 degrees
+      shadowLength   = 17.5;
+
+      treeHeight = Math.tan(angleElevation) * shadowLength;
+
+      System.out.print("Tree height: ");
+      System.out.println(treeHeight);
+
+      return;
+   }
+}
+
+/*5.3: Type Conversions */
+A type conversion is a conversion of one data type to another, such as an int to a double. The compiler automatically 
+performs several common conversions between int and double types, such automatic conversion known as implicit conversion.
+
+For an arithmetic operator like + or *, if either operand is a double, the other is automatically converted to double, and 
+then a floating-point operation is performed.
+For assignment =, the right side type is converted to the left side type if the conversion is possible without loss of 
+precision.
+
+int-to-double conversion is straightforward: 25 becomes 25.0.
+
+double-to-int conversion may lose precision, so is not automatic.
+
+Figure 5.3.1: Code that undesirably performs integer division.
+
+import java.util.Scanner;
+
+public class KidsPerFamilyBad {
+   public static void main (String [] args) {
+      int kidsInFamily1 = 3; // Should be int, not double
+      int kidsInFamily2 = 4; // (know anyone with 2.3 kids?)
+      int numFamilies   = 2; // Should be int, not double
+
+      double avgKidsPerFamily = 0.0; // Expect fraction, so double
+
+      avgKidsPerFamily = (kidsInFamily1 + kidsInFamily2) / numFamilies;
+
+      // Should be 3.5, but is 3 instead
+      System.out.println("Average kids per family: " + avgKidsPerFamily);
+
+      return;
+   }
+}
+
+A common error is to accidentally perform integer division when floating-point division was intended.
+A programmer can precede an expression with (type)expression to convert the expression's value to the indicated type. 
+For example, if myIntVar is 7, then (double)myIntVar converts int 7 to double 7.0. 
+The following converts the numerator and denominator each to double to obtain floating-point division (actually, converting 
+only one would have worked).
+
+Such explicit conversion by the programmer of one type to another is known as type casting.
+Figure 5.3.2: Using type casting to obtain floating-point division.
+
+
+import java.util.Scanner;
+
+public class KidsPerFamily {
+   public static void main (String [] args) {
+      int kidsInFamily1 = 3; // Should be int, not double
+      int kidsInFamily2 = 4; // (know anyone with 2.3 kids?)
+      int numFamilies   = 2; // Should be int, not double
+
+      double avgKidsPerFamily = 0.0; // Expect fraction, so double
+
+      avgKidsPerFamily = (double)(kidsInFamily1 + kidsInFamily2) 
+                         / (double)numFamilies;
+
+      System.out.println("Average kids per family: " + avgKidsPerFamily);
+
+      return;
+   }
+}
+
+A common error is to cast the entire result of integer division, rather than the operands, thus not obtaining the desired 
+floating-point division. For example, (double)((5 + 10) / 2) yields 7.0 (integer division yields 7, then converted to 7.0) 
+rather than 7.5.
+
+A common type cast converts a double to an int. Ex: myInt = (int)myDouble. The fractional part is truncated. 
+Ex: 9.5 becomes 9.
+
+Challenge Activity5.3.1: Type casting: Computing average kids per family
+Compute the average kids per family. Note that the integers should be type cast to doubles. 
+
+import java.util.Scanner;
+
+public class TypeCasting {
+   public static void main (String [] args) {
+      int numKidsA = 1;
+      int numKidsB = 4;
+      int numKidsC = 5;
+      int numFamilies = 3;
+      double avgKids = 0.0;
+
+      avgKids = (((double)(numKidsA) + (double)(numKidsB) + (double)(numKidsC)) / numFamilies );
+      
+      System.out.print("Average kids per family: ");
+      System.out.println(avgKids);
+
+      return;
+   }
+}
+
+/*5.4: Binary */
+Normally, a programmer can think in terms of base ten numbers. However, a compiler must allocate some finite quantity of 
+bits (e.g., 32 bits) for a variable, and that quantity of bits limits the range of numbers that the variable can represent. 
+Thus, some background on how the quantity of bits influences a variable's number range is helpful.
+
+Because each memory location is composed of bits (0s and 1s), a processor stores a number using base 2, known as a binary 
+number.
+
+For a number in the more familiar base 10, known as a decimal number, each digit must be 0-9 and each digit's place is 
+weighed by increasing powers of 10.
+
+(SEE SCREENSHOT)
+
+/*5.5: Character */
+A variable of char type can store a single character, like the letter m or the symbol %. A character literal is surrounded 
+with single quotes, as in 'm' or '%'.
+Figure 5.5.1: Simple char example: Arrow.
+
+public class CharArrow {
+   public static void main (String [] args) {
+      char arrowBody = '-';
+      char arrowHead = '>';
+
+      System.out.println(arrowHead);
+      System.out.println("" + arrowBody + arrowBody + arrowBody + arrowHead);
+
+      arrowBody = 'o';
+
+      System.out.println("" + arrowBody + arrowBody + arrowBody + arrowHead);
+
+      return;
+   }
+}
+
+A common error is to use double quotes rather than single quotes around a character literal, as in myChar = "x", 
+yielding a compiler error. Similarly, a common error is to forget the quotes around a character literal, as in myChar = x, 
+usually yielding a compiler error.
+
+In one statement, define a variable named userKey of type char and initialize to the letter a.
+	 char userKey = 'a';  
+char is a built-in type like int. A character literal is written surrounded by single quotes as in 'a'.
+
+Under the hood, a char variable stores a number. For example, the letter m is stored as 109. A table showing the standard 
+number used for common characters appears at this section's end. Though stored as a number, the compiler knows to output a 
+char type as the corresponding character.
+
+ASCII is an early standard for encoding characters as numbers.
+ 
+Many earlier programming languages like C or C++ use ASCII. Java uses a more recent standard called Unicode. ASCII can 
+represent 255 items, whereas Unicode can represent over 64,000 items; Unicode can represent characters from many different 
+human languages, many symbols, and more. (For those who have studied binary: ASCII uses 8 bits, while Unicode uses 16, hence 
+the 255 versus 64,000). Unicode's first several hundred items are the same as ASCII.The Unicode encoding for these characters 
+has 0s on the left to yield 16 bits. 
+ 
+ An escape sequence is a two-character sequence starting with \ that represents a special character. Ex: '\n' represents a 
+ newline character. Escape sequences also enable representing characters like ', ", or \. Ex: myChar = '\'' assigns myChar 
+ with a single-quote character. myChar = '\\' assigns myChar with \ (just '\' would yield a compiler error, since \' is the 
+ escape sequence for ', and then a closing ' is missing).
+ 
+Common escape sequences.
+Escape sequence	Char
+\n	newline
+\t	tab
+\'	single quote
+\"	double quote
+\\	backslash 
+
+Print a message telling a user to press the letterToQuit key numPresses times to quit. End with newline. Ex: If letterToQuit = 'q' and numPresses = 2, print: 
+Press the q key 2 times to quit. 
+ 
+ import java.util.Scanner;
+
+public class QuitScreen {
+   public static void main (String [] args) {
+      char letterToQuit = '?';
+      int  numPresses   = 0;
+
+      System.out.println("Press the " + letterToQuit + " key " + numPresses + " times to quit.");
+
+      return;
+   }
+}
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 

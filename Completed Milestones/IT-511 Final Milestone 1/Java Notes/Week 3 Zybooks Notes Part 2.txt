@@ -1,0 +1,380 @@
+/* STRING BASICS */
+Some variables should store a sequence of characters like the name Julia. A sequence of characters is called a string. 
+A string literal uses double quotes as in "Julia". Various characters may be included, such as letters, numbers, spaces, 
+symbols like $, etc., as in "Hello ... Julia!!".
+
+A programmer defines a string variable similarly to defining char, int, or double variables, but using the String data type. 
+Note the capital S.
+
+Figure 5.6.1: Strings example: Word game:
+
+import java.util.Scanner;
+
+/* A game inspired by "Mad Libs" where user enters nouns,
+   verbs, etc., and then a story using those words is output.
+*/
+
+public class StoryGame {
+   public static void main (String [] args) {
+      Scanner scnr = new Scanner(System.in);
+      String wordRelative   = "";
+      String wordFood       = "";
+      String wordAdjective  = "";
+      String wordTimePeriod = "";
+
+      // Get user's words
+      System.out.println("Provide input without spaces.");
+
+      System.out.println("Enter a kind of relative: ");
+      wordRelative = scnr.next();
+
+      System.out.println("Enter a kind of food: ");
+      wordFood = scnr.next();
+
+      System.out.println("Enter an adjective: ");
+      wordAdjective = scnr.next();
+
+      System.out.println("Enter a time period: ");
+      wordTimePeriod = scnr.next();
+
+      // Tell the story
+      System.out.println();
+      System.out.print  ("My " + wordRelative);
+      System.out.println(" says eating " + wordFood);
+      System.out.println("will make me more " + wordAdjective + ",");
+      System.out.println("so now I eat it every " + wordTimePeriod + ".");
+
+      return;
+   }
+}
+
+Note that scnr.next() is used to get the next string from input, versus scnr.nextInt() to get the next integer.
+
+scnr.next() gets the next input string only up to the next input space, tab, or newline. So following the user typing 
+Betty Sue(ENTER), scnr.next() will only store Betty in stringVar. 
+Sue will be the next input string. In contrast, the method scnr.nextLine() reads all user text on the input line, 
+up to the newline character resulting from the user pressing ENTER, into stringVar.
+
+Figure 5.6.2: Reading an input string containing spaces using nextLine.
+
+import java.util.Scanner;
+
+public class NameWelcome {
+   public static void main (String [] args) {
+      Scanner scnr = new Scanner(System.in);
+      String firstName = "";
+      String lastName  = "";
+
+      System.out.println("Enter first name: ");
+      firstName = scnr.nextLine(); // Gets enter line up to ENTER
+
+      System.out.println("Enter last name: ");
+      lastName = scnr.nextLine(); // Gets enter line up to ENTER
+
+      System.out.println();
+      System.out.println("Welcome " + firstName + " " + lastName + "!");
+      System.out.println("May I call you " + firstName + "?");
+
+      return;
+   }
+}
+
+Each string character has a position number called an index. To read a single user-entered character, scnr.next() 
+or scnr.nextLine() is first used to read a string, and then someString.charAt(0) determines the character at index 0.
+
+Figure 5.6.3: charAt(0) accesses the first character in a string: Name with initials example.
+import java.util.Scanner;
+
+public class NameInitials {
+   public static void main (String [] args) {
+      Scanner scnr = new Scanner(System.in);
+      String firstName = "";
+      String lastName  = "";
+      String middleName = "";
+      Character firstInitial = ' ';
+      Character middleInitial = ' ';
+
+      System.out.println("Enter first name: ");
+      firstName = scnr.nextLine(); 
+      firstInitial = firstName.charAt(0);   // Gets first character in string
+
+      System.out.println("Enter middle name: ");
+      middleName = scnr.nextLine(); 
+      middleInitial = middleName.charAt(0); // Gets first character in string
+      
+      System.out.println("Enter last name: ");
+      lastName = scnr.nextLine(); 
+
+      System.out.println();
+      System.out.println("" + firstInitial + ". " + 
+                         middleInitial + ". " +lastName + "!");
+
+      return;
+   }
+}
+
+A String variable is a reference type (discussed in depth elsewhere) variable that refers to a String object. 
+An object consists of some internal data items plus operations that can be performed on that data. 
+Ex: String movieTitle = "Frozen"; defines a String reference variable named movieTitle that refers to a String object. 
+That String object stores the string "Frozen".
+
+A programmer can assign a new literal to a String variable, which creates a new String object. 
+Ex: movieTitle = "The Martian"; creates a new String object with the string "The Martian", and assigns the String object's 
+reference to the variable movieTitle.
+
+Assigning one String variable to another String variable causes both variables to refer to the same String, 
+and does not create a new String. Ex:  movieTitle = favoriteMovie; assigns favoriteMovie's reference to movieTitle. 
+Both movieTitle and favoriteMovie refer to the same String object.
+
+Figure 5.6.4: Assigning a value to a string.
+
+import java.util.Scanner;
+
+public class SentenceFromStrings {
+   public static void main(String[] args) {
+      Scanner scnr = new Scanner(System.in);
+      String userNoun1       = "";
+      String userVerb        = "";
+      String userNoun2       = "";
+      String sentenceSubject = "";
+      String sentenceObject  = "";
+
+      System.out.print("Enter a noun: ");
+      userNoun1 = scnr.next();
+      System.out.print("Enter a verb: ");
+      userVerb = scnr.next();
+      System.out.print("Enter a noun: ");
+      userNoun2 = scnr.next();
+
+      sentenceSubject = userNoun1;
+      sentenceObject = userNoun2;
+      System.out.print(sentenceSubject);
+      System.out.print(" ");
+      System.out.print(userVerb);
+      System.out.print(" ");
+      System.out.print(sentenceObject);
+      System.out.println(".");
+
+      sentenceSubject = userNoun2;
+      sentenceObject = userNoun1;
+      System.out.print(sentenceSubject);
+      System.out.print(" ");
+      System.out.print(userVerb);
+      System.out.print(" ");
+      System.out.print(sentenceObject);
+      System.out.println(".");
+
+      return;
+   }
+}
+
+Challenge Activity5.6.1: Reading and printing a string.
+A user types a word and a number on a single line. Read them into the provided variables. Then print: word_number. 
+End with newline. Example output if user entered: Amy 5 
+Amy_5 
+
+import java.util.Scanner;
+
+public class SpaceReplace {
+   public static void main (String [] args) {
+      Scanner scnr = new Scanner(System.in);
+      String userWord = "";
+      int userNum = 0;
+
+      userWord = scnr.next();
+      userNum = scnr.nextInt();
+      
+      System.out.println(userWord + "_" + userNum);
+
+      return;
+   }
+}
+
+/* Integer Overflow */
+An integer variable cannot store a number larger than the maximum supported by the variable's data type. An overflow occurs 
+when the value being assigned to a variable is greater than the maximum value the variable can store.
+
+A common error is to try to store a value greater than about 2 billion into an int variable.
+Defining the variable of type long, (described in another section) which uses 64 bits, would solve the above problem. 
+But even that variable could overflow if assigned a large enough value.
+
+public class OverflowExample {
+   public static void main (String [] args) {
+      int num = 1000;
+
+      num = num * 100;
+      System.out.println("num: " + num);
+
+      num = num * 100;
+      System.out.println("num: " + num);
+
+      num = num * 100;
+      System.out.println("num: " + num);
+
+      return;
+   }
+}
+
+/*NUMERIC DATA TYPES */
+int and double are the most common numeric data types. However, several other numeric types exist. 
+The following table summarizes available integer numeric data types.
+
+Definition	Size	Supported number range
+byte myVar;	8 bits	-128 to 127
+short myVar;	16 bits	-32,768 to 32,767
+int myVar;	32 bits	-2,147,483,648 to 2,147,483,647
+long myVar;	64 bits	-9,223,372,036,854,775,808 to 9,223,372,036,854,775,807
+
+int is the most commonly used integer type.
+
+long is used for integers expected to exceed about 2 billion.
+
+A common error made by a program's user is to enter the wrong type, such as entering a string when the input statement was  
+myInt = scnr.nextInt(); where myInt is an int, which can cause strange program behavior.
+
+The following table summarizes available floating-point numeric types.
+Table 5.8.2: Floating-point numeric data types.
+Definition	Size	Supported number range
+float x;	32 bits	-3.4x1038 to 3.4*1038
+double x;	64 bits	-1.7x10308 to 1.7*10308
+
+The compiler uses one bit for sign, some bits for the mantissa, and some for the exponent. Details are beyond our scope.
+
+float is typically only used in memory-saving situations, as discussed above for short.
+
+Due to the fixed sizes of the internal representations, the mantissa (e.g, the 6.02 in 6.02e23) is limited to about 7 
+significant digits for float and about 16 significant digits for double. So for a variable defined as double pi, the 
+assignment pi = 3.14159265 is OK, but pi = 3.14159265358979323846 will be truncated.
+
+A variable cannot store a value larger than the maximum supported by the variable's data type. An overflow occurs when the 
+value being assigned to a variable is greater than the maximum value the variable can store. Overflow with floating-point 
+results in infinity. Overflow with integer is discussed elsewhere.
+
+5.9 Random numbers 
+Some programs need to use a random number. For example, a program might serve as an electronic dice roller, 
+generating random numbers between 1 and 6. The following example demonstrates how to generate four random numbers between 1 
+and 6. The program's relevant parts are explained further below.
+
+Figure 5.9.1: Random numbers: Four dice rolls.
+import java.util.Random;
+
+public class DiceRoll {
+   public static void main (String[] args) {
+      Random randGen = new Random();  // New random number generator
+
+      System.out.println("Four rolls of a dice...");
+
+      // randGen.nextInt(6) yields 0, 1, 2, 3, 4, or 5
+      // so + 1 makes that 1, 2, 3, 4, 5, or 6
+      System.out.println(randGen.nextInt(6) + 1);
+      System.out.println(randGen.nextInt(6) + 1);
+      System.out.println(randGen.nextInt(6) + 1);
+      System.out.println(randGen.nextInt(6) + 1);
+
+      return;
+   }
+
+Line 1 makes Java's Random class available to the program. Line 5 creates a new random number generator object named randGen. 
+The method call randGen.nextInt(X) can then be used to get a random number ranging from 0 to X - 1. Mentioned concepts like 
+class, object, and method call will be described in later sections; here, the programmer can just copy the given code to get 
+random numbers.
+
+After the above setup, line 11 uses randGen.nextInt(6) to get a new random number between 0 and 5. The code adds 1 to obtain 
+values between 1 and 6. Lines 12, 13, and 14 follow similarly.
+
+If program is executing and randGen.nextInt(10) returns the value 6, what will the next randGen.nextInt(10) return?
+	The numbers are random, so we can't possibly know. That's what random means.
+
+What is the smallest possible value returned by randGen.nextInt(10)?
+	The range for nextInt(X) always starts with 0.
+	
+What is the largest possible value returned by randGen.nextInt(10)?
+	10 indicates the number of possible values starting from 0, so the largest is 9.	
+
+randGen.nextInt(), with no number between the (), returns a random value that could be any integer (of int type), positive or negative. What is the largest possible value?
+	That's the maximum value for an int type. 2,147,483,647
+	
+Which generates a random number in the range 18..30?
+	randGen(13) yields a range of 0 to 12. Adding 18 yields a range of 18..30.
+
+Because an important part of testing or debugging a program is being able to have the program run exactly the same across 
+multiple runs, most programming languages use a pseudo-random number generation approach. A pseudo-random number generator 
+produces a specific sequence of numbers based on a seed number, that sequence seeming random but always being the same for a 
+given seed. For example, a program that prints four random numbers and that seeds a random number generator with a seed of 3 
+might then print 99, 4, 55, and 7. Running with a seed of 8 might yield 42, 0, 22, 9. Running again with 3 will yield 99, 4, 
+55, and 7 again—guaranteed.
+
+Early video games used a constant seed for "random" features, enabling players to breeze through a level by learning and 
+then repeating the same winning moves.
+
+Random() seeds the pseudo-random number generator with a number based on the current time; that number is essentially random, 
+so the program will get a different pseudo-random number sequence on each run. On the other hand, Random(num) will seed the 
+generator with the value num, where num is any integer (actually, any "long" value).
+
+Challenge Activity5.9.1: rand function: Seed and then get random numbers
+Type two statements using nextInt() to print two random integers between (and including) 0 and 9. End with a newline. Ex: 
+5
+7
+
+import java.util.Scanner;
+import java.util.Random;
+
+public class DiceRoll {
+   public static void main (String [] args) {
+      Random randGen = new Random();
+      int seedVal = 0;
+      randGen.setSeed(seedVal);
+
+       System.out.println(randGen.nextInt(10));
+       System.out.println(randGen.nextInt(10));
+
+      return;
+   }
+}
+
+Type two statements that use nextInt() to print 2 random integers between (and including) 100 and 149. 
+End with a newline. Ex: 
+112
+102
+Well, what if the random number you get is 0? Adding 50 to it gives you... 50.
+What you really want to do is get a random number between 0 and 49, and add 100 to that.
+So if the random number is 0, your addition puts it at 100. If the number is 49, you get 149.
+Tadaa.
+
+import java.util.Scanner;
+import java.util.Random;
+
+public class RandomGenerateNumbers {
+   public static void main (String [] args) {
+      Random randGen = new Random();
+      int seedVal = 0;
+
+      seedVal = 4;
+      randGen.setSeed(seedVal);
+
+      System.out.println(randGen.nextInt(150-100)+100);
+      System.out.println(randGen.nextInt(150-100)+100);
+
+      return;
+   }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

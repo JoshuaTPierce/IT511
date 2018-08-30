@@ -1,0 +1,250 @@
+3.6 Unit testing (classes)
+Like a chef who tastes the food before allowing it to be served to diners, a programmer should test a class before allowing 
+it to be used in a program. Testing a class can be done by creating a special program, sometimes known as a testbench, whose 
+job is to thoroughly test the class. The process of creating and running a program that tests a specific item (or "unit"), 
+such as a method or a class, is known as unit testing.
+
+Class to test: StatsInfo.java
+
+public class StatsInfo {
+
+   // Note: This class intentionally has errors
+
+   private int num1;
+   private int num2;
+
+   public void setNum1(int numVal) {
+      num1 = numVal;
+   }
+
+   public void setNum2(int numVal) {
+      num2 = numVal;
+   }
+
+   public int getNum1() {
+      return num1;
+   }
+
+   public int getNum2() {
+      return num1;
+   }
+
+   public int getAverage() {
+      return num1 + num2 / 2;
+   }
+}
+
+Testbench: StatsInfoTest.java
+
+public class StatsInfoTest {
+   public static void main(String[] args) {
+      StatsInfo testData = new StatsInfo();
+
+      // Typical testbench tests more thoroughly
+
+      System.out.println("Beginning tests.");
+
+      // Check set/get num1
+      testData.setNum1(100);
+      if (testData.getNum1() != 100) {
+         System.out.println("   FAILED set/get num1");
+      }
+
+      // Check set/get num2
+      testData.setNum2(50);
+      if (testData.getNum2() != 50) {
+         System.out.println("   FAILED set/get num2");
+      }
+
+      // Check getAverage()
+      testData.setNum1(10);
+      testData.setNum2(20);
+      if (testData.getAverage() != 15) {
+         System.out.println("   FAILED GetAverage for 10, 20");
+      }
+
+      testData.setNum1(-10);
+      testData.setNum2(0);
+      if (testData.getAverage() != -5) {
+         System.out.println("   FAILED GetAverage for -10, 0");
+      }
+
+      System.out.println("Tests complete.");
+
+      return;
+   }
+}
+
+Beginning tests.
+   FAILED set/get num2
+   FAILED GetAverage for 10, 20
+   FAILED GetAverage for -10, 0
+Tests complete.
+
+The testbench program creates an object of the class, then invokes public methods to ensure they work as expected
+
+A good practice is to create the testbench program to automatically check for correct execution rather than relying on a 
+user reading program output, as done above. The program may print a message for each failed test, but not each passed test, 
+to ensure failures are evident. 
+
+Also, good practice is to keep each test independent from the previous case, as much as possible. Note, for example, 
+that the get average test did not rely on values from the earlier set/get tests. Also note that different values were used 
+for each set/get (100 for num1, 50 for num2) so that problems are more readily detected.
+
+A goal of testing is to achieve complete code coverage, meaning all code is executed at least once.
+
+Minimally for a class, that means every public method is called at least once. Of course, the programmer of a class knows 
+about a class' implementation and thus will want to also ensure that every private helper method is called, and that every 
+line of code within every method is executed at least once, which may require multiple calls with different input values for 
+a method with branches.
+
+The testbench should be maintained for the lifetime of the class code, and run again (possibly updated first) whenever a 
+change is made to the class. Running an existing testbench whenever code is changed is known as regression testing, 
+due to checking whether the change caused the code to "regress", meaning to fail previously-passed test cases.
+
+Write a unit test for addInventory(). Call redSweater.addInventory() with parameter sweaterShipment. 
+Print the shown error if the subsequent quantity is incorrect. 
+Sample output for failed unit test given initial quantity is 10 and sweaterShipment is 50:
+
+Beginning tests.
+   UNIT TEST FAILED: addInventory()
+Tests complete.
+Note: UNIT TEST FAILED is preceded by 3 spaces.
+
+// ===== Code from file InventoryTag.java =====
+public class InventoryTag {
+   private int quantityRemaining;
+
+   public InventoryTag() {
+      quantityRemaining = 0;
+   }
+
+   public int getQuantityRemaining() {
+      return quantityRemaining;
+   }
+
+   public void addInventory(int numItems) {
+      if (numItems > 10) {
+         quantityRemaining = quantityRemaining + numItems;
+      }
+      return;
+   }
+}
+// ===== end =====
+
+// ===== Code from file CallInventoryTag.java =====
+public class CallInventoryTag {
+   public static void main (String [] args) {
+      InventoryTag redSweater = new InventoryTag();
+      int sweaterShipment = 0;
+      int sweaterInventoryBefore = 0;
+
+      sweaterInventoryBefore = redSweater.getQuantityRemaining();
+      sweaterShipment = 25;
+
+      System.out.println("Beginning tests.");
+
+      // FIXME add unit test for addInventory
+      redSweater.addInventory(sweaterShipment);
+         sweaterShipment = 25;
+      if ( sweaterShipment + sweaterInventoryBefore != sweaterInventoryBefore + sweaterShipment) {
+      System.out.println(" UNIT TEST FAILED: addInventory()");
+      }
+      
+      System.out.println("Tests complete.");
+
+      return;
+   }
+}
+
+##################
+3.7 The "This" Implicit Parameter
+
+An object's member method is called using the syntax objectReference.method(). 
+The compiler converts that syntax into a method call with the object's reference implicitly passed as a parameter. 
+So you can think of objectReference.method(...) getting converted to  method(objectReference, ...). 
+The object is known as an implicit parameter of the member method.
+
+Within a member method, the implicitly-passed object reference is accessible via the keyword this. 
+In particular, a class member can be accessed as this.classMember. The "." is the member access operator.
+
+public class ShapeSquare {
+   // Private fields
+   private double sideLength;
+
+   // Public methods
+   public void setSideLength(double sideLength) {
+      this.sideLength = sideLength;
+      // Field member    Parameter
+   }
+
+   public double getArea() {
+      return sideLength * sideLength; // Both refer to field
+   }
+}
+
+ShapeTest.java:
+public class ShapeTest {
+   public static void main(String[] args) {
+      ShapeSquare square1 = new ShapeSquare();
+
+      square1.setSideLength(1.2);
+      System.out.println("Square's area: " + square1.getArea());
+
+      return;
+   }
+}
+
+The 'this' keyword can also be used in a constructor to invoke a different (overloaded) constructor.
+
+Calling overloaded constructor using this keyword.
+public class ElapsedTime {
+   private int hours;
+   private int minutes;
+
+   // Overloaded constructor definition
+   public ElapsedTime(int timeHours, int timeMins) {
+      hours   = timeHours;
+      minutes = timeMins;
+   }
+   
+   // Default constructor definition
+   public ElapsedTime() {
+      this(0, 0);
+   }
+   
+   // Other methods ...
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

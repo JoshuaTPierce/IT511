@@ -1,0 +1,21 @@
+//Java Main Class [Program Executes Here]
+
+public class Ingredient {
+	public static void main(String [] args) {
+		Ingredient newIngredient = new Ingredient(); //Creates object of class Ingredient
+	}
+}
+
+//Define the Class Here
+//Class Definition Happens Outside of Main Method
+//Defines a "Template" for Creating Objects of Class Ingredient 
+
+class Ingredient {
+	
+//Define Member Variables
+	String nameOfIngredient;             
+    String unitMeasurement;             
+    float ingredientAmount; 			 
+    int numberOfCaloriesPerUnit;         
+    double totalCalories;
+}

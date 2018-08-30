@@ -1,0 +1,13 @@
+1. Create and Initialize new String ArrayList "Instructions"
+2. Do
+	3. Prompt User to Enter Instruction 1 [Scanner]
+	4. Add Input to ArrayList
+	5. Ask if User Wants to Enter More Instructions
+		6. If Yes, boolean MoreIngredients = T
+		
+		7. Else, boolean MoreIngredients = F
+			Break
+	While MoreIngredients = T
+8. For each string in new String Arraylist "Instructions"
+	9. Print Each String, then new line.
+10. End.

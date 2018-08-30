@@ -1,0 +1,1388 @@
+public class Salary {
+   public static void main (String [] args) {
+      int wage = 20;
+
+      System.out.println("Wage is: " + wage); // The + separates items 
+      System.out.println("Goodbye."); 
+
+      return;
+   }
+}
+
+import java.util.Scanner; // Enables user input
+
+public class Salary {
+   public static void main(String [] args) {
+      int hourlyWage   = 0;
+      int annualSalary = 0;
+
+      Scanner scnr = new Scanner(System.in); // Setup to scan chars from System.in
+
+      System.out.println("Enter hourly wage: ");
+      hourlyWage = scnr.nextInt();  // Read next integer from scanner
+
+      annualSalary = hourlyWage * 40 * 50;
+      System.out.print("Salary is ");
+      System.out.println(annualSalary);
+
+      return;
+   }
+}
+
+import java.util.Scanner;
+
+public class DogYears {
+   public static void main(String [] args) {
+      Scanner scnr = new Scanner(System.in);
+      int dogYears   = 0;
+      int humanYears = 0;
+
+      System.out.println("Enter dog years:");
+      dogYears = scnr.nextInt();
+
+      humanYears = 7 * dogYears;
+      System.out.print("A " + dogYears + " year old dog is about a ");
+      System.out.println(humanYears + " year old human.");
+
+      return;
+   }
+}
+
+import java.util.Scanner;
+
+public class InputExample {
+   public static void main(String [] args) {
+      Scanner scnr = new Scanner(System.in);
+      int birthMonth;
+      int birthYear;
+
+      birthMonth = scnr.nextInt();
+      
+      birthYear = scnr.nextInt();
+      
+      System.out.println(birthMonth + "/" + birthYear);
+
+      return;
+   }
+}
+
+public class Salary {                         
+
+   public static void main (String [] args) { 
+      int hourlyWage = 20;       
+                   
+      System.out.print("Annual salary is: ");         
+      System.out.println(hourlyWage * 40 * 50);   
+    
+      System.out.print("Monthly salary is: ");
+      System.out.println((hourlyWage * 40 * 50) / 1); 
+
+      return;
+   } 
+}
+
+import java.util.Scanner;
+
+public class ShowMarriedNames {
+
+   public static void main(String[] args) {
+      Scanner scnr = new Scanner(System.in);
+      String firstName1 = "";
+      String lastName1  = "";
+      String firstName2 = "";
+      String lastName2  = "";     
+      
+      System.out.println("What is the first person's first name?");
+      firstName1 = scnr.nextLine();
+      System.out.println("What is the first person's last name?");
+      lastName1  = scnr.nextLine();
+
+      System.out.println("What is the second person's first name?");
+      firstName2 = scnr.nextLine();
+      System.out.println("What is the second person's last name?");
+      lastName2  = scnr.nextLine();
+
+      System.out.println("Here are some common married-couple names:");
+      System.out.println(firstName1 + " " + lastName1 + " and " +
+                         firstName2 + " " + lastName2);
+      System.out.println(firstName1 + " and " + firstName2 + "-" + lastName1);
+      System.out.println(firstName1 + " and " + firstName2 + "-" + lastName2);
+      
+      // FIXME: Print two hyphenated last name options, with either last name
+      //        appearing first. (A hyphen can be written as "-")
+      
+      return;
+   }
+}
+
+import java.util.Scanner;
+
+public class ShowMarriedNames_Solution {
+
+   public static void main(String[] args) {
+      Scanner scnr = new Scanner(System.in);
+      String firstName1 = "";
+      String lastName1  = "";
+      String firstName2 = "";
+      String lastName2  = "";
+      
+      System.out.println("What is the first person's first name?");
+      firstName1 = scnr.nextLine();
+      System.out.println("What is the first person's last name?");
+      lastName1  = scnr.nextLine();
+
+      System.out.println("What is the second person's first name?");
+      firstName2 = scnr.nextLine();
+      System.out.println("What is the second person's last name?");
+      lastName2  = scnr.nextLine();
+
+      System.out.println("Here are some common married-couple names:");
+      System.out.println(firstName1 + " " + lastName1 + " and " +
+                         firstName2 + " " + lastName2);
+      System.out.println(firstName1 + " and " + firstName2 + " " + lastName1);
+      System.out.println(firstName1 + " and " + firstName2 + " " + lastName2);
+      System.out.println(firstName1 + " and " + firstName2 + " " + lastName1 +
+                         "-" + lastName2);
+      System.out.println(firstName1 + " and " + firstName2 + " " + lastName2 +
+                         "-" + lastName1);
+      return;
+   }
+}
+
+public class AttendanceExample {
+   public static void main(String[] args) {
+      PeopleCounter attendeeCounter = new PeopleCounter();
+      
+      attendeeCounter.incrementCount();
+      attendeeCounter.incrementCount();
+      attendeeCounter.incrementCount();
+      
+      System.out.print("Attendee count: ");
+      attendeeCounter.printCount();
+
+      return;
+   }
+}
+
+public class PeopleCounter {
+
+   // Variable to store number of people counted
+   private int numPeople;
+
+   // Default constructor initializes count to 0
+   public PeopleCounter() {
+      numPeople = 0;
+   }
+
+   // Increments counts by 1
+   public void incrementCount() {
+      numPeople = numPeople + 1;
+      return;
+   }
+
+   // Resets count to 0
+   public void resetCount() {
+      numPeople = 0;
+      return;
+   }
+
+   // Display current count
+   public void printCount() {
+      System.out.print(numPeople);
+      return;
+   }
+
+   // Returns current count
+   public int getCount() {
+      return numPeople;
+   }
+}
+
+import java.util.Scanner;
+
+public class AgePrinter {
+   public static void main (String [] args) {
+      int userAge = 0; //THIS IS THE MAIN VARIABLE - DATA STORAGE IS CREATED
+      System.out.print("Enter your age: ");
+      Scanner scnr = new Scanner(System.in);
+      userAge = scnr.nextInt(); //THIS IS WHERE A VALUE IS STORED IN THAT DATA STORAGE
+      System.out.println(userAge + " is a great age."); //METHOD IS CALLED ON THE VARIABLE'S VALUE
+      return;
+   }
+}
+
+import java.util.Scanner;
+
+public class Age {
+   public static void main (String [] args) {
+      Scanner scnr = new Scanner(System.in);
+      int userAge = 0;
+      int avgLifespan = 70;
+
+      System.out.println("Enter your age: ");
+      userAge = scnr.nextInt();
+
+      System.out.println(userAge + " is a great age.");
+
+      System.out.println("Average lifespan is " + avgLifespan);
+      
+      return;
+   }
+}
+
+public class Mice {
+   public static void main(String [] args) {
+      int litterSize    = 3; // Low end of litter size range
+      int yearlyLitters = 5; // Low end of litters per year
+      int annualMice    = 0;
+//Variables have been initialized
+      System.out.print("One female mouse may give birth to ");
+      annualMice = litterSize * yearlyLitters;
+      System.out.println(annualMice + " mice,");
+//Print string literal, declare a new value for annualMice, print new value and another string literal with the first string literal
+      litterSize    = 14; // High end - new variable value
+      yearlyLitters = 10; // High end - new variable value
+      System.out.print("and up to ");
+      annualMice = litterSize * yearlyLitters;
+      System.out.println(annualMice + " mice, in a year.");
+
+      return;
+   }
+}
+
+import java.util.Scanner;
+
+public class PeopleKnown {
+   public static void main (String [] args) {
+      int yourFriends = 0;
+      int totalFriends = 0;
+
+      System.out.print("Enter the number of people you know: ");
+      Scanner scnr = new Scanner(System.in);
+      yourFriends = scnr.nextInt();
+
+      totalFriends = yourFriends;
+      System.out.println(" You know " + totalFriends + " people.");
+      totalFriends = totalFriends * yourFriends;
+      System.out.println(" Those people know " + totalFriends + " people.");
+      totalFriends = totalFriends * yourFriends;
+      System.out.println(" And they know " + totalFriends + " people.");
+
+      return;
+   }
+}
+
+Write a statement that assigns 3 to hoursLeft.
+ 
+public class AssignmentValue {
+   public static void main (String [] args) {
+      int hoursLeft = 0;
+
+      hoursLeft = 3;
+      
+      System.out.print(hoursLeft);
+      System.out.println(" hours left.");
+
+      return;
+   }
+}
+
+Write a statement that assigns numCoins with numNickels + numDimes. Ex: 5 nickels and 6 dimes results in 11 coins. 
+
+public class AssigningSum {
+   public static void main (String [] args) {
+      int numCoins;
+      int numNickels;
+      int numDimes;
+
+      numNickels = 5;
+      numDimes = 6;
+
+      numCoins = numNickels + numDimes;
+
+      System.out.print("There are ");
+      System.out.print(numCoins);
+      System.out.println(" coins");
+
+      return;
+   }
+}
+
+Write a statement that increases numPeople by 5. Ex: If numPeople is initially 10, the output is: There are 15 people. 
+
+public class AssigningNumberToVariable {
+   public static void main (String [] args) {
+      int numPeople = 0;
+
+      numPeople = 10;
+
+      numPeople = numPeople + 5;
+
+      System.out.print("There are ");
+      System.out.print(numPeople);
+      System.out.println(" people.");
+
+      return;
+   }
+}
+
+public class CarLeaseCost {
+   public static void main (String [] args) {
+      Scanner scnr = new Scanner(System.in);
+      int downpayment     = 0; 
+      int paymentPerMonth = 0; 
+      int numMonths       = 0;
+      int totalCost       = 0; // Computed total cost to be output
+
+        
+      System.out.println("Enter down payment: ");
+      downpayment = scnr.nextInt();
+
+      System.out.println("Enter monthly payment: ");
+      paymentPerMonth = scnr.nextInt();
+
+      System.out.println("Enter number of months: ");
+      numMonths = scnr.nextInt();
+        
+      totalCost = downpayment + (paymentPerMonth * numMonths);
+        
+      System.out.println("Total cost: " + totalCost);
+      
+      return;
+   }
+}
+
+import java.util.Scanner;
+
+public class TimeConverter {
+   public static void main (String [] args) {
+      Scanner scnr = new Scanner(System.in);
+      int userMinutes = 0; // User input: Minutes
+      int outHours    = 0; // Output hours
+      int outMinutes  = 0; // Output minutes (remaining)
+
+      System.out.println("Enter minutes: ");
+      userMinutes = scnr.nextInt();
+
+      outHours   = userMinutes / 60;
+      outMinutes = userMinutes % 60;
+
+      System.out.print(userMinutes  + " minutes is ");
+      System.out.print(outHours     + " hours and ");
+      System.out.println(outMinutes + " minutes.");
+
+      return;
+   }
+}
+
+import java.util.Scanner;
+
+public class DailySalary {
+   public static void main (String [] args) {
+      Scanner scnr = new Scanner(System.in);
+      int salaryPerYear = 0; // User input: Yearly salary
+      int daysPerYear   = 0; // User input: Days worked per year
+      int salaryPerDay  = 0; // Output:     Salary per day
+
+      System.out.println("Enter yearly salary:");
+      salaryPerYear = scnr.nextInt();
+      
+      System.out.println("Enter days worked per year:");
+      daysPerYear = scnr.nextInt();
+
+      // If daysPerYear is 0, then divide-by-zero causes program termination.
+      salaryPerDay = salaryPerYear / daysPerYear;
+
+      System.out.println("Salary per day is: " + salaryPerDay);
+
+      return;
+   }
+}
+
+import java.util.Scanner;
+
+public class ComputingFinalResult {
+   public static void main (String [] args) {
+      int num1 = 0;
+      int num2 = 0;
+      int finalResult = 0;
+
+      num1 = 4;
+      num2 = 5;
+
+      finalResult = (num1 + num2) / 3;
+
+      System.out.print("Final result: ");
+      System.out.println(finalResult);
+
+      return;
+   }
+}
+
+import java.util.Scanner;
+
+public class ComputingChange {
+   public static void main (String [] args) {
+      int amountToChange = 0;
+      int numFives = 0;
+      int numOnes  = 0;
+
+      amountToChange = 19;
+      numFives = amountToChange / 5;
+
+      numOnes = amountToChange % 5;
+
+      System.out.print("numFives: ");
+      System.out.println(numFives);
+      System.out.print("numOnes: ");
+      System.out.println(numOnes);
+
+      return;
+   }
+}
+
+import java.util.Scanner;
+
+public class ComputingTotalCost {
+   public static void main (String [] args) {
+      int numDrinks;
+      int numTacos;
+      int totalCost;
+
+      numDrinks = 4;
+      numTacos  = 6;
+
+      totalCost = (numDrinks * 2) + (numTacos * 3);
+
+      System.out.print("Total cost: ");
+      System.out.println(totalCost);
+   }
+}
+
+import java.util.Scanner;
+
+public class TravelTime {
+   public static void main (String [] args) {
+      Scanner scnr = new Scanner(System.in);
+      double milesTravel = 0.0; // User input of miles to travel
+      double hoursFly    = 0.0; // Travel hours if flying those miles
+      double hoursDrive  = 0.0; // Travel hours if driving those miles
+
+      System.out.print("Enter a distance in miles:\n");
+      milesTravel = scnr.nextDouble();
+
+      hoursFly   = milesTravel / 500.0;
+      hoursDrive = milesTravel / 60.0;
+
+      System.out.println(milesTravel + " miles would take:");
+      System.out.println(hoursFly    + " hours to fly,");
+      System.out.println(hoursDrive  + " hours to drive.");
+
+      return;
+   }
+}
+
+public class SphereVolumeCalculator {
+   public static void main (String [] args) {
+      double piVal = 3.14159;
+      double sphereVolume = 0.0;
+      double sphereRadius = 0.0;
+
+      sphereRadius = 1.0;
+
+      sphereVolume = (sphereRadius * sphereRadius * sphereRadius) * piVal * (4.0/3.0);
+
+      System.out.println("Sphere volume: " + sphereVolume);
+      return;
+   }
+}
+
+public class GravityCalculation {
+   public static void main (String [] args) {
+      double G            = 6.673e-11;
+      double M            = 5.98e24;
+      double accelGravity = 0.0;
+      double distCenter   = 0.0;
+
+      distCenter = 6.38e6;
+
+      accelGravity = (G * M) / (distCenter * distCenter);
+      
+      System.out.println("accelGravity: " + accelGravity);
+      return;
+   }
+}
+
+// Single-line comment. The compiler ignores any text to the right, like ;, "Hi", //, /* */, etc.
+
+/* Multi-line comment. The compiler ignores text until seeing the closing half of the comment, 
+   so ignores ;, or (), or "Hi", or //, or /*, or num = num + 1, etc. Programmers usually line up
+   the opening and closing symbols and indent the comment text, but neither is mandatory.
+*/
+
+import java.util.Scanner;
+
+/*
+   This program calculates the amount of pasta to cook, given the
+   number of people eating.
+
+   Author: Mario Boyardee
+   Date:   March 9, 2014
+*/
+
+public class PastaCalculator {
+   public static void main (String [] args) {
+      Scanner scnr = new Scanner(System.in);
+      int numPeople = 0;         // Number of people that will be eating
+      int totalOuncesPasta = 0;  // Total ounces of pasta to serve numPeople
+
+      // Get number of people
+      System.out.println("Enter number of people: ");
+      numPeople = scnr.nextInt();
+
+      // Calculate and print total ounces of pasta
+      totalOuncesPasta = numPeople * 3;  // Typical ounces per person
+      System.out.println("Cook " + totalOuncesPasta + " ounces of pasta.");
+
+      return;
+   }
+}
+
+public class WhiteSpaceEx {
+   public static void main(String[] args) {
+      Scanner scnr = new Scanner(System.in);
+      int myFirstVar    = 0; // Some programmers like to align the
+      int yetAnotherVar = 0; // initial values. Not always possible.
+      int thirdVar      = 0;
+
+      // Above blank line separates variable declarations from the rest
+      System.out.print("Enter a number: ");
+      myFirstVar = scnr.nextInt();
+
+      // Above blank line separates user input statements from the rest
+      yetAnotherVar = myFirstVar;        // Aligned = operators, and these aligned
+      thirdVar      = yetAnotherVar + 1; // comments yield less visual clutter.
+      // Also notice the single-space on left and right of + and =
+      // (except when aligning the second = with the first =)
+
+      System.out.println("Final value is " + thirdVar); // Single-space each side of +
+
+      return; // The above blank line separates the return from the rest
+   }
+}
+
+public class MovieExample {
+   public static void main(String[] args) {
+      Histogram movieReviewScores = new Histogram();
+      movieReviewScores.setNumberOfBins(6);
+      
+      movieReviewScores.setBinValue(0, 1);
+      movieReviewScores.setBinValue(1, 2);
+      movieReviewScores.setBinValue(2, 2);
+      movieReviewScores.setBinValue(3, 7);
+      movieReviewScores.setBinValue(4, 10);
+      movieReviewScores.setBinValue(5, 3);
+      
+      movieReviewScores.printHistogram();
+      
+      return;
+   }
+}
+public class Histogram {
+   
+   // Array to store the bin values for each bin
+   private int[] histogramData;
+
+   // Default constructor creates an empty histogram
+   public Histogram() {
+      histogramData = null;
+   }
+   
+   // Alternate constructor creates a histogram with
+   // the specified number of bins
+   public Histogram(int numberBins) {
+      histogramData = new int[numberBins];
+   }
+   
+   // Sets the number of bins (previous data is deleted)
+   public void setNumberOfBins(int numberBins) {
+      histogramData = new int[numberBins];
+      return;
+   }
+
+   // Sets the value for the bin at the specified index
+   public void setBinValue(int binIndex, int binValue) {
+      histogramData[binIndex] = binValue;
+      return;
+   }
+
+   // Returns the value of the bin at the specified index
+   public int getBinValue(int binIndex) {
+      return histogramData[binIndex];
+   }
+
+   // Prints the histogram
+   public void printHistogram() {
+      int binIndex = 0;
+      int binValue = 0;
+      char barChar = '-';
+
+      for (binIndex = 0; binIndex < histogramData.length; ++binIndex) {
+         System.out.print(binIndex + " ");
+         for (binValue = 0; binValue < histogramData[binIndex]; ++binValue) {
+            System.out.print(barChar);
+         }
+         System.out.println();
+      }
+
+      return;
+   }
+}
+
+
+public class CoinFlipEx {
+   public static void main(String[] args) {
+      Histogram coinFlipHist = new Histogram();
+      
+      // Set two bins: heads or tails
+      coinFlipHist.setNumberOfBins(2);
+      
+      // Record number of heads
+      coinFlipHist.setBinValue(0, 7);
+      
+      // Record number of tails
+      coinFlipHist.setBinValue(1, 9);
+      
+      System.out.print("Heads: ");
+      System.out.println(coinFlipHist.getBinValue(0));
+      
+      return;
+   }
+   
+   import javax.swing.JFrame;
+
+public class EmptyFrame {
+   public static void main(String[] args) {
+      
+      // Construct the JFrame object
+      JFrame appFrame = new JFrame();
+
+      // Set the frame's width (400) and height (250) in pixels
+      appFrame.setSize(400, 250);
+      
+      // Set the frame's title
+      appFrame.setTitle("An Empty Frame");
+      
+      // Set the program to exit when the user
+      // closes the frame
+      appFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+      
+      // Make the frame visible to the user
+      appFrame.setVisible(true);
+
+      return;
+   }
+}
+
+HistogramViewer.java
+import javax.swing.JFrame;
+
+public class HistogramViewer {
+   public static void main(String[] args) {
+      JFrame appFrame = new JFrame();
+      HistogramComponent histogramComponent = new HistogramComponent();
+
+      appFrame.setSize(400, 250);
+      appFrame.setTitle("Histogram Viewer");
+      appFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+      
+      // Add the HistogramComponent object to the frame
+      appFrame.add(histogramComponent);
+      
+      // Set the frame and its contents visible
+      appFrame.setVisible(true);
+
+      return;
+   }
+}
+
+public class Salary {                         
+   public static void main (String [] args) { 
+      int hourlyWage       = 20;
+      int workHoursPerWeek = 40;  
+      // FIXME: Declare and initialize variable workWeeksPerYear, then replace the 50's below
+      int annualSalary     = 0;
+       
+      annualSalary = hourlyWage * workHoursPerWeek * 50; 
+      System.out.print("Annual salary is: ");         
+      System.out.println(annualSalary);  
+      
+      System.out.print("Monthly salary is: ");
+      System.out.println((hourlyWage * workHoursPerWeek * 50) / 12); 
+
+      return;
+   } 
+}
+
+import java.util.Scanner;
+
+public class Salary {                         
+   public static void main (String [] args) { 
+      Scanner scnr = new Scanner(System.in);
+      int hourlyWage = 0;
+      int workHoursPerWeek = 40;      
+      int workWeeksPerYear = 50;
+      int monthsPerYear = 12; // FIXME: Declare as final and use standard naming  
+      int annualSalary  = 0; 
+      int monthlySalary = 0; 
+            
+      System.out.println("Enter hourly wage: ");
+      hourlyWage = scnr.nextInt();
+
+      // FIXME: Get user input values for workHoursPerWeek and workWeeksPerYear
+
+      annualSalary = hourlyWage * workHoursPerWeek * workWeeksPerYear;
+      System.out.print("Annual salary is: ");         
+      System.out.println(annualSalary);  
+      
+      // FIXME: Change monthsPerYear to the final variable that uses the standard naming
+      monthlySalary = (hourlyWage * workHoursPerWeek * workWeeksPerYear) / monthsPerYear;
+      System.out.print("Monthly salary is: ");
+      System.out.println(monthlySalary); 
+
+      return;
+   } 
+}
+
+public class RunnerInfo {
+
+   // The class' private internal fields
+   private int timeRun;
+   private double distRun;
+
+   // The class' public methods
+
+   // Set time run in seconds
+   public void setTime(int timeRunSecs) {
+      timeRun = timeRunSecs;  // timeRun refers to class member
+      return;
+   }
+
+   // Set distance run in miles
+   public void setDist(double distRunMiles) {
+      distRun = distRunMiles;
+      return;
+   }
+
+   // Get speed in miles/hour
+   public double getSpeedMph() {
+      // miles / (sec / (3600sec/hr))
+      return distRun / (timeRun / 3600.0);
+   }
+}
+import java.util.Scanner;
+
+public class RunnerTimes {
+   public static void main(String[] args) {
+      Scanner scnr = new Scanner(System.in);
+      // User-created object of class type RunnerInfo
+      RunnerInfo runner1 = new RunnerInfo();
+      // A second object
+      RunnerInfo runner2 = new RunnerInfo();   
+
+      runner1.setTime(360);
+      runner1.setDist(1.2);
+
+      runner2.setTime(200);
+      runner2.setDist(0.5);
+
+      System.out.println("Runner1's speed in MPH: " + runner1.getSpeedMph());
+      System.out.println("Runner2's speed in MPH: " + runner2.getSpeedMph());
+
+      return;
+   }
+}
+
+3.1.6: Class example: Right triangle.
+
+
+import java.lang.Math;
+
+public class RightTriangle {
+   private double side1;
+   // FIXME: Declare side2
+
+   public void setSide1(double side1Val) {
+      side1 = side1Val;
+
+      return;
+   }
+
+   // FIXME: Define setSide2()
+
+   public double getHypotenuse() {
+      return -1.0; // FIXME: temporary until side2 defined
+      // return Math.sqrt((side1 * side1) + (side2 * side2));
+   }
+}
+
+
+import java.util.Scanner;
+
+public class HypotenuseCalc {
+   public static void main(String[] args) {
+      Scanner scnr = new Scanner(System.in);
+      RightTriangle triangleA = new RightTriangle();
+
+      triangleA.setSide1(3.0);
+      // FIXME: Set side2 to 4.0
+
+      System.out.println("Hypotenuse: " + triangleA.getHypotenuse());
+      // Should output 5 for the above side values
+
+      return;
+   }
+}
+
+public class CallPerson {
+   public static void main(String [] args) {
+      String userName = "Ron";
+      Person person1 = new Person();
+   
+      person1.setFirstName(userName);
+      System.out.print("I am " + person1.getFirstName());
+   
+      return;
+   }
+
+ EXAMPLES: TWO SOURCE FILES
+CallPerson.java 
+   }
+public class CallPerson {
+   public static void main(String [] args) {
+      String userFirstName = "Ron";
+      String userLastName = "Rogers";
+      Person person1 = new Person();
+   
+      person1.setFirstName(userFirstName);
+      person1.setLastName(userLastName);
+      System.out.print("I am " + person1.getFullName());
+   
+      return;
+   }
+}
+Person.java
+public class Person {
+   private String firstName;
+   private String lastName;
+   
+   public void setFirstName(String firstNameToSet) {
+      firstName = firstNameToSet;
+   }
+   
+   public void setLastName(String lastNameToSet) {
+      lastName = lastNameToSet;
+   }
+   
+   public String getFullName() {
+      return firstName + " " + lastName;
+   }
+}
+
+public class CallPerson {
+   public static void main(String [] args) {
+      String userName = "Joe";
+      String differentUserName = "Sam";
+      Person person1 = new Person();
+   
+      person1.setFirstName(userName);
+      System.out.println("He is not " + person1.getFirstName());
+      person1.setFirstName(differentUserName);
+      System.out.println("He is " + person1.getFirstName());
+   
+      return;
+   }
+}
+
+public class Person {
+   private String firstName;
+
+   public void setFirstName(String firstNameToSet) {
+      firstName = firstNameToSet;
+   }
+   
+   public String getFirstName() {
+      return firstName;
+   }
+}
+
+public class CallPerson {
+   public static void main(String [] args) {
+      String aFirstName = "Ann";
+      String anotherFirstName = "Ron";
+      String aLastName = "Stark";
+      String anotherLastName = "Rogers";
+
+      Person person1 = new Person();
+      Person person2 = new Person();
+      
+      person1.setLastName(aLastName);
+      person1.setFirstName(aFirstName);
+      person2.setLastName(anotherLastName);
+      person2.setFirstName(anotherFirstName);
+
+      System.out.println("You are " + person1.getFullName());
+      System.out.println("I am " + person2.getFullName());
+   
+      return;
+   }
+}
+
+public class Person {
+   private String firstName;
+   private String lastName;
+
+   public void setFirstName(String firstNameToSet) {
+      firstName = firstNameToSet;
+   }
+   
+   public void setLastName(String lastNameToSet) {
+      lastName = lastNameToSet;
+   }
+   
+   public String getFullName() {
+      return firstName + "_" + lastName;
+   }
+}
+// ===== Code from file PersonInfo.java =====
+public class PersonInfo {
+   private int numKids;
+
+   public void setNumKids(int personsKids) {
+      numKids = personsKids;
+      return;
+   }
+
+   public void incNumKids() {
+      numKids = numKids + 1;
+      return;
+   }
+
+   public int getNumKids() {
+      return numKids;
+   }
+}
+// ===== end =====
+
+// ===== Code from file CallPersonInfo.java =====
+public class CallPersonInfo {
+   public static void main (String [] args) {
+      PersonInfo person1 = new PersonInfo();
+
+      person1.setNumKids(3);
+
+      System.out.println("Kids: " + person1.getNumKids());
+      person1.incNumKids();
+      System.out.println("New baby, kids now: " + person1.getNumKids());
+      
+      return;
+   }
+}
+// ===== end =====
+
+// ===== Code from file DogLicense.java =====
+public class DogLicense {
+   private int licenseYear;
+   private int licenseNum;
+
+   public void setYear(int yearRegistered) {
+      licenseYear = yearRegistered;
+      return;
+   }
+
+   // FIXME: Write createLicenseNum()
+
+   public void createLicenseNum(int customID){
+      licenseNum = (customID * 100000) + licenseYear;
+   }
+   
+   public int getLicenseNum() {
+      return licenseNum;
+   }
+}
+// ===== end =====
+
+// ===== Code from file CallDogLicense.java =====
+public class CallDogLicense {
+   public static void main (String [] args) {
+      DogLicense dog1 = new DogLicense();
+
+      dog1.setYear(2014);
+      dog1.createLicenseNum(777);
+      System.out.println("Dog license: " + dog1.getLicenseNum());
+
+      return;
+   }
+}
+// ===== end =====
+
+CHALLENGE:
+Challenge Activity3.2.1: Basic method call.
+Complete the method definition to print five asterisks ***** when called once (do NOT print a newline). Output for sample program:
+**********
+
+public class CharacterPrinter {
+
+   public static void printPattern() {
+      char asterisk = '*';
+      
+      System.out.print(asterisk);
+      System.out.print(asterisk);
+      System.out.print(asterisk);
+      System.out.print(asterisk);
+      System.out.print(asterisk);
+      
+      return;
+   }
+
+   public static void main (String [] args) {
+      printPattern();
+      printPattern();
+      System.out.println("");
+      return;
+   }
+}
+
+
+Complete the printShape() method to print the following shape. End with newline.
+Example output: 
+***
+***
+***
+
+public class MethodShapePrinter {
+   public static void printShape() {
+      char asterisk = '*';
+      
+      System.out.print(asterisk);
+      System.out.print(asterisk);
+      System.out.println(asterisk);
+      System.out.print(asterisk);
+      System.out.print(asterisk);
+      System.out.println(asterisk);
+      System.out.print(asterisk);
+      System.out.print(asterisk);
+      System.out.println(asterisk);
+
+      return;
+   }
+
+   public static void main (String [] args) {
+      printShape();
+      return;
+   }
+}
+Type the program's output.
+
+public class User {
+
+   public static void printAge(int userAge) {
+      System.out.print("She is " + userAge);
+
+      return;
+   }
+
+   public static void main (String [] args) {
+      int ageToPrint = 24;
+
+      printAge(ageToPrint);
+
+      return;
+   }
+}
+
+She is 24
+
+Type the program's output.
+
+public class Price {
+
+   public static void printPrice(int price) {
+      System.out.print("Price: $" + price);
+
+      return;
+   }
+
+   public static void main (String [] args) {
+      int productPrice = 27;
+      int taxAmount = 2;
+
+      printPrice(productPrice + taxAmount);
+
+      return;
+   }
+}
+
+Price: $29
+
+Type the program's output.
+
+public class User {
+   
+   public static void printInfo(String name, int age) {
+      System.out.println(name + ", " + age);
+      
+      return;
+   }
+   
+   public static void main (String [] args) {
+      String userName1 = "May";
+      String userName2 = "Bob";
+      int userAge1 = 22;
+      int userAge2 = 21;
+      
+      printInfo(userName1, userAge1);
+      printInfo(userName2, userAge2);
+      
+      return;
+   }
+}
+May, 22
+Bob, 21
+
+
+Type the program's output.
+
+public class Player {
+   
+   public static void printPoints(String name, int age, int totalPoints) {
+      System.out.println(name + " is " + age);
+      System.out.println(name + " made " + totalPoints + " points");
+   
+      return;
+   }
+   
+   public static void main (String [] args) {
+      String userName = "Bob";
+      int userAge = 23;
+      int regularTimePoints = 25;
+      int overtimePoints = 5;
+      
+      printPoints(userName, userAge, regularTimePoints + overtimePoints);
+      
+      return;
+   }
+}
+Bob is 23
+Bob made 30 points
+
+x!x!x
+~~~~~
+x!x!x
+~~~~~
+x!x!x
+
+import java.util.Scanner;
+
+public class GameBoardPrinter {
+   public static void printTicTacToe(char horizChar, char vertChar) {
+
+      System.out.println("x" + vertChar + "x" + vertChar + "x");
+      System.out.print(horizChar);
+      System.out.print(horizChar);
+      System.out.print(horizChar);
+      System.out.print(horizChar);
+      System.out.println(horizChar);
+      System.out.println("x" + vertChar + "x" + vertChar + "x");
+      System.out.print(horizChar);
+      System.out.print(horizChar);
+      System.out.print(horizChar);
+      System.out.print(horizChar);
+      System.out.println(horizChar);
+      System.out.println("x" + vertChar + "x" + vertChar + "x");
+
+      return;
+   }
+
+   public static void main (String [] args) {
+      printTicTacToe('~', '!');
+
+      return;
+   }
+}
+
+Define a method printFeetInchShort, with int parameters numFeet and numInches, that prints using ' and " shorthand. 
+Ex: printFeetInchShort(5, 8) prints:
+
+import java.util.Scanner;
+
+public class HeightPrinter {
+      public static void printFeetInchShort(int num1, int num2) {
+         
+         System.out.print(num1 + "' ");
+         System.out.print(num2 + "\"");
+      
+      return;
+   }
+
+   public static void main (String [] args) {
+      printFeetInchShort(5, 8);
+      System.out.println("");
+
+     return;
+   }
+}
+
+A method is commonly defined to compute a mathematical function involving several numerical parameters and returning a 
+numerical result. For example, the following program uses a method to convert a person's height in U.S. units 
+(feet and inches) into total centimeters.
+
+import java.util.Scanner;
+
+public class HeightConverter {
+
+   /* Converts a height in feet/inches to centimeters */
+   public static double heightFtInToCm(int heightFt, int heightIn) {
+      final double CM_PER_IN = 2.54;
+      final int IN_PER_FT = 12;
+      int totIn = 0;
+      double cmVal = 0.0;
+
+      totIn = (heightFt * IN_PER_FT) + heightIn; // Total inches
+      cmVal = totIn * CM_PER_IN;                 // Conv inch to cm
+      return cmVal;
+   }
+
+   public static void main(String[] args) {
+      Scanner scnr = new Scanner(System.in);
+      int userFt = 0;  // User defined feet
+      int userIn = 0;  // User defined inches
+
+      // Prompt user for feet/inches
+      System.out.print("Enter feet: ");
+      userFt = scnr.nextInt();
+
+      System.out.print("Enter inches: ");
+      userIn = scnr.nextInt();
+
+      // Output converted feet/inches to cm result
+      System.out.print("Centimeters: ");
+      System.out.println(heightFtInToCm(userFt, userIn));
+
+      return;
+   }
+}
+
+public class returnMethodOutput {
+   public static int changeValues(int x, int y) {
+      return x + y;
+   }
+
+   public static void main (String [] args) {
+      System.out.print(changeValues(4, 3));
+   
+      return;
+   }
+}
+
+public class returnMethodOutput {
+   public static int changeValues(int x, int y) {
+      int newValue = 0;
+
+      newValue = x + y;
+
+      return newValue;
+   }
+
+   public static void main (String [] args) {
+      System.out.print(changeValues(1, 4));
+   
+      return;
+   }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,736 @@
+/*Module 4
+ *Control Structures: Branching
+ *Logical Operators
+ */
+ 
+IF-ELSE
+Like a river splitting and re-merging, branching directs a program to execute either one statement group or another, depending on an 
+expression's value. An example is to print "Too young to drive" if userAge < 16, else print "OK to drive". The language's if-else statement 
+supports branching.
+ 
+// Statements that execute before the branches
+if (expression) {
+   // Statements to execute when the expression is true (first branch)
+}
+else {
+   // Statements to execute when the expression is false (second branch)
+}
+// Statements that execute after the branches
+
+If-else example: Car insurance prices.
+
+import java.util.Scanner;
+
+public class Insurance {
+   public static void main(String[] args) {
+      Scanner scnr = new Scanner(System.in);
+      final int PRICE_LESS_THAN_25 = 4800; // Age less than 25
+      final int PRICE_25_AND_UP    = 2200; // Age 25 and Up
+      int userAge                  = 0;    // Years
+      int insurancePrice           = 0;    // Dollars
+
+      System.out.print("Enter age: ");
+      userAge = scnr.nextInt();
+
+      if (userAge < 25) {
+         insurancePrice = PRICE_LESS_THAN_25;
+         System.out.println("(executed first branch)");
+      } 
+      else {
+         insurancePrice = PRICE_25_AND_UP;
+         System.out.println("(executed second branch)");
+      }
+
+      System.out.println("Annual price: $" + insurancePrice);
+
+      return;
+   }
+}
+Though not required, programmers follow the good practice of indenting a branch's statements, using a consistent number of spaces. 
+This material indents 3 spaces.
+
+if (userAge > 62) {  
+   discount = 15; 
+} 
+else { 
+   discount = 0; 
+} 
+
+if (numPeople > 10) {
+	groupSize = 2 * groupSize;
+} 
+else {
+	groupSize = 3 * groupSize;
+	numPeople = numPeople -1;
+}
+
+if (numPlayers > 11) {
+teamSize = 11;
+}
+else {
+teamSize = numPlayers;
+}
+teamSize = 2 * teamSize;
+
+If statement without else: Absolute value example.
+import java.util.Scanner;
+
+public class AbsoluteValueCalc {
+   public static void main (String [] args) {
+      Scanner scnr = new Scanner(System.in);
+      int userVal = 0;
+      int absVal  = 0;
+
+      System.out.print("Enter an integer: ");
+      userVal = scnr.nextInt();
+
+      absVal = userVal;
+      if (absVal < 0) {
+         absVal = absVal * -1;
+      }
+
+      System.out.print("The absolute value of " + userVal);
+      System.out.println(" is " + absVal);
+
+      return;
+   }
+}
+
+An if statement can be written without the else part. Such a statement acts like an if-else with no statements in the else branch.
+DON'T HAVE TO HAVE ELSE IN AN IF STATEMENT. Otherwise the program will just return the initial value at the end of the branch, e.g.:
+bonusVal = 0;
+numItems = 1; 
+if (bonusVal > 10) {
+   numItems = numItems + 3;
+}
+Would return 1 for numItems since it did not execute in the if statement.
+
+Braces surround a branch's statements. Braces { }, sometimes redundantly called curly braces, represent a grouping, such as a grouping of 
+statements. Note: { } are braces, [ ] are brackets.
+
+When a branch has a single statement, the braces are optional, but good practice  always uses the braces. Always using braces even when a branch 
+only has one statement prevents the common error of mistakenly thinking a statement is part of a branch.
+
+Write an expression that will cause the following code to print "less than 18" if the value of userAge is less than 18.
+public class AgeChecker {
+   public static void main (String [] args) {
+      int userAge = 0;
+
+      if (userAge < 18) {
+         System.out.println("less than 18");
+      }
+      else {
+        System.out.println("18 or more");
+      }
+
+      return;
+   }
+}
+
+Write an if-else statement for the following: 
+If userTickets is less than 5, execute numTickets = 1. Else, execute numTickets = userTickets. 
+Ex: if userTickets is 3, then numTickets = 1. 
+
+public class TicketCounter {
+   public static void main (String [] args) {
+      int numTickets = 0;
+      int userTickets = 3;
+
+      if (userTickets < 5) {
+         numTickets = 1;
+      }
+      else {
+         numTickets = userTickets;
+      }
+
+      System.out.println(numTickets);
+
+      return;
+   }
+}
+
+----------------------------------------------
+/*Relational and Equality Operators*/
+An if-else expression commonly involves a relational operator or equality operator.
+Relational and equality operators	
+
+Description
+a < b	a is less-than b
+a > b	a is greater-than b
+a <= b	a is less-than-or-equal-to b
+a >= b	a is greater-than-or-equal-to  b
+a == b	a is equal to b
+a != b	a is not equal to b
+
+Each operator involves two operands, shown above as a and b. The operation evaluates to a Boolean value meaning either 
+true or false. If userAge is 19, then userAge < 25 evaluates to true.
+
+Some operators like >= involve two characters. Only the shown two-character sequences represent valid operators. 
+A common error is to use invalid character sequences like =>, !<, or <>, which are not valid operators.
+
+Note that equality is ==, not =.
+The program prints "Zero" if the user enters 0, else prints "Non-zero":
+
+import java.util.Scanner;
+
+public class Neg {
+   public static void main (String [] args) {
+      Scanner scnr = new Scanner(System.in);
+      int userNum = 0;
+
+      System.out.println("Enter a number: ");
+      userNum = scnr.nextInt();
+      if (userNum == 0) {
+         System.out.println("Zero");
+      }
+      else {
+         System.out.println("Non-zero");
+      }
+            
+      return;
+   }
+}
+
+The relational and equality operators work for integer, character, and floating-point built-in types. 
+Comparing characters compares their Unicode numerical encoding. However, floating-point types should not be compared using 
+the equality operators, due to the imprecise representation of floating-point numbers, as discussed in a later section.
+
+The operators should not be used with strings; unexpected results will occur. See another section discussing string comparison 
+methods equals() and compareTo().
+
+A common error is to use = rather than == in an if-else expression, as in: if (numDogs = 9) { ... }. The compiler usually 
+generates an error message, like: 
+"incompatible types. found : int. required: boolean."
+
+Write an expression that will print "Dollar or more" if the value of numCents is at least a dollar (100 cents is a dollar). 
+Ex: If numCents is 109, output is "Dollar or more". 
+
+import java.util.Scanner;
+
+public class DetectDollar {
+   public static void main (String [] args) {
+      int numCents = 0;
+
+      numCents = 109;
+
+      if (numCents >= 100) {
+         System.out.println("Dollar or more");
+      }
+      else {
+         System.out.println("Not a dollar");
+      }
+
+      return;
+   }
+}
+
+
+Write an expression that will print "Even" if the value of userNum is an even number. Hint: Use the % operator. 
+Also, be sure to use ==, and not just =. 
+import java.util.Scanner;
+
+public class DetectOdd {
+   public static void main (String [] args) {
+     int userNum = 0;
+
+     userNum = 6;
+
+      if ((userNum % 2) == 0) {
+         System.out.println("Even");
+      }
+      else {
+         System.out.println("Odd");
+      }
+
+      return;
+   }
+}
+
+MODULO OF EVEN NUMBER AND 2 ALWAYS = ZERO.
+
+Write an if-else statement that checks patronAge. If 55 or greater, print "Senior citizen", otherwise print 
+"Not senior citizen" (without quotes). End with newline. 
+import java.util.Scanner;
+
+public class DetectSenior {
+   public static void main (String [] args) {
+      int patronAge = 0;
+
+      patronAge = 55;
+
+      if (patronAge >= 55) {
+         System.out.println("Senior citizen");
+      }
+      
+      else {
+         System.out.println("Not senior citizen");
+      }
+
+      return;
+   }
+}
+--------------------------------------------
+/*6.3 Multiple if-else branches*/
+Commonly, a programmer requires more than two branches, in which case a multi-branch if-else arrangement can be used.
+SYNTAX:
+
+if (expr1) {
+
+}
+else if (expr2) {
+
+}
+
+...
+
+else if (exprN) {
+
+}
+else {
+
+}
+
+Multiple if-else branches example: Anniversaries.
+
+import java.util.Scanner;
+
+public class MultIfElseAnniv {
+   public static void main(String[] args) {
+      Scanner scnr = new Scanner(System.in);
+      int numYears = 0;
+
+      System.out.print("Enter number years married: ");
+      numYears = scnr.nextInt();
+
+      if (numYears == 1) {
+         System.out.println("Your first year -- great!");
+      }
+      else if (numYears == 10) {
+         System.out.println("A whole decade -- impressive.");
+      }
+      else if (numYears == 25) {
+         System.out.println("Your silver anniversary -- enjoy.");
+      }
+      else if (numYears == 50) {
+         System.out.println("Your golden anniversary -- amazing.");
+      }
+      else {
+         System.out.println("Nothing special.");
+      }
+
+      return;
+   }
+}
+Figure 6.3.2: Using sequential nature of multi-branch if-else for ranges: Insurance prices:
+
+import java.util.Scanner;
+
+public class MultIfElseInsur {
+   public static void main(String[] args) {
+      Scanner scnr = new Scanner(System.in);
+      final int PRICE_16_TO_24  = 4800; // Age 16..24 (2010 U.S., carsdirect.com)
+      final int PRICE_25_TO_39  = 2350; // Age 25..39
+      final int PRICE_40_AND_UP = 2100; // Age 40 and up
+      int userAge        = 0;
+      int insurancePrice = 0;
+
+      System.out.print("Enter your age: ");
+      userAge = scnr.nextInt();
+
+      if (userAge <= 15) {                  // Age 15 and under
+         System.out.println("Too young.");
+         insurancePrice = 0;
+      } else if (userAge <= 24) {           // Age 16..24
+         insurancePrice = PRICE_16_TO_24;
+      } else if (userAge <= 39) {           // Age 25..39
+         insurancePrice = PRICE_25_TO_39;
+      } else {                              // Age 40 and up
+         insurancePrice = PRICE_40_AND_UP;
+      }
+
+      System.out.println("Annual price: $" + insurancePrice);
+
+      return;
+   }
+}
+----------------------------------
+/*NESTED IF-ELSE STATEMENTS*/ 
+A branch's statements can include any valid statements, including another if-else statement, such occurrence known 
+as nested if-else statements.
+SYNTAX:
+if (userChar == 'q') { // userChar 'q'     
+   ...
+}
+else if (userChar == 'c') {
+   if (numItems < 0) { // userChar 'c' and numItems < 0
+      ...
+   }
+   else {              // userChar 'c' and numItems >= 0
+      ...
+   }
+}
+else { // userChar not 'q' or 'c'
+   ...
+}
+
+Sometimes the programmer has multiple if statements in sequence, which looks similar to a multi-branch if-else statement but 
+has a very different meaning. Each if-statement is independent, and thus more than one branch can execute, in contrast to 
+the multi-branch if-else arrangement.
+Figure 6.3.4: Multiple distinct if statements.
+
+import java.util.Scanner;
+
+public class AgeStats {
+   public static void main(String[] args) {
+      Scanner scnr = new Scanner(System.in);
+      int userAge = 0;
+
+      System.out.print("Enter age: ");
+      userAge = scnr.nextInt();
+
+      // Note that more than one "if" statement can execute
+      if (userAge < 16) {
+         System.out.println("Enjoy your early years.");
+      }
+
+      if (userAge >= 16) {
+         System.out.println("You are old enough to drive.");
+      }
+
+      if (userAge >= 18) {
+         System.out.println("You are old enough to vote.");
+      }
+
+      if (userAge >= 25) {
+         System.out.println("Most car rental companies will rent to you.");
+      }
+
+      if (userAge >= 35) {
+         System.out.println("You can run for president.");
+      }
+
+      return;
+   }
+}
+
+The code should convert negative numbers to 0:
+import java.util.Scanner;
+
+public class ConvertNegative {
+   public static void main (String [] args) {
+      int userNum = 0;
+
+      if (userNum >= 0) {
+         System.out.println("Non-negative");
+      }
+      
+      else {
+         System.out.println("Negative; converting to 0");
+         userNum = 0;
+      }
+      
+   System.out.format("Final: %d", userNum);
+   System.out.println("");
+
+      return;
+   }
+}
+
+Write an if-else statement with multiple branches. If givenYear is 2100 or greater, print "Distant future" (without quotes). 
+Else, if givenYear is 2000 or greater (2000-2099), print "21st century". Else, if givenYear is 1900 or greater (1900-1999), 
+print "20th century". Else (1899 or earlier), print "Long ago". Do NOT end with newline.
+import java.util.Scanner;
+
+public class YearChecker {
+   public static void main (String [] args) {
+      int givenYear = 0;
+
+      givenYear = 1776;
+
+      if (givenYear >= 2100) {
+         System.out.print("Distant future");
+      }
+         else if (givenYear >= 2000) {
+         System.out.print("21st century");
+      }      
+         else if (givenYear >= 1900) {
+            System.out.print("20th century");
+      }
+      else {
+         System.out.print("Long ago");
+      }
+      
+      return;
+   }
+}
+
+Write multiple if statements. If carYear is 1969 or earlier, print "Probably has few safety features." 
+If 1970 or higher, print "Probably has seat belts." If 1990 or higher, print "Probably has anti-lock brakes." 
+If 2000 or higher, print "Probably has air bags." End each phrase with period and newline. Ex: carYear = 1995 prints: 
+
+import java.util.Scanner;
+
+public class CarFeatures {
+   public static void main (String [] args) {
+      int carYear = 0;
+
+      carYear = 1940;
+
+      if (carYear <= 1969) {
+         System.out.println("Probably has few safety features.");
+      }
+      if (carYear >= 1970) {
+         System.out.println("Probably has seat belts.");
+      }
+      if (carYear >= 1990) {
+         System.out.println("Probably has anti-lock brakes.");
+      }
+      if (carYear >= 2000 ) {
+         System.out.println("Probably has air bags.");
+      }
+
+      return;
+   }
+}
+---------------------------------------
+/* 6.4 Logical Operators */
+
+More operators are available for use in expressions. A logical operator treats operands as being true or false, 
+and evaluates to true or false.
+a && b	Logical AND: true when both of its operands are true
+a || b	Logical OR: true when at least one of its two operands are true
+!a	Logical NOT (opposite): true when its single operand is false (and false when operand is true)
+
+Logical operators examples.
+Given age = 19, days = 7, userChar = 'q'	
+(age > 16) && (age < 25)	true, because both operands are true.
+(age > 16) && (days > 10)	false, because one operand is true and the other is false (days > 10 is false).
+(age > 16) || (days > 10) 	true, because at least one operand is true (age > 16 is true).
+!(days > 10) 	true, because operand is false.
+!(age > 16) 	false, because operand is true.
+!(userChar == 'q') 	false, because operand is true.
+
+The boolean data type is for variables that should store only values true or false. 
+Thus, a programmer can define a variable like boolean result;, assign the variable as in result = true;,  
+result = (age < 25);, or result = x && y;, and use the variable in an if-else statement as in  
+
+if (result) or if ((!result) && (b == c)).
+
+A common error often made by new programmers is to write expressions like if (16 < age < 25), as one might see in mathematics.
+
+Using parentheses makes the order of evaluation explicit, rather than relying on precedence rules. 
+Thus,  (age > 16) || (age < 25) is preferable over age > 16 || age < 25, even though both expressions evaluate the same 
+because > and < have higher precedence than ||.
+
+Using parentheses to make order of evaluation explicit becomes even more critical as arithmetic, relational, equality, 
+and logical operators are combined in a single expression. For example, a programmer might write:
+
+! x == 2 intending to mean !(x == 2), but in fact the compiler computes (!x) == 2 because ! has precedence over ==.
+w && x  == y && z intending (w && x) == (y && z), but the compiler computes  (w && (x == y)) && z because == has precedence over &&.
+! x + y < 5 intending !((x + y) < 5), but the compiler computes ((!x) + y) < 5 because ! has precedence over +.
+
+Good practice is to use parentheses in expressions to make the intended order of evaluation explicit.
+
+The reader should note that the logical AND is && and not just &, and likewise that logical OR is || and not just |. 
+For integral operand types, such as int, the single character versions represent different operators known as bitwise operators. 
+When both operands are integers, the bitwise operators evaluate to an integer value. For boolean operands, the bitwise operators 
+evaluate to the same boolean value as the logical operators, but do not perform short circuit evaluation, which is discussed 
+elsewhere. Mixing integral and boolean operands in a bitwise operator, such as 2 & false, generates a syntax error.
+
+Using bitwise operators when intending to use logical operators may yield different behavior than expected. 
+A common error occurs when bitwise operators are used instead of logical operators by mistake.
+
+Challenge Activity6.4.1: Detect specific values.
+Write an expression that prints "Special number" if specialNum is -99, 0, or 44. 
+import java.util.Scanner;
+
+public class FindSpecialValue {
+   public static void main (String [] args) {
+      int specialNum = 0;
+
+      specialNum = 17;
+
+      if ((specialNum == -99) || (specialNum == 0) || (specialNum == 44)) {
+          System.out.println("Special number");
+      }
+      else {
+          System.out.println("Not special number");
+      }
+
+      return;
+   }
+}
+
+Challenge Activity6.4.2: Detect number range.
+Write an expression that prints "Eligible" if userAge is between 18 and 25 inclusive. 
+Ex: 17 prints "Ineligible", 18 prints "Eligible". 
+import java.util.Scanner;
+
+public class AgeChecker {
+   public static void main (String [] args) {
+      int userAge = 0;
+
+      userAge = 17;
+      if( (userAge >= 18) && (userAge <= 25) ){
+          System.out.println("Eligible");
+      }
+      else{
+          System.out.println("Ineligible");
+      }
+
+      return;
+   }
+}
+
+----------------------------
+/*Boolean Data Types*/
+Boolean refers to a quantity that has only two possible values, true or false.
+
+Java has the built-in data type boolean for representing Boolean quantities.
+Example using variables of bool data type.
+import java.util.Scanner;
+
+public class PosOrNeg {
+   public static void main (String [] args) {
+      Scanner scnr = new Scanner(System.in);
+      boolean isLarge = false;
+      boolean isNeg   = false;
+      int  userNum = 0;
+
+      System.out.print("Enter any integer: ");
+      userNum = scnr.nextInt();
+
+      if ((userNum < -100) || (userNum > 100)) {
+         isLarge = true;
+      }
+      else {
+         isLarge = false;
+      }
+
+      // Alternative way to set a Boolean variable
+      isNeg = (userNum < 0);
+
+      System.out.print("(isLarge: " + isLarge);
+      System.out.println(" isNeg: " + isNeg + ")");
+
+      System.out.print("You entered a ");
+      if (isLarge && isNeg) {
+         System.out.println("large negative number.");
+      }
+      else if (isLarge && !isNeg) {
+         System.out.println("large positive number.");
+      }
+      else {
+         System.out.println("small number.");
+      }
+
+      return;
+   }
+}
+A Boolean variable may be set using true or false keywords, as for isLarge above. Alternatively, a Boolean variable may be 
+set to the result of a logical expression, which evaluates to true or false, as for  isNeg above.
+
+Challenge Activity6.6.1: Using bool.
+Write code to assign true to isTeenager if kidAge is 13 to 19 inclusive. 
+
+public class TeenagerDetector {
+   public static void main (String [] args) {
+      boolean isTeenager = false;
+      int kidAge      = 0;
+
+      kidAge = 13;
+
+     if ((kidAge >= 13) && (kidAge <= 19)) {
+        isTeenager = true;
+     }
+
+      if (isTeenager) {
+         System.out.println("Teen");
+      }
+      else {
+         System.out.println("Not teen");
+      }
+
+      return;
+   }
+}
+
+Challenge Activity6.6.2: Bool in branching statements.
+Write an if-else statement to describe an object. Print "Balloon" if isBalloon is true and isRed is false. 
+Print "Red balloon" if isBalloon and isRed are both true. Print "Not a balloon" otherwise. End with newline.
+
+public class RedBalloon {
+   public static void main (String [] args) {
+      boolean isRed = false;
+      boolean isBalloon = false;
+      
+      if ((isRed == false) && (isBalloon == true)) {
+         System.out.println("Balloon");
+      }
+      
+      else if ((isRed == true) && (isBalloon == true)){
+            System.out.println("Red balloon");
+      }
+      
+      else {
+         System.out.println("Not a balloon");
+      }
+
+      return;
+   }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

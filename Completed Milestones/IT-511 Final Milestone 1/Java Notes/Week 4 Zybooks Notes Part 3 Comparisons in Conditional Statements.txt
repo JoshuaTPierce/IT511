@@ -1,0 +1,451 @@
+/*Module 4: Branching and Comparisons
+ *String Comparisons
+ */
+----------------------------
+/*String Comparisons*/
+
+Two strings are commonly compared for equality. Equal strings have the same number of characters, and 
+each corresponding character is identical.
+
+A programmer can compare two strings using the notation str1.equals(str2). 
+The equals method returns true if the two strings are equal. 
+A common error is to use == to compare two strings, which behaves differently than expected.
+Figure 6.7.1: String equality example: Censoring.
+
+import java.util.Scanner;
+
+public class StringCensoring {
+   public static void main(String[] args) {
+      Scanner scnr = new Scanner(System.in);
+      String userWord = "";
+
+      System.out.print("Enter a word: ");
+      userWord = scnr.next();
+
+      if (userWord.equals("Voldemort")) {
+         System.out.println("He who must not be named");
+      } 
+      else {
+         System.out.println(userWord);
+      }
+
+      return;
+   }
+}
+
+Strings are sometimes compared relationally (less-than, greater-than), as when sorting words alphabetically. 
+For example, banana comes before orange alphabetically, so banana is less-than orange. Also, banana is less-than bananas.
+[This would be important for sorting algorithms with strings]
+
+A programmer compares strings relationally using the notation str1.compareTo(str2). compareTo() returns values as follows.
+
+Relation	Returns	Expression to detect
+str1 less-than str2	  Negative number	  str1.compareTo(str2) < 0
+str1 equal-to str2	  0	  str1.compareTo(str2) == 0
+str1 greater-than str2	  Positive number	  str1.compareTo(str2) > 0
+
+Complete the code by comparing string variables myName and yourName. Start with myName.
+if (
+myName.compareTo(yourName) > 0
+) {
+  System.out.print(myName + " is greater."); 
+} 
+
+If existing characters are equal, the shorter string is less-than.
+'A' is less-than 'O'
+The coded value for 'm' is greater-than the coded value for 'M'
+
+A programmer can compare strings while ignoring case using str1.equalsIgnoreCase(str2) and str1.compareToIgnoreCase(str2).
+
+Challenge Activity
+Write an if-else statement that prints "Goodbye" if userString is "Quit", else prints "Hello". End with newline. 
+import java.util.Scanner;
+
+public class DetectWord {
+   public static void main (String [] args) {
+      String userString;
+
+      userString = "Quit";
+
+      if (userString.equals("Quit")) {
+         System.out.println("Goodbye");
+      }
+      else {
+         System.out.println("Hello");
+      }
+
+      return;
+   }
+}
+
+Challenge Activity6.7.2: Print two strings in alphabetical order.
+Print the two strings in alphabetical order. Assume the strings are lowercase. End with newline. 
+import java.util.Scanner;
+
+public class OrderStrings {
+   public static void main (String [] args) {
+      String firstString;
+      String secondString;
+
+      firstString  = "rabbits";
+      secondString = "capes";
+
+      if ((firstString.compareTo(secondString) < 0)) {
+         System.out.println(firstString + " " + secondString);
+      }
+      else {
+         System.out.println((secondString + " " + firstString));
+      }
+
+      return;
+   }
+}
+
+ALPHABETICAL ORDER: A < B < C < D ETC.
+WHEN IT COMES TO .compareTo() expressions.
+
+----------------------------
+/*String Access Operations*/
+
+A string is a sequence of characters in memory. Each string character has a position number called an index. 
+The numbering starts with 0, not 1.
+
+charAt(): The notation someString.charAt(0) determines the character at a particular index of a string, in this 
+case index 0.
+
+Figure 6.8.1: String character access.
+
+import java.util.Scanner;
+
+public class WordScramble {
+   public static void main(String[] args) {
+      Scanner scnr = new Scanner(System.in);
+      String usrWord = "";
+
+      System.out.print("Enter a word with 5 letters: ");
+      usrWord = scnr.next();
+
+      System.out.println("Size: " + usrWord.length());
+      // Note: Error if usrWord has < 5 letters
+
+      System.out.println("Original:  " + usrWord);
+      System.out.print("Scrambled: ");
+      System.out.print(usrWord.charAt(3));
+      System.out.print(usrWord.charAt(4));
+      System.out.print(usrWord.charAt(1));
+      System.out.print(usrWord.charAt(0));
+      System.out.println(usrWord.charAt(2));
+
+      return;
+   }
+}
+The String data type comes with several useful features. The features are made possible due to String's 
+implementation as a class, which for purposes here can be thought of as several useful methods. The String 
+class provides useful methods for accessing information about a string.
+
+length() 
+Number of characters	
+
+// userText is "Help me!"
+userText.length()  // Returns 8 
+// userText is ""
+userText.length()  // Returns 0
+
+isEmpty()	true if length is 0	
+
+// userText is "Help me!"
+userText.isEmpty()   // Returns false
+// userText is ""
+userText.isEmpty()   // Returns true
+
+indexOf(item)	Index of first item occurrence, else -1. 
+Item may be char, String variable, or string literal. 
+indexOf(item, indx) starts at index indx.
+lastIndexOf(item) finds the last occurrence .	
+
+// userText is "Help me!"
+userText.indexOf('p')     // Returns 3 
+userText.indexOf('e')     // Returns 1 (first occurrence) 
+userText.indexOf('z')     // Returns -1 
+userText.indexOf("me")    // Returns 5
+userText.indexOf('e', 2)  // Returns 6 (starts at index 2)
+userText.lastIndexOf('e') // Returns 6 (last occurrence
+
+substring(startIndex, endIndex)	Returns substring starting at startIndex and ending at endIndex - 1. 
+The length of the substring is given by endIndex - startIndex.	
+
+// userText is "http://google.com"
+userText.substring(0, 7)   // Returns "http://"
+userText.substring(13, 17) // Returns ".com"
+userText.substring(userText.length() - 4, userText.length()) // Last 4: ".com"
+
+A common error is to access an invalid array index, especially exactly one larger than the largest index. 
+Given userText with size 8, the range of valid indices are 0..7; accessing with index 8 is an error.
+
+The charAt(index) method generates an exception if the index is out of range for the string's size. 
+An exception is a detected runtime error that commonly prints an error message and terminates the program.
+
+Write an expression to detect that the first character of userInput matches firstLetter. 
+import java.util.Scanner;
+
+public class CharMatching {
+   public static void main (String [] args) {
+      String userInput = "";
+      char firstLetter = '-';
+
+      userInput = "banana";
+      firstLetter = 'b';
+
+      if ((userInput.charAt(0)) == firstLetter) {
+         System.out.println("Found match: " + firstLetter);
+      }
+      else {
+         System.out.println("No match: " + firstLetter);
+      }
+
+      return;
+   }
+}
+
+Challenge Activity 6.8.2: 
+Print "Censored" if userInput contains the word "darn", else print userInput. End with newline. 
+import java.util.Scanner;
+
+public class CensoredWords {
+   public static void main (String [] args) {
+      String userInput = "";
+
+      userInput = "That darn cat.";
+
+      if (userInput.contains("darn")) {
+         System.out.println("Censored");
+      }
+      
+      else {
+         System.out.println(userInput);
+      }
+
+      return;
+   }
+}
+Yes that's right, String class has a method called contains, which checks whether a substring is a part 
+of the whole string or not
+
+----------------------------
+/*String Modify Operations*/
+The String class has several methods for modifying strings.
+
+concat(moreString) 
+Creates a new String that appends the String moreString at the end.	
+
+// userText is "Hi"
+userText = userText.concat(" friend"); // Now "Hi friend" 
+newText = userText.concat(" there");   
+// newText is "Hi friend there"
+
+replace(findStr, replaceStr) 
+
+replace(findChar, replaceChar)	Returns a new String in which all occurrences of findStr (or findChar) have been replaced with replaceStr (or replaceChar).	
+
+// userText is "Hello"
+userText = userText.replace('H', 'j'); // Now "jello" 
+// userText is "You have many gifts"
+userText = userText.replace("many", "a plethora of"); 
+// Now "You have a plethora of gifts" 
+// userText is "Goodbye"
+newText = userText.replace("bye"," evening"); 
+// newText is "Good evening"
+
+str1 + str2 
+Returns a new String having str1 with str2 appended. 
+str1 may be a String variable or string literal. Likewise for str2. One of str1 or str2 (not both) may 
+be a character.	
+
+// userText is "A B"
+myString = userText + " C D";
+// myString is "A B C D"
+myString = myString + '!';
+// myString now "A B C D!"
+
+str1 += str2 
+Shorthand for str1 = str1 + str2. 
+str1 must be a String variable, and str2 may be a String variable, a string literal, or a character.	
+
+// userText is "My name is "
+userText += "Tom"; // Now "My name is Tom"
+
+Strings are considered immutable. Thus, a programmer cannot directly modify a String's characters. 
+Instead, a programmer must assign a new value to a String variable if a different value is needed. 
+When a programmer uses a String modification method, such as one of the methods described above, a new String 
+with those modifications will be created. For example, assume the String userText is initialized to "climb". 
+The method call userText.concat("ing") will create an entirely new String with the contents "climbing". 
+Note that the original userText String is not modified by the call to the concat() method. 
+If the programmer wants to update userText, then the statement  userText = userText.concat("ing") can be used, 
+in which the new String created by the call to concat is assigned back to userText.
+
+Figure 6.9.1: String modify example: Greeting.
+import java.util.Scanner;
+
+public class GreetingMaker {
+   public static void main (String [] args) {
+      Scanner scnr = new Scanner(System.in);
+      String userName = "";
+      String greetingText = "";
+      
+      System.out.print("Enter name: ");
+      userName = scnr.nextLine();
+
+      // Combine strings using +
+      greetingText = "Hello " + userName;
+      
+      // Append a period (could have used +)
+      greetingText = greetingText.concat(".");
+      System.out.println(greetingText);
+      
+      // Insert Mr/Ms before user's name
+      greetingText = "Hello Mr/Ms ";
+      greetingText = greetingText.concat(userName);
+      greetingText = greetingText.concat(".");
+      System.out.println(greetingText);
+      
+      // Replace occurrence of "Darn" by "@$#"
+      greetingText = greetingText.replace("Darn", "@$#");
+      System.out.println(greetingText);
+
+      return;
+   }
+}
+
+Challenge Activity6.9.1: Combining strings.
+
+Retype and correct the code provided to combine two strings separated by a space.
+   secretID.concat(spaceChar);
+   secretID.concat(lastName);
+   
+import java.util.Scanner;
+
+public class CombiningStrings {
+   public static void main (String [] args) {
+      String secretID = "Barry";
+      String lastName = "Allen";
+      char spaceChar = ' ';
+
+      secretID = secretID.concat(" ");
+      secretID = secretID.concat(lastName);
+
+      System.out.println(secretID);
+      return;
+   }
+}
+Challenge Activity6.9.2: Name song.
+Modify secondVerse to play "The Name Game" (a.k.a. "The Banana Song", see Wikipedia.org), 
+by replacing "(Name)" with userName but without the first letter. Ex: if userName = "Katie", 
+the program prints: 
+Banana-fana fo-fatie!
+
+import java.util.Scanner;
+
+public class NameSong {
+   public static void main (String [] args) {
+      String secondVerse = "Banana-fana fo-f(Name)!";
+      String userName = "Katie";
+
+      userName = userName.substring(1); // Removes first char from userName
+
+      secondVerse = secondVerse.replace("(Name)", userName);
+
+      System.out.println(secondVerse);
+
+      return;
+   }
+}
+
+----------------------------
+/*Conditional Expressions*/
+Conditional expressions
+If-else statements with the form shown below are so common that the language supports the shorthand 
+notation shown.
+
+
+if (condition) {
+  myVar = expr1;
+}
+else {
+  myVar = expr2;
+}
+
+CAN BE WRITTEN AS:
+
+myVar =(condition) ? expr1 : expr2
+
+A conditional expression has the following form:
+
+condition ? exprWhenTrue : exprWhenFalse
+
+All three operands are expressions. If the condition evaluates to true, then exprWhenTrue is evaluated. 
+If the condition evaluates to false, then  exprWhenFalse is evaluated. The conditional expression evaluates to 
+whichever of those two expressions was evaluated. For example, if x is 2, then the conditional expression 
+(x == 2) ? 5 : 9 * x evaluates to 5.
+
+A conditional expression has three operands and thus the "?" and ":" together are sometimes referred to as a 
+ternary operator.
+
+Good practice is to restrict usage of conditional expressions to an assignment statement, as in: y = (x == 2) ? 
+5 : 9 * x;. Common practice is to put parentheses around the first expression of the conditional expression, 
+to enhance readability.
+
+
+Conditional expression: Print negative or positive.
+Create a conditional expression that evaluates to string "negative" if userVal is less than 0, and 
+"non-negative" otherwise. Example output when userVal = -9 for the below sample program:
+-9 is negative
+
+import java.util.Scanner;
+
+public class NegativeOrPositive {
+   public static void main (String [] args) {
+      String condStr = "";
+      int userVal = 0;
+
+      userVal = -9;
+
+      condStr = (userVal < 0) ? "negative" : "non-negative";
+
+      System.out.println(userVal + " is " + condStr);
+
+      return;
+   }
+}
+
+Challenge Activity6.11.2: Conditional assignment.
+
+Using a conditional expression, write a statement that increments numUsers if updateDirection is 1, 
+otherwise decrements numUsers. Ex: if numUsers is 8 and updateDirection is 1, numUsers becomes 9; if 
+updateDirection is 0, numUsers becomes 7. Hint: Start with "numUsers = ..."
+
+import java.util.Scanner;
+
+public class UpdateNumberOfUsers {
+   public static void main (String [] args) {
+      int numUsers = 0;
+      int updateDirection = 0;
+
+      numUsers = 8;
+      updateDirection = 1;
+
+      numUsers = (updateDirection == 1) ? (numUsers + 1) : (numUsers - 1);
+
+      System.out.println("New value is: " + numUsers);
+
+      return;
+   }
+}
+
+
+
+
+
+
+
+
+

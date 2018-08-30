@@ -1,0 +1,276 @@
+11.6 ArrayLists of Objects
+Because all classes are derived from the Object class, programmers can take advantage of runtime 
+polymorphism in order to create a collection (e.g., ArrayList) of objects of various class types and 
+perform operations on the elements. The following program adds objects of seemingly differing types 
+(e.g., Object, Integer, IntegerWithBase, Double, and String) into a single ArrayList and prints the 
+contents.
+
+Figure 11.6.1: Printing an ArrayList of Object elements.
+
+IntegerWithBase.java:
+public class IntegerWithBase {
+   private int decimalValue;
+   private int baseFormat;
+
+   public IntegerWithBase(int inDecimal, int inBase) {
+      this.decimalValue = inDecimal;
+      this.baseFormat = inBase;
+   }
+
+   @Override
+   public String toString() {
+      int quotientVal = 0;
+      int remainderVal = 0;
+      int dividendVal = 0 ;
+      String resultVal = "";
+
+      dividendVal = decimalValue;
+      
+      if (baseFormat > 1) {
+
+         // Loop iteratively determines each digit
+         do {
+            quotientVal = dividendVal / baseFormat;
+            remainderVal = dividendVal % baseFormat;
+
+            // Append remainder to the result as the new digit
+            resultVal = remainderVal + resultVal;
+
+            dividendVal = quotientVal;
+
+         } while (quotientVal > 0);
+      }
+      else {
+         resultVal = String.valueOf(decimalValue);
+      }
+
+      return resultVal;
+   }
+}
+
+ArrayPrinter.java:
+import java.util.ArrayList;
+
+public class ArrayPrinter {
+   // Method prints an ArrayList of Objects
+   public static void PrintArrayList(ArrayList<Object> objList) {
+      int i = 0;
+
+      for (i = 0; i < objList.size(); ++i) {
+         System.out.println(objList.get(i));
+      }
+
+      return;
+   }
+
+   public static void main (String[] args) {
+      ArrayList<Object> objList = new ArrayList<Object>();
+      
+      // Add new instances of various classes to objList
+      objList.add(new Integer(12));
+      objList.add(new IntegerWithBase(10,2));
+      objList.add(new Double(3.14));
+      objList.add(new String("Hello!"));
+      objList.add(new Object());
+      
+      // Call method to print list of Objects
+      PrintArrayList(objList);
+
+      return;
+   }
+}
+
+The statement ArrayList<Object> objList = new ArrayList<Object>(); initializes an ArrayList of Object 
+elements used to store different objects. The program then adds five new objects of various class types 
+to the ArrayList and prints the contents of the ArrayList. Adding an object of a type derived from Object 
+(e.g., Double) into an ArrayList of Object elements is possible due to Java's automatic conversion of 
+derived class references to base class references. Thus, a statement such as  
+objList.add(new Double(3.14)); converts the reference to the new Double object into an Object reference.
+
+The PrintArrayList() method takes an ArrayList of Objects as an argument, iterates through every element 
+of the ArrayList, and prints the String representation of each element using the toString() method. 
+Runtime polymorphism enables the Java virtual machine to dynamically determine the correct version of 
+toString() to call based on the actual class type of each element. Notice that the statement  
+System.out.println(objList.get(i)); does not need to explicitly call each element's toString() method 
+because each element is concatenated with a String literal.
+
+Finally, note that a method operating on a collection of Object elements may only invoke the methods 
+declared by the base class (e.g., the Object class). Thus, a statement that calls the toString() method 
+on an element of an ArrayList of Objects called objList, such as objList.get(i).toString(), is valid 
+because the Object class defines the toString() method. However, a statement that calls, for example, the 
+Integer class's intValue() method on the same element (i.e., objList.get(i).intValue()) results in a 
+compiler error even if that particular element is an Integer object.
+
+The Object class is the base class for all classes. Thus, an item of any class type is implicitly casted 
+to the Object type and added to the ArrayList.
+
+he ArrayList is defined to contain elements of type Object. Thus, the methods a program may invoke on 
+the elements must be defined by the Object class.
+
+Runtime polymorphism enables the Java virtual machine to determine an element's class type and thus call 
+the appropriate implementation of toString().
+
+11.8 Java example: Employees and overriding class methods
+The classes below describe a superclass named EmployeePerson and two derived classes, EmployeeManager 
+and EmployeeStaff, each of which extends the EmployeePerson class. The main program creates objects of 
+type EmployeeManager and EmployeeStaff and prints those objects.
+
+public class EmployeeMain {
+
+   public static void main(String [] args) {
+
+      // Create the objects
+      EmployeeManager manager = new EmployeeManager(25);
+      EmployeeStaff   staff1  = new EmployeeStaff("Michele");
+
+      // Load data into the objects using the Person class' method
+      manager.setData("Michele", "Sales", "03-03-1975", 70000);
+      staff1.setData ("Bob",     "Sales", "02-02-1980", 50000);
+
+      // Print the objects
+      manager.printInfo();
+      staff1.printInfo();
+
+      return;
+   } 
+} 
+
+
+public class EmployeePerson {
+   protected String fullName;       // Format: last name, first name
+   protected String departmentCode;
+   protected String birthday;
+   protected int    annualSalary;
+   
+   // ***********************************************************************
+
+   // Default constructor. Set protected variables to the empty string or 0
+   public EmployeePerson() {
+      fullName       = "";
+      departmentCode = "";
+      birthday       = "";
+      annualSalary   = 0;
+   } 
+
+   // ***********************************************************************
+
+   // Constructor with parameters to set the private variables
+   public EmployeePerson(String empFullName, String empDepartmentCode,
+                         String empBirthday, int empAnnualSalary) {
+      setData(empFullName, empDepartmentCode, empBirthday, empAnnualSalary);
+   } 
+    
+   // ***********************************************************************
+
+   public void setData(String empFullName, String empDepartmentCode,
+                       String empBirthday, int empAnnualSalary) {
+      fullName       = empFullName;
+      departmentCode = empDepartmentCode;
+      birthday       = empBirthday;
+      annualSalary   = empAnnualSalary;
+   } 
+
+   // ***********************************************************************
+
+   public void printInfo() {
+      System.out.print("Name: " + fullName + ", Department: " + 
+                       departmentCode + ", Birthday: " + birthday +
+                       ", Salary: " + annualSalary);
+   } 
+} 
+
+
+public class EmployeeManager extends EmployeePerson {
+
+   private int numManaged;    // Number of staff managed
+
+   // ***********************************************************************
+
+   // Default constructor
+   public EmployeeManager() {
+      numManaged = 0;
+   } 
+
+   // ***********************************************************************
+
+   // Constructor with parameters 
+   public EmployeeManager(int nManaged) {
+      numManaged = nManaged;
+   } 
+
+   // ***********************************************************************
+
+   // Get the number of people managed
+   public int getNumManaged() {
+      return numManaged;
+   } 
+
+   // ***********************************************************************
+  
+   // FIXME: Override the EmployeePerson class' printInfo method with a 
+   // FIXME: printInfo method to print all manager fields here.
+
+} 
+
+
+public class EmployeeStaff extends EmployeePerson {
+
+   private String managerName;
+
+   // ***********************************************************************
+
+   // Default constructor
+   public EmployeeStaff() {
+      managerName = "";
+   } 
+
+   // ***********************************************************************
+
+   // Constructor with parameters
+   public EmployeeStaff(String reportsTo) {
+      managerName = reportsTo;
+   } 
+
+   // ***********************************************************************
+
+   // Get the name of the manager
+   public String getManagerName() {
+      return managerName;
+   } 
+
+   // ***********************************************************************
+
+   // FIXME: Override the EmployeePerson class' printInfo method with a 
+   // FIXME: printInfo method to print all staff fields.
+
+   @Override
+   public void printInfo() {
+   } 
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,341 @@
+1: Improve program readability
+A program's main() method can be easier to understand if it calls high-level methods, rather than being cluttered with 
+computation details. The following program converts steps walked into distance walked and into calories burned, using two 
+user-defined methods. Note how main() is easy to understand.
+
+User-defined methods make main() easy to understand: 
+import java.util.Scanner;
+
+public class CalorieCalc {
+   // Method converts steps to feet walked
+   public static int stepsToFeet(int baseSteps) {
+      final int FEET_PER_STEP = 3;  // Unit conversion
+      int feetTot = 0;              // Corresponding feet to steps
+
+      feetTot = baseSteps * FEET_PER_STEP;
+
+      return feetTot;
+   }
+
+   // Method converts steps to calories burned
+   public static double stepsToCalories(int baseSteps) {
+      final double STEPS_PER_MINUTE = 70.0;            // Unit Conversion
+      final double CALORIES_PER_MINUTE_WALKING = 3.5;  // Unit Conversion
+      double minutesTot = 0.0;                         // Corresponding min to steps
+      double caloriesTot = 0.0;                        // Corresponding calories to min
+
+      minutesTot = baseSteps / STEPS_PER_MINUTE;
+      caloriesTot = minutesTot * CALORIES_PER_MINUTE_WALKING;
+
+      return caloriesTot;
+   }
+
+   public static void main(String[] args) {
+      Scanner scnr = new Scanner(System.in);
+      int stepsInput = 0;      // User defined steps
+      int feetTot = 0;         // Corresponding feet to steps
+      double caloriesTot = 0;  // Corresponding calories to steps
+
+      // Prompt user for input
+      System.out.print("Enter number of steps walked: ");
+      stepsInput = scnr.nextInt();
+
+      // Call methods to convert steps to feet/calories
+      feetTot = stepsToFeet(stepsInput);
+      System.out.println("Feet: " + feetTot);
+
+      caloriesTot = stepsToCalories(stepsInput);
+      System.out.println("Calories: " + caloriesTot);
+
+      return;
+   }
+}
+
+2: Modular program development
+
+A method has precisely-defined input and output. As such, a programmer can focus on developing a particular method 
+(or module) of the program independently of other methods.
+
+Programs are typically written using incremental development, meaning a small amount of code is written, compiled, and tested, 
+then a small amount more (an incremental amount) is written, compiled, and tested, and so on. To assist with that process, 
+programmers commonly introduce method stubs, which are method definitions whose statements haven't been written yet. 
+
+The benefit of a method stub is that the high-level behavior of main() can be captured before diving into details of each 
+method, akin to planning the route of a roadtrip before starting to drive. The following illustrates: 
+
+import java.util.Scanner;
+
+// Program calculates price of lumber. Hardwoods are sold
+// by the board foot (measure of volume, 12"x12"x1"). 
+
+public class LumberCostCalc {
+   // Method determines board foot based on lumber dimensions
+   public static double calcBoardFoot(double boardHeight, double boardLength,
+           double boardThickness) {
+
+      // board foot = (h * l * t)/144
+      System.out.println("FIXME: finish board foot calc");
+
+      return 0;
+   }
+
+   // Method calculates price based on lumber type and quantity
+   public static double calcLumberPrice(int lumberType, double boardFoot) {
+      final double CHERRY_COST_BF = 6.75; // Price of cherry per board foot
+      final double MAPLE_COST_BF = 10.75; // Price of maple per board foot
+      final double WALNUT_COST_BF = 13.00; // Price of walnut per board foot
+      double lumberCost = 0.0;             // Total lumber cost
+      
+      // Determine cost of lumber based on type
+      switch (lumberType) {
+         case 0:
+            lumberCost = CHERRY_COST_BF;
+            break;
+         case 1:
+            lumberCost = MAPLE_COST_BF;
+            break;
+         case 2:
+            lumberCost = WALNUT_COST_BF;
+            break;
+         default:
+            lumberCost = -1.0;
+            break;
+      }
+
+      lumberCost = lumberCost * boardFoot;
+      return lumberCost;
+   }
+
+   public static void main(String[] args) {
+      Scanner scnr = new Scanner(System.in);
+      double heightDim = 0.0;  // Board height
+      double lengthDim = 0.0;  // Board length
+      double thickDim = 0.0;   // Board thickness
+      int boardType = 0;       // Type of lumber
+      double boardFoot = 0.0;  // Volume of lumber
+
+      // Prompt user for input
+      System.out.print("Enter lumber height (in):");
+      heightDim = scnr.nextDouble();
+
+      System.out.print("Enter lumber length (in):");
+      lengthDim = scnr.nextDouble();
+
+      System.out.print("Enter lumber width (in):");
+      thickDim = scnr.nextDouble();
+
+      System.out.print("Enter lumber type (0: Cherry, 1: Maple, 2: Walnut):");
+      boardType = scnr.nextInt();
+
+      // Call Method to calculate lumber cost
+      boardFoot = calcBoardFoot(heightDim, lengthDim, thickDim);
+      System.out.println("Cost of Lumber = $" + calcLumberPrice(boardType, boardFoot));
+
+      return;
+   }
+}
+
+The program can be compiled and executed, and the user can enter numbers, but then the above FIXME messages will be printed. 
+Alternatively, the FIXME message could be in a comment. The programmer can later complete calcBoardFoot().
+
+Using method stubs mainly helps a programmer capture correct high-level behavior before getting distracted by low-level details.
+
+Modular development means to divide a program into separate modules that can be developed and tested separately and then 
+integrated into a single program.
+
+Modular development can yield programs that are correct and easier to maintain.
+
+Activity: Method Stubs
+
+
+import java.util.Scanner;
+
+// Program calculates price of lumber. Hardwoods are sold
+// by the board foot (measure of volume, 12"x12"x1"). 
+
+public class LumberCostCalc {
+   // Method determines board foot based on lumber dimensions
+   public static double calcBoardFoot(double boardHeight, double boardLength,
+           double boardThickness) {
+
+      // board foot = (h * l * t)/144
+      System.out.println("FIXME: finish board foot calc");
+
+      return 0;
+   }
+
+   // Method calculates price based on lumber type and quantity
+   public static double calcLumberPrice(int lumberType, double boardFoot) {
+      final double CHERRY_COST_BF = 6.75; // Price of cherry per board foot
+      final double MAPLE_COST_BF = 10.75; // Price of maple per board foot
+      final double WALNUT_COST_BF = 13.00; // Price of walnut per board foot
+      double lumberCost = 0.0;             // Total lumber cost
+
+      // Determine cost of lumber based on type
+      // (Note: switch statements need not be understood to 
+      // appreciate function stub usage in this example)
+      switch (lumberType) {
+         case 0:
+            lumberCost = CHERRY_COST_BF;
+            break;
+         case 1:
+            lumberCost = MAPLE_COST_BF;
+            break;
+         case 2:
+            lumberCost = WALNUT_COST_BF;
+            break;
+         default:
+            lumberCost = -1.0;
+            break;
+      }
+
+      lumberCost = lumberCost * boardFoot;
+      return lumberCost;
+   }
+
+   public static void main(String[] args) {
+      Scanner scnr = new Scanner(System.in);
+      double heightDim = 0.0;  // Board height
+      double lengthDim = 0.0;  // Board length
+      double thickDim = 0.0;   // Board thickness
+      int boardType = 0;       // Type of lumber
+      double boardFoot = 0.0;  // Volume of lumber
+
+      // Prompt user for input
+      System.out.println("Enter lumber height (in):");
+      heightDim = scnr.nextDouble();
+
+      System.out.println("Enter lumber length (in):");
+      lengthDim = scnr.nextDouble();
+
+      System.out.println("Enter lumber width (in):");
+      thickDim = scnr.nextDouble();
+
+      System.out.println("Enter lumber type (0: Cherry, 1: Maple, 2: Walnut):");
+      boardType = scnr.nextInt();
+
+      // Call functions to calculate lumber cost
+      boardFoot = calcBoardFoot(heightDim, lengthDim, thickDim);
+      System.out.println("Cost of Lumber = $" + calcLumberPrice(boardType, boardFoot));
+
+      return;
+   }
+} 
+
+3: Avoid writing redundant code
+
+A method can be defined once, then called from multiple places in a program, thus avoiding redundant code. 
+Examples of such methods are math methods like pow() and abs() that prevent a programmer from having to write several 
+lines of code each time he/she wants to compute a power or an absolute value.
+
+Method call from multiple locations in main.
+
+
+import java.util.Scanner;
+
+// Program calculates X = | Y | + | Z |
+
+public class AbsoluteValueAdder {
+   // Method returns the absolute value
+   public static int absValueConv(int origValue) {
+      int absValue = 0;  // Resulting abs val
+
+      if (origValue < 0) {  // origVal is neg
+         absValue = -1 * origValue;
+      }
+      else {  // origVal is pos
+         absValue = origValue;
+      }
+
+      return absValue;
+   }
+
+   public static void main(String[] args) {
+      Scanner scnr = new Scanner(System.in);
+      int userValue1 = 0; // First user value
+      int userValue2 = 0; // Second user value
+      int sumValue = 0;   // Resulting value
+
+      // Prompt user for inputs
+      System.out.print("Enter first value: ");
+      userValue1 = scnr.nextInt();
+
+      System.out.print("Enter second value: ");
+      userValue2 = scnr.nextInt();
+
+      sumValue = absValueConv(userValue1) + absValueConv(userValue2);
+      System.out.println("Total: " + sumValue);
+
+      return;
+   }
+}
+
+The skill of decomposing a program's behavior into a good set of methods is a fundamental part of programming that helps characterize a good programmer.
+
+Each method should have easily-recognizable behavior, and the behavior of main() (and any method that calls other methods) should be easily understandable via the sequence of method calls.
+
+import java.util.Scanner;
+
+public class MthdStubsStatistics {
+  public static int getUserNum() {
+    System.out.println("FIXME: Finish getUserNum()");
+    return -1;
+}
+   public static int computeAvg(int userNum1, int userNum2) {
+      System.out.println("FIXME: Finish computeAvg()");
+   return -1;   
+   }   
+ 
+   public static void main(String [] args) {
+      int userNum1 = 0;
+      int userNum2 = 0;
+      int avgResult = 0;
+
+      userNum1 = getUserNum();
+      userNum2 = getUserNum();
+
+      avgResult = computeAvg(userNum1, userNum2);
+
+      System.out.println("Avg: " + avgResult);
+
+      return;
+   }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

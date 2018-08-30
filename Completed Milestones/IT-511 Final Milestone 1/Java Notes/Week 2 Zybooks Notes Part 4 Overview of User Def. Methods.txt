@@ -1,0 +1,418 @@
+Chapter 4: Basic Methods + Classes
+4.4 Return
+4.5 Reasons for Methods
+4.6 Unit Testing (classes)
+4.7 The “This” Implicit Parameter
+4.8 Javadoc for Classes
+
+###################
+Method Basics
+User-defined method basics
+A method is a named list of statements. Invoking a method's name, known as a method call, causes the method's statements to 
+execute. The following illustrates:
+
+public class SimpleFace { //Creating a class
+
+   public static void printFace() { //Method definition for printFace()
+      char faceChar = 'o';
+
+      System.out.println("  " + faceChar + " " + faceChar);      // Eyes
+      System.out.println("   " + faceChar);                      // Nose
+      System.out.println("  " + faceChar + faceChar + faceChar); // Mouth
+
+      return;
+   }
+
+   public static void main (String [] args) {
+      printFace();
+      return;
+   }
+
+A method definition consists of the new method's name and a block of statements, as appeared above: public static void printFace() { ... }. The name can be any valid identifier. A block is a list of statements surrounded by braces.
+
+Methods must be defined within a class. The line:  public class SimpleFace {   begins a new class. 
+The class has two methods, printFace() and main(). 
+Both use the access modifiers public static. 
+Public tells the compiler that the method may be called from any class in the program, 
+and static that the method only uses values that are passed to the method; details of such items are discussed elsewhere. 
+For now, just know that a method defined using public static can be called from the program's main() method.
+
+A program must define a main() method, which is automatically called first when a program executes.
+Method definitions usually appear before main() in the program file.
+
+CHALLENGE:
+Challenge Activity3.2.1: Basic method call.
+Complete the method definition to print five asterisks ***** when called once (do NOT print a newline). Output for sample program:
+**********
+
+public class CharacterPrinter {
+
+   public static void printPattern() {
+      char asterisk = '*';
+      
+      System.out.print(asterisk);
+      System.out.print(asterisk);
+      System.out.print(asterisk);
+      System.out.print(asterisk);
+      System.out.print(asterisk);
+      
+      return;
+   }
+
+   public static void main (String [] args) {
+      printPattern();
+      printPattern();
+      System.out.println("");
+      return;
+   }
+}
+
+
+Complete the printShape() method to print the following shape. End with newline.
+Example output: 
+***
+***
+***
+
+public class MethodShapePrinter {
+   public static void printShape() {
+      char asterisk = '*';
+      
+      System.out.print(asterisk);
+      System.out.print(asterisk);
+      System.out.println(asterisk);
+      System.out.print(asterisk);
+      System.out.print(asterisk);
+      System.out.println(asterisk);
+      System.out.print(asterisk);
+      System.out.print(asterisk);
+      System.out.println(asterisk);
+
+      return;
+   }
+
+   public static void main (String [] args) {
+      printShape();
+      return;
+   }
+}
+
+##################################
+Parameters
+
+Programmers can influence a method's behavior via an input to the method known as a parameter.
+For example, a face-printing method might have an input that indicates the character to print when printing the face.
+
+public class SimpleFace {
+
+   public static void printFace(char faceChar) {
+      System.out.println("  " + faceChar + " " + faceChar);      // Eyes
+      System.out.println("   " + faceChar);                      // Nose
+      System.out.println("  " + faceChar + faceChar + faceChar); // Mouth
+
+      return;
+   }
+
+   public static void main (String [] args) {
+      printFace('o');
+      return;
+   }
+}
+The method call jumps execution to the method's statements (MAIN), passing character 'o' to the method's parameter faceChar.
+
+The code void printFace(char faceChar) indicates that the method has a parameter of type char named faceChar.
+
+The method call printFace('o') passes the value 'o' to that parameter. The value passed to a parameter is known as an argument.
+An argument is an expression, such as 99, numCars, or numCars + 99.
+
+In contrast to an argument being an expression, a parameter is like a variable declaration. Upon a call, 
+the parameter's memory location is allocated, and the argument's value is assigned to the parameter. 
+Upon a return, the parameter is deleted from memory,
+
+Q/A:
+
+Complete the method beginning to have a parameter named userAge of type int.
+	void printAge(int userAge) {
+
+	
+Call a method named printAge, passing the value 21 as an argument:
+	printAge(21);
+
+Is the following a valid method definition beginning? Type yes or no. 
+void myMthd(int userNum + 5) { ... }
+	NO
+	A parameter is like a variable declaration. It cannot be an expression.
+
+Assume a method void printNum(int userNum) simply prints the value of userNum without any space or new line. 
+What will the following output? 
+printNum(43);
+printNum(21);
+	4321
+	The first call prints 43. The second call prints 21 immediately after, so the entire output is 4321.
+	
+	Which correctly defines two integer parameters x and y for a method definition: 
+void calcVal(...)?
+		(int x, int y)
+	Each parameter has a type and a name. The comma separates the two parameters.
+
+	
+
+A method definition with no parameters must still have the parentheses, as in:  void printSomething() { ... }. 
+The call to such a method there must be parentheses, and they must be empty, as in: PrintSomething().
+
+public class SimpleFace {
+  public static void printFace(char faceChar) {
+     System.out.println("  " + faceChar + " " + faceChar);      // Eyes
+     System.out.println("   " + faceChar);                      // Nose
+     System.out.println("  " + faceChar + faceChar + faceChar); // Mouth
+     return;
+  }
+
+   public static void main (String [] args) {
+     printFace('o');
+     return;
+  }
+}
+
+Modify printFace() to have three parameters: char eyeChar, char noseChar, char mouthChar. 
+Call the method with arguments 'o', '*', and '#', which should draw this face:
+
+public class SimpleFace {
+  public static void printFace(char eyeChar, char noseChar, char mouthChar) {
+     System.out.println("  " + eyeChar + " " + eyeChar);      // Eyes
+     System.out.println("   " + noseChar);                      // Nose
+     System.out.println("  " + mouthChar + mouthChar + mouthChar); // Mouth
+     return;
+  }
+
+   public static void main (String [] args) {
+     printFace('o', '*', '#');
+     return;
+  }
+}
+NOTICE: IN THE METHOD CALL PRINTFACE IN MAIN, THE VALUES ARE PASSED TO THE METHOD 
+IN THE ORDER THE VARIABLES ARE DESIGNATED IN PUBLIC STATIC VOID PRINTFACE (...)
+
+Given:
+public static void printSum(int num1, int num2) {
+   System.out.print(num1 + " + " + num2 + " is " + (num1 + num2));
+   return;
+}
+What will be printed for the following method call?
+ printSum(1, 2);
+	1 + 2 is 3 
+
+When printSum(1, 2) is called, 1 is assigned to the method's first parameter num1, and 2 to num2.
+
+############################
+Method call with parameter: Print tic-tac-toe board.
+Complete the printTicTacToe method with char parameters horizChar and vertChar that prints a tic-tac-toe board 
+with the characters as follows. End with newline. Ex: printTicTacToe('~', '!') prints:
+
+x!x!x
+~~~~~
+x!x!x
+~~~~~
+x!x!x
+
+import java.util.Scanner;
+
+public class GameBoardPrinter {
+   public static void printTicTacToe(char horizChar, char vertChar) {
+
+      System.out.println("x" + vertChar + "x" + vertChar + "x");
+      System.out.print(horizChar);
+      System.out.print(horizChar);
+      System.out.print(horizChar);
+      System.out.print(horizChar);
+      System.out.println(horizChar);
+      System.out.println("x" + vertChar + "x" + vertChar + "x");
+      System.out.print(horizChar);
+      System.out.print(horizChar);
+      System.out.print(horizChar);
+      System.out.print(horizChar);
+      System.out.println(horizChar);
+      System.out.println("x" + vertChar + "x" + vertChar + "x");
+
+      return;
+   }
+
+   public static void main (String [] args) {
+      printTicTacToe('~', '!');
+
+      return;
+   }
+}
+
+Define a method printFeetInchShort, with int parameters numFeet and numInches, that prints using ' and " shorthand. 
+Ex: printFeetInchShort(5, 8) prints:
+
+import java.util.Scanner;
+
+public class HeightPrinter {
+      public static void printFeetInchShort(int num1, int num2) {
+         
+         System.out.print(num1 + "' ");
+         System.out.print(num2 + "\"");
+      
+      return;
+   }
+
+   public static void main (String [] args) {
+      printFeetInchShort(5, 8);
+      System.out.println("");
+
+     return;
+   }
+}
+
+##########################
+Returns
+A method may return a value using a return statement, as follows.
+
+public class SquareComputation {
+
+   public static int computeSquare(int numToSquare) {
+      return numToSquare * numToSquare;
+   }
+
+   public static void main (String [] args) {
+      int numSquared = 0;
+      numSquared = computeSquare(7);
+      System.out.println("7 squared is " + numSquared);
+ 
+      return;
+  }
+}
+numSquared is assigned the return value of computeSquare(7).
+
+The computeSquare method is defined to have a return type of int. 
+So the method's return statement must also have an expression that evaluates to an int.
+
+Other return types are allowed, such as char, double, etc. A method can only return one item, not two or more. 
+A return type of void indicates that a method does not return any value, in which case the return statement should simply 
+be: return;
+
+A return statement may appear as any statement in a method, not just as the last statement. Also, multiple return statements may 
+exist in a method.
+
+A method evaluates to its returned value. Thus, a method call often appears within an expression.
+For example, 5 + ComputeSquare(4) would become 5 + 16, or 21. A method with a void return type cannot be used as such within an 
+expression.
+
+Assign to maxSum the max of (numA, numB) PLUS the max of (numY, numZ). Use just one statement. Hint: Call findMax() 
+twice in an expression. 
+
+import java.util.Scanner;
+
+public class SumOfMax {
+   public static double findMax(double num1, double num2) {
+      double maxVal = 0.0;
+
+      // Note: if-else statements need not be understood to
+      // complete this activity
+      if (num1 > num2) { // if num1 is greater than num2,
+         maxVal = num1;  // then num1 is the maxVal.
+      }
+      else {             // Otherwise,
+         maxVal = num2;  // num2 is the maxVal.
+      }
+      return maxVal;
+   }
+
+   public static void main(String [] args) {
+      double numA = 5.0;
+      double numB = 10.0;
+      double numY = 3.0;
+      double numZ = 7.0;
+      double maxSum = 0.0;
+
+      maxSum = findMax(numA, numB) + findMax(numY, numZ);
+
+      System.out.print("maxSum is: " + maxSum);
+
+      return;
+   }
+
+Define a method pyramidVolume with double parameters baseLength, baseWidth, and pyramidHeight, that returns as a double the 
+volume of a pyramid with a rectangular base. Relevant geometry equations: 
+Volume = base area x height x 1/3 
+Base area = base length x base width. 
+(Watch out for integer division). 
+
+import java.util.Scanner;
+
+public class CalcPyramidVolume {
+   public static double pyramidVolume(double baseLength, double baseWidth, double pyramidHeight) {
+      double pyramidVolume = 0.0;
+      
+      pyramidVolume = ((baseLength * baseWidth) * pyramidHeight * (1.0/3.0));
+      
+      return pyramidVolume;
+   
+   }
+   
+
+   public static void main (String [] args) {
+      System.out.println("Volume for 1.0, 1.0, 1.0 is: " + pyramidVolume(1.0, 1.0, 1.0));
+      return;
+   }
+}
+
+
+import java.util.Scanner;
+
+public class MthdStubsStatistics {
+  public static int getUserNum() {
+    System.out.println("FIXME: Finish getUserNum()");
+    return -1;
+}
+   public static int computeAvg(int userNum1, int userNum2) {
+      System.out.println("FIXME: Finish computeAvg()");
+   return -1;   
+   }   
+ 
+   public static void main(String [] args) {
+      int userNum1 = 0;
+      int userNum2 = 0;
+      int avgResult = 0;
+
+      userNum1 = getUserNum();
+      userNum2 = getUserNum();
+
+      avgResult = computeAvg(userNum1, userNum2);
+
+      System.out.println("Avg: " + avgResult);
+
+      return;
+   }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

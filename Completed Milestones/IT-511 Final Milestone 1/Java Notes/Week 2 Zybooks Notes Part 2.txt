@@ -1,0 +1,485 @@
+
+############################################################
+
+2.8 Calling methods
+A program uses the operations supported by objects to perform useful tasks, such as printing text or getting a 
+user's input. A method call is a statement that invokes an object's method, allowing the program to perform a 
+particular operation on that object.
+
+Writing a method call to perform an operation on an object:
+objectName.methodName();
+
+Calling a method on an object requires appending the "." operator and the method's name to the object's name. 
+The "." operator is also known as the member access operator.
+
+The object name comes before the ".", and the method being called on that object comes after the ".".
+The method name is followed by parentheses.
+
+A class' public methods are the operations that a program can directly invoke on objects of that class type. 
+The class' public methods are often called the class interface. A programmer only needs to understand the class 
+interface to use objects of that class type.
+
+The methods for a class' interface are listed after the public keyword in the class definition. 
+The internal data (and internal methods) are listed after the private keyword.
+
+// Internal data (private fields)
+   private int[] histogramData;
+
+   
+   // Operations (public methods)   
+   // Sets the number of bins (previous data is deleted)
+   public void setNumberOfBins(int numberBins) {...}
+
+   // Sets the value for the bin at the specified index
+   public void setBinValue(int binIndex, int binValue) {...}
+
+   // Returns the value of the bin at the specified index
+   public int getBinValue(int binIndex) {...}
+
+   // Prints the histogram
+   public void printHistogram() {...}
+}
+Internal data
+(private fields): histogramDatas
+
+Operations 
+(public methods): setNumberOfBins
+getBinValue
+printHistogram
+setBinValue
+
+Internal (or private) data and methods are not meant to be used outside of the class.
+Only knowledge of a class' public methods is necessary to use an object of that class type.
+
+Programmers influence the behavior of methods by providing additional input values, called method arguments, 
+in a method call. The value passed to a parameter is known as an argument.
+
+Write a method call that sets the number bins for a Histogram object named coinFlipHistogram to 2:
+coinFlipHistogram.setNumberOfBins(2);
+
+Write a method call that sets the value of the bin 1 to the value 10 for a Histogram object named coinFlipHistogram:
+coinFlipHistogram.setBinValue(1, 10);
+
+public class MovieExample {
+   public static void main(String[] args) {
+      Histogram movieReviewScores = new Histogram();
+      movieReviewScores.setNumberOfBins(6);
+      
+      movieReviewScores.setBinValue(0, 1);
+      movieReviewScores.setBinValue(1, 2);
+      movieReviewScores.setBinValue(2, 2);
+      movieReviewScores.setBinValue(3, 7);
+      movieReviewScores.setBinValue(4, 10);
+      movieReviewScores.setBinValue(5, 3);
+      
+      movieReviewScores.printHistogram();
+      
+      return;
+   }
+}
+public class Histogram {
+   
+   // Array to store the bin values for each bin
+   private int[] histogramData;
+
+   // Default constructor creates an empty histogram
+   public Histogram() {
+      histogramData = null;
+   }
+   
+   // Alternate constructor creates a histogram with
+   // the specified number of bins
+   public Histogram(int numberBins) {
+      histogramData = new int[numberBins];
+   }
+   
+   // Sets the number of bins (previous data is deleted)
+   public void setNumberOfBins(int numberBins) {
+      histogramData = new int[numberBins];
+      return;
+   }
+
+   // Sets the value for the bin at the specified index
+   public void setBinValue(int binIndex, int binValue) {
+      histogramData[binIndex] = binValue;
+      return;
+   }
+
+   // Returns the value of the bin at the specified index
+   public int getBinValue(int binIndex) {
+      return histogramData[binIndex];
+   }
+
+   // Prints the histogram
+   public void printHistogram() {
+      int binIndex = 0;
+      int binValue = 0;
+      char barChar = '-';
+
+      for (binIndex = 0; binIndex < histogramData.length; ++binIndex) {
+         System.out.print(binIndex + " ");
+         for (binValue = 0; binValue < histogramData[binIndex]; ++binValue) {
+            System.out.print(barChar);
+         }
+         System.out.println();
+      }
+
+      return;
+   }
+}
+
+
+public class CoinFlipEx {
+   public static void main(String[] args) {
+      Histogram coinFlipHist = new Histogram();
+      
+      // Set two bins: heads or tails
+      coinFlipHist.setNumberOfBins(2);
+      
+      // Record number of heads
+      coinFlipHist.setBinValue(0, 7);
+      
+      // Record number of tails
+      coinFlipHist.setBinValue(1, 9);
+      
+      System.out.print("Heads: ");
+      System.out.println(coinFlipHist.getBinValue(0));
+      
+      return;
+   }
+}The type of value returned by an object's method is defined in object's class definition. 
+A method may return a single value or none. The Histogram class' getBinValue() method returns 
+an integer value, which is specified by the int keyword before the method name in the method's declaration: 
+public int getBinValue(int binIndex) {. 
+The printHistogram() method does not return a value, specified the void in the method declaration.
+
+A method can return either zero or one value .
+
+A method's return value can be of any type (including a class type).
+
+#########################
+Constructing Objects
+
+Creating an object and assigning a variable with that object involves three parts:
+
+Reference variable: The first part of the statement, Histogram gradesHistogram declares a reference variable 
+that can refer to an object. But, the variable declaration does not create an object. A reference is a variable 
+type that refers to an object. A reference may be thought of as storing the memory address of an object.
+
+new operator: The next part of the statement, new Histogram(), creates a new object. The new operator creates 
+an object by allocating memory for the object and initializing the object by calling a constructor.
+
+Constructor: A constructor is a special method for an object that is called whenever a new object is created, 
+and is used to initialize the object's internal data. A class may define more than one constructor. 
+The Histogram() part of the statement indicates which constructor should be called.
+
+// Histogram object for tracking number of parts
+// that pass (bin 0) of fail (bin 1) inspection.
+Histogram passFailHistogram = new Histogram();
+
+passFailHistogram.setNumberOfBins(2);
+passFailHistogram.setBinValue(0, 14);
+passFailHistogram.setBinValue(1, 3);
+passFailHistogram.printHistogram();
+
+Figure 2.9.1: Passing arguments to a constructor.
+public class PartsInspection {
+   public static void main(String[] args) {      
+      // Histogram object for tracking number of parts
+      // that pass (bin 0) or fail (bin 1) inspection.
+      Histogram passFailHistogram = new Histogram(2);
+
+      passFailHistogram.setBinValue(0, 56);
+      passFailHistogram.setBinValue(1, 3);
+
+      System.out.println("Parts passing(0) or failing(1) inspection:");
+      passFailHistogram.printHistogram();
+
+      return;
+   }
+}
+
+################################
+Accessors and Mutators
+
+An object's methods are commonly classified as either mutators or accessors. A mutator method may modify 
+("mutate") the object, thereby changing the object's internal data. An accessor method accesses the object's 
+data but does not modify the internal data.
+
+public class Histogram {
+   
+   // Internal data (private fields)
+   private int[] histogramData;
+
+   // Operations (public methods)   
+   // Sets the number of bins (previous data is deleted)
+   public void setNumberOfBins(int numberBins) {...}
+
+   // Sets the value for the bin at the specified index
+   public void setBinValue(int binIndex, int binValue) {...}
+
+   // Returns the value of the bin at the specified index
+   public int getBinValue(int binIndex) {...}
+
+   // Prints the histogram
+   public void printHistogram() {...}
+}
+
+Accessors:
+int getBinValue(int binIndex)
+void printHistogram()
+
+Mutators:
+void setNumberOfBins(int numberBins)
+void setBinValue(int binIndex, int binValue)
+
+A mutator "mutates", meaning changes, an object's internal data.
+An accessor may access the object's data, and then returns some value or performs some operation.
+
+
+###############
+Reading API Documentation, Debugging, and Basic Graphics
+
+ A package is a group of related classes. Organizing classes into packages helps programmers find needed classes.
+ 
+ Import statement.
+
+import packageName.ClassName;
+
+The statement import java.util.Scanner; imports the scanner class.
+
+Method summary: Provides a list and brief description of all methods that can be called on objects of the class. 
+The Java documentation only lists the public methods that a program may use.
+
+Constructor and method details: Lastly, the documentation for a class provides a detailed description of all constructors and methods for the class. 
+
+2.13 Basic graphics
+Java supports a set of objects for developing graphical applications. A graphical application is a program that 
+displays drawings and other graphical objects. Graphical applications display their contents inside a window 
+called a frame using a JFrame object. The following program shows how to create and configure an JFrame object to 
+display an empty application window:
+
+import javax.swing.JFrame;
+
+public class EmptyFrame {
+   public static void main(String[] args) {
+      
+      // Construct the JFrame object
+      JFrame appFrame = new JFrame();
+
+      // Set the frame's width (400) and height (250) in pixels
+      appFrame.setSize(400, 250);
+      
+      // Set the frame's title
+      appFrame.setTitle("An Empty Frame");
+      
+      // Set the program to exit when the user
+      // closes the frame
+      appFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+      
+      // Make the frame visible to the user
+      appFrame.setVisible(true);
+
+      return;
+   }
+}
+
+Constructing a JFrame object does not immediately display a frame. The program uses the methods supported by the 
+JFrame object to configure and display the frame as follows:
+
+Set the frame's size by calling the setSize() method with arguments for the width and height, as in  
+appFrame.setSize(400, 250). Forgetting to set the frame's size results in a frame too small to see.
+
+Set the frame's title by calling the setTitle() method with a String as the argument. Alternatively, the frame's 
+title can be provided as an argument to JFrame's constructor as in JFrame appFrame = new JFrame("An Empty Frame").
+
+Set the frame's closing operation by calling the setDefaultCloseOperation() method, as in  
+appFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE). This statement configures the program 
+to exit when the user closes the frame.
+
+Make the frame visible to the user by calling the setVisible() method with a boolean argument of true
+
+A JFrame can be used to draw graphical objects, such as rectangles, circles, and lines. To display graphical 
+objects, a programmer can add a custom JComponent object to a frame. A JComponent is a blank graphical component 
+that a programmer extends (or customizes) with custom code in order to draw basic shapes.
+
+Basic example showing how to create a class extending JComponent to draw 2D graphics:
+import java.awt.Graphics;
+import javax.swing.JComponent;
+
+public class MyCustomJComponent extends JComponent {
+   public void paintComponent(Graphics g) {
+      // Cast to Graphics2D
+      Graphics2D graphicsObj = (Graphics2D)g;
+
+      // Write your drawing instructions
+   }
+}
+Drawing a histogram in a frame:
+
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Rectangle;
+import javax.swing.JComponent;
+
+// HistogramComponent extends the functionality of a JComponent
+// in order to draw a histogram.
+public class HistogramComponent extends JComponent {
+   
+   // Paints a histogram with three bins
+   public void paintComponent(Graphics g) {  
+      // Cast to Graphics2D
+      Graphics2D graphicsObj = (Graphics2D) g;
+      
+      // Draw 1st bin as an olive colored rectangle at (10,10)
+      // with width = 200 and height = 50
+      Rectangle binRectangle1 = new Rectangle(10, 10, 200, 50); 
+      Color binColor1 = new Color(128, 128, 0);
+      graphicsObj.setColor(binColor1);
+      graphicsObj.fill(binRectangle1);
+      
+      // Draw 2nd bin as a teal blue rectangle at (10,75)
+      // with width = 150 and height = 50
+      Rectangle binRectangle2 = new Rectangle(10, 75, 150, 50); 
+      Color binColor2 = new Color(0, 200, 200);
+      graphicsObj.setColor(binColor2);
+      graphicsObj.fill(binRectangle2);
+      
+      // Draw 3rd bin as a gray rectangle at (10,140)
+      // with width = 350 and height = 50
+      Rectangle binRectangle3 = new Rectangle(10, 140, 350, 50); 
+      Color binColor3 = new Color(100, 100, 100);
+      graphicsObj.setColor(binColor3);
+      graphicsObj.fill(binRectangle3);
+      
+      return;
+   }
+}
+ 
+
+HistogramViewer.java
+import javax.swing.JFrame;
+
+public class HistogramViewer {
+   public static void main(String[] args) {
+      JFrame appFrame = new JFrame();
+      HistogramComponent histogramComponent = new HistogramComponent();
+
+      appFrame.setSize(400, 250);
+      appFrame.setTitle("Histogram Viewer");
+      appFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+      
+      // Add the HistogramComponent object to the frame
+      appFrame.add(histogramComponent);
+      
+      // Set the frame and its contents visible
+      appFrame.setVisible(true);
+
+      return;
+   }
+}
+
+
+#################
+Examples
+
+public class Salary {                         
+   public static void main (String [] args) { 
+      int hourlyWage       = 20;
+      int workHoursPerWeek = 40;  
+      // FIXME: Declare and initialize variable workWeeksPerYear, then replace the 50's below
+      int annualSalary     = 0;
+       
+      annualSalary = hourlyWage * workHoursPerWeek * 50; 
+      System.out.print("Annual salary is: ");         
+      System.out.println(annualSalary);  
+      
+      System.out.print("Monthly salary is: ");
+      System.out.println((hourlyWage * workHoursPerWeek * 50) / 12); 
+
+      return;
+   } 
+}
+
+import java.util.Scanner;
+
+public class Salary {                         
+   public static void main (String [] args) { 
+      Scanner scnr = new Scanner(System.in);
+      int hourlyWage = 0;
+      int workHoursPerWeek = 40;      
+      int workWeeksPerYear = 50;
+      int monthsPerYear = 12; // FIXME: Declare as final and use standard naming  
+      int annualSalary  = 0; 
+      int monthlySalary = 0; 
+            
+      System.out.println("Enter hourly wage: ");
+      hourlyWage = scnr.nextInt();
+
+      // FIXME: Get user input values for workHoursPerWeek and workWeeksPerYear
+
+      annualSalary = hourlyWage * workHoursPerWeek * workWeeksPerYear;
+      System.out.print("Annual salary is: ");         
+      System.out.println(annualSalary);  
+      
+      // FIXME: Change monthsPerYear to the final variable that uses the standard naming
+      monthlySalary = (hourlyWage * workHoursPerWeek * workWeeksPerYear) / monthsPerYear;
+      System.out.print("Monthly salary is: ");
+      System.out.println(monthlySalary); 
+
+      return;
+   } 
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

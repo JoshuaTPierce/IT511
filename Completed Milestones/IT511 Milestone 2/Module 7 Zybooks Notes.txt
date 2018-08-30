@@ -1,0 +1,313 @@
+/* Methods */ 9.6, 9.8, 9.9
+By the end of this module, you will meet these learning objectives:
+Identify the idea of scope in constructing and applying methods
+Construct collection and items classes for a functioning collection manager program
+
+9.6 Scope of variable/method definitions
+The name of a defined variable or method item is only visible to part of a program, known as the item's scope. 
+A variable defined in a method has scope limited to inside that method. In fact, because a compiler scans a program 
+line-by-line from top-to-bottom, the scope starts after the definition until the method's end. The following highlights the 
+scope of local variable cmVal.
+
+Figure 9.6.1: Local variable scope.
+import java.util.Scanner;
+
+public class HeightConverter {
+   final static double CM_PER_IN = 2.54;
+   final static int IN_PER_FT = 12;
+
+   /* Converts a height in feet/inches to centimeters */
+   public static double heightFtInToCm(int heightFt, int heightIn) {
+      int totIn = 0;
+      double cmVal = 0.0;
+
+      totIn = (heightFt * IN_PER_FT) + heightIn; // Total inches
+      cmVal = totIn * CM_PER_IN;                 // Conv inch to cm
+      return cmVal;
+   }
+
+   public static void main(String[] args) {
+      Scanner scnr = new Scanner(System.in);
+      int userFt = 0;  // User defined feet
+      int userIn = 0;  // User defined inches
+
+      // Prompt user for feet/inches
+      System.out.print("Enter feet: ");
+      userFt = scnr.nextInt();
+
+      System.out.print("Enter inches: ");
+      userIn = scnr.nextInt();
+
+      // Output converted feet/inches to cm result
+      System.out.print("Centimeters: ");
+      System.out.println(heightFtInToCm(userFt, userIn));
+
+      return;
+   }
+}
+
+Note that variable cmVal is invisible to the method main(). A statement in main() like newLen = cmVal; would yield a 
+compiler error, e.g., the "cannot find symbol". Likewise, variables userFt and userIn are invisible to the 
+methodheightFtInToCm(). Thus, a programmer is free to define items with names userFt or userIn in method heightFtInToCm.
+
+A variable defined within a class but outside any method is called a class member variable or field, in contrast to a 
+local variable defined inside a method. A field's scope extends from the class's opening brace to the class's closing 
+brace, and reaches into methods regardless of where the field is defined within the class. 
+
+For example, heightFtInToCm() above accesses fields CM_PER_IN and IN_PER_FT. Fields are sometimes called global variables, 
+in contrast to local variables.
+
+If a method's local variable (including a parameter) has the same name as a field, then in that method the name refers to 
+the local item and the field is inaccessible. Such naming can confuse a reader. Furthermore, if a method updates a field, 
+the method has effects that go beyond its parameters and return value, sometimes known as side effects, which unless done 
+carefully can make program maintenance hard. Beginning programmers sometimes use globals to avoid having to use parameters, 
+which is bad practice.
+
+Fields should be used carefully, and not as a replacement for parameters.
+If a method's local variable has the same name as a field, the name will refer to the local variable.
+
+A method also has scope, which extends from the class's opening brace to the class's closing brace. Thus, a method can 
+access any other method defined in the same class, regardless of the order in which the methods are defined. 
+For example, the main() method can access heightFtInToCm() even if the programmer defines heightFtInToCm() below main(), 
+provided that both main() and heightFtInToCm() are defined in the same class. 
+
+Access specifiers additionally affect the visibility of both methods and fields in other classes in the program. 
+The public access modifier, for example, allows the programmer to write code that accesses fields and methods from within a 
+different class. Although other access modifiers are available to the programmer, these constitute a more advanced topic 
+and are discussed elsewhere.
+
+Figure 9.6.2: Method scope.
+import java.util.Scanner;
+
+public class HeightConverter {
+   final static double CM_PER_IN = 2.54;
+   final static int IN_PER_FT = 12;
+
+   public static void main(String[] args) {
+      Scanner scnr = new Scanner(System.in);
+      int userFt = 0;  // User defined feet
+      int userIn = 0;  // User defined inches
+
+      // Prompt user for feet/inches
+      System.out.print("Enter feet: ");
+      userFt = scnr.nextInt();
+
+      System.out.print("Enter inches: ");
+      userIn = scnr.nextInt();
+
+      // Output converted feet/inches to cm result
+      System.out.print("Centimeters: ");
+      System.out.println(heightFtInToCm(userFt, userIn));
+
+      return;
+   }
+
+   /* Converts a height in feet/inches to centimeters */
+   public static double heightFtInToCm(int heightFt, int heightIn) {
+      int totIn = 0;
+      double cmVal = 0.0;
+
+      totIn = (heightFt * IN_PER_FT) + heightIn; // Total inches
+      cmVal = totIn * CM_PER_IN;                 // Conv inch to cm
+      return cmVal;
+   }
+
+}
+
+The main() method can access heightFtInToCm() even if the programmer defines heightFtInToCm() below main(), provided that 
+both methods are defined in the same class.
+
+
+9.8 Java documentation for methods
+An important part of a program is its documentation, which is a written description of a program and its various parts, 
+intended to be read by programmers who must maintain or interface with the program. Documentation written separately from 
+a program is hard to keep consistent with the program. Preferably, documentation could be written directly in the program 
+itself.
+
+Javadoc is a tool that parses specially formatted multi-line comments to generate program documentation in HTML format. 
+The program documentation is also known as an API (application programming interface). Those special doc comments begin 
+with /** and end with */; the beginning two asterisks distinguish doc comments from regular comments.
+
+Figure 9.8.1: Using Javadoc comments to document the EbayFeeCalc program.
+import java.util.Scanner;
+
+/**
+ * Program reports the fees charged by ebay.com given an item's 
+ * selling price.
+ *
+ * @author Zyante Developers
+ * @version 1.0
+ */
+public class EbayFeeCalc {
+   /**
+    * Returns fees charged by ebay.com given selling price of
+    * fixed-price books/movies/music/video-games. $0.50 to list
+    * plus 13% of selling price up to $50.00, %5 of amount from
+    * $50.01 to$1000.00, and 2% for amount $1000.01 or more.
+    *
+    * @param sellPrice the item's selling price
+    * @return a double representing the imposed fees
+    * @see "http://pages.ebay.com/help/sell/fees.html"
+    */
+   public static double ebayFee(double sellPrice) {
+      final double BASE_LIST_FEE = 0.50;     // Listing Fee
+      final double PERC_50_OR_LESS = 0.13;   // % $50 or less
+      final double PERC_50_TO_1000 = 0.05;   // % $50.01..$1000.00
+      final double PERC_1000_OR_MORE = 0.02; // % $1000.01 or more
+      double feeTot = 0.0;                   // Resulting eBay fee
+
+      feeTot = BASE_LIST_FEE;
+
+      // Determine additional fee based on selling pricd
+      if (sellPrice <= 50.00) { // $50.00 or lower
+         feeTot = feeTot + (sellPrice * PERC_50_OR_LESS);
+      }
+      else if (sellPrice <= 1000.00) { // $50.01..$1000.00
+         feeTot = feeTot + (50 * PERC_50_OR_LESS)
+                 + ((sellPrice - 50) * PERC_50_TO_1000);
+      }
+      else { // $1000.01 and higher
+         feeTot = feeTot + (50 * PERC_50_OR_LESS)
+                 + ((1000 - 50) * PERC_50_TO_1000)
+                 + ((sellPrice - 1000) * PERC_1000_OR_MORE);
+      }
+
+      return feeTot;
+   }
+
+   /**
+    * Asks for an item's selling price and calls ebayFee() to 
+    * calculate the imposed fees.
+    *
+    * @param args command-line arguments
+    */
+   public static void main(String[] args) {
+      Scanner scnr = new Scanner(System.in);
+      double sellingPrice = 0.0;  // User defined selling price
+
+      // Prompt user for selling price, call eBay fee method
+      System.out.print("Enter item selling price (e.g., 65.00): ");
+      sellingPrice = scnr.nextDouble();
+      System.out.println("eBay fee: $" + ebayFee(sellingPrice));
+
+      return;
+   }
+}
+
+/**
+ * The overall description is written here.
+ * The text below is the tag section.
+ * @blockTag text associated with tag
+ * @blockTag text associated with tag
+ */
+
+The overall description describes the items purpose and extends to the first @, which denotes the beginning of the tags 
+section. A Javadoc comment tags section consists of block tags, each of the form @keyword plus text, each block tag on its 
+own line
+
+A method's doc comment typically has an overall description summarizing the method, and tags for parameters, return types, 
+and other items. Each class (described elsewhere) typically also has doc comments. See examples in the above program. Good 
+practice is to include a doc comment for every method, having at least an overall description, a @param block tag for each 
+parameter, and a @return block tag if not void.
+
+Common block tags in doc comments:
+@author	Lists the item's author.
+@version	Indicates the items's version number (typically for a program).
+@param	Describes a method parameter's type, purpose, etc.
+@return	Describes a method's return type, purpose, etc. Optional if return type is void.
+@see	Refers to relevant information like a website, another method, etc.
+
+Doc comments not only help a programmer who is working with the code, but also produces standalone HTML documentation of a 
+program and its methods, as shown above.
+
+A programmer can indicate the destination directory for documentation: javadoc -d destination myProg.java.
+
+9.9 Java example: Salary calculation with methods
+import java.util.Scanner;
+
+public class IncomeTax {    
+   // Method to prompt for and input an integer
+   public static int promptForInteger(Scanner input, String userPrompt) {
+      int inputValue = 0;
+      
+      System.out.println(userPrompt + ": ");
+      inputValue = input.nextInt();
+      
+      return inputValue;
+   }
+
+   // *********************************************************************** 
+
+   // Method to get a value from one table based on a range in the other table
+   public static double getCorrespondingTableValue(int search, int [] baseTable, double [] valueTable) {
+      int baseTableLength = baseTable.length;
+      double value = 0.0;
+      int i = 0;
+      boolean keepLooking = true;
+
+      i = 0;
+      while ((i < baseTableLength) && keepLooking) {
+         if (search <= baseTable[i]) {
+            value = valueTable[i];
+            keepLooking = false;
+         }
+         else {
+            ++i;
+         }
+      }
+
+      return value;
+   }
+
+   // *********************************************************************** 
+
+   public static void main (String [] args) { 
+      Scanner scnr = new Scanner(System.in);
+      int annualSalary = 0;
+      double taxRate = 0.0;
+      int taxToPay = 0;
+      int i = 0;
+      final String USER_PROMPT = "\nEnter annual salary (negative to exit)";
+
+      // The first entries in the two tables are 0 to catch annualSalary < 0
+      int [] salaryBase = {   0,     20000,     50000,     100000,     999999999 };
+      double [] taxBase = { 0.0,      0.10,      0.20,       0.30,          0.40 };
+    
+      annualSalary = promptForInteger(scnr, USER_PROMPT);
+
+      while (annualSalary >= 0) {
+         taxRate = getCorrespondingTableValue(annualSalary, salaryBase, taxBase);
+
+         taxToPay= (int)(annualSalary * taxRate);     // Truncate tax to an integer amount
+         System.out.println("Annual salary: " + annualSalary + 
+                            "\nTax rate: " + taxRate +
+                            "\nTax to pay: " + taxToPay);
+
+         // Get the next annual salary
+         annualSalary = promptForInteger(scnr, USER_PROMPT);
+      } 
+
+      return;
+   }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

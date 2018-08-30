@@ -1,0 +1,17 @@
+/**
+  *Begin For-loop: Print each member of the array list ingredientlist 
+  *Shows user all of the ingredients a recipe requires
+  */
+
+for (int i = 0; i < ingredientList.size(); i++) {     
+
+	String ingredient = ingredientList[i];				
+
+	System.out.println(ingredient);         
+
+}
+/**
+  *Step 1: set new string value equal to arraylist member i starting @ i=0 (new constructor).
+  *Step 2: i++ incrementally moves arraylist member i up one index until i < size of arraylist.
+  *Step 3: prints each ingredient before re-assigning the String ingredient to the next array member.
+  */

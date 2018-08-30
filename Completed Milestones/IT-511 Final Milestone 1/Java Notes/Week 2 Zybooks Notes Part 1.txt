@@ -1,0 +1,442 @@
+##################################################################################
+Basic Objects Part 2
+
+Identifiers
+A name created by a programmer for an item like a variable or method is called an identifier.
+A reserved word is a word that is part of the language, like int, short, or double. A reserved word is also known as a keyword. 
+A programmer cannot use a reserved word as an identifier:
+abstract 
+assert 
+boolean 
+break 
+byte 
+case 
+catch 
+char 
+class 
+const 
+continue 
+default 
+do 
+double 
+else 
+enum 
+extends
+ final 
+finally 
+float 
+for 
+goto 
+if 
+implements 
+import 
+instanceof 
+int 
+interface 
+long 
+native 
+new 
+package 
+private
+protected 
+public 
+return 
+short 
+static 
+strictfp 
+super 
+switch 
+synchronized 
+this 
+throw 
+throws 
+transient 
+try 
+void 
+volatile
+true
+false
+null
+
+While various (crazy-looking) identifiers may be valid, programmers follow identifier naming conventions (style) defined by their company, 
+team, teacher, etc. Two common conventions for naming variables are:
+
+Camel case: Lower camel case abuts multiple words, capitalizing each word except the first, as in numApples or peopleOnBus.
+
+Underscore separated: Words are lowercase and separated by an underscore, as in num_apples or people_on_bus.
+
+#######################
+Arithmetic expressions (int)
+An expression is a combination of items, like variables, literals, and operators, that evaluates to a value, e.g.:
+int numKids = 0;                     // Expr: 0
+numKids     = 7;                     // Expr: 7 
+numPeople   = numKids + numAdults;   // Expr: numKids + numAdults
+totOffers   = jobsCA + (2 * jobsAZ); // Expr: jobsCA + (2 * jobsAZ)   
+xCoord      = yCoord;                // Expr: yCoord
+xCoord      = -yCoord;               // Expr: -yCoord
+
+
+A LITERAL IS AN EXPRESSION
+AN IDENTIFIER IS NOT AN EXPRESSION
+An expression can combine variables, literals, and operators.
+Commas aren't allowed in an integer literal.
+
+An operator is a symbol for a built-in language calculation like + for addition. Arithmetic operators built into the language are:
++	addition
+-	subtraction
+*	multiplication
+/	division
+%	modulo (remainder)
+
+Parentheses may be used, as in: ((userItems + 1) * 2) / totalItems. Brackets [ ] or braces { } may NOT be used.
+
+import java.util.Scanner;
+
+/* Computes the total cost of leasing a car given the down payment,
+   monthly rate, and number of months 
+*/
+
+public class CarLeaseCost {
+   public static void main (String [] args) {
+      Scanner scnr = new Scanner(System.in);
+      int downpayment     = 0; 
+      int paymentPerMonth = 0; 
+      int numMonths       = 0;
+      int totalCost       = 0; // Computed total cost to be output
+
+        
+      System.out.println("Enter down payment: ");
+      downpayment = scnr.nextInt();
+
+      System.out.println("Enter monthly payment: ");
+      paymentPerMonth = scnr.nextInt();
+
+      System.out.println("Enter number of months: ");
+      numMonths = scnr.nextInt();
+        
+      totalCost = downpayment + (paymentPerMonth * numMonths);
+        
+      System.out.println("Total cost: " + totalCost);
+      
+      return;
+   }
+}
+A good practice is to include a single space around operators for readability, as in numItems + 2, rather than numItems+2. 
+An exception is - used as negative, as in: xCoord = -yCoord. - used as negative is known as unary minus.
+
+When the / operands are integers, the division operator / performs integer division, throwing away any remainder. Examples:
+
+24 / 10 is 2.
+50 / 50 is 1.
+1 / 2 is 0. 2 divides into 1 zero times; remainder of 1 is thrown aw
+
+The modulo operator % may be unfamiliar to some readers. The modulo operator evaluates to the remainder of the division of two integer operands. Examples:
+
+24 % 10 is 4. Reason: 24 / 10 is 2 with remainder 4.
+50 % 50 is 0. Reason: 50 / 50 is 1 with remainder 0.
+1 % 2 is 1. Reason: 1 / 2 is 0 with remainder 1
+
+Division and modulo example: Minutes to hours/minutes:
+
+import java.util.Scanner;
+
+public class TimeConverter {
+   public static void main (String [] args) {
+      Scanner scnr = new Scanner(System.in);
+      int userMinutes = 0; // User input: Minutes
+      int outHours    = 0; // Output hours
+      int outMinutes  = 0; // Output minutes (remaining)
+
+      System.out.println("Enter minutes: ");
+      userMinutes = scnr.nextInt();
+
+      outHours   = userMinutes / 60;
+      outMinutes = userMinutes % 60;
+
+      System.out.print(userMinutes  + " minutes is ");
+      System.out.print(outHours     + " hours and ");
+      System.out.println(outMinutes + " minutes.");
+
+      return;
+   }
+}
+
+For integer division, the second operand of / or % must never be 0, because division by 0 is mathematically undefined. 
+A divide-by-zero error occurs at runtime if a divisor is 0, causing a program to terminate:
+
+
+import java.util.Scanner;
+
+public class DailySalary {
+   public static void main (String [] args) {
+      Scanner scnr = new Scanner(System.in);
+      int salaryPerYear = 0; // User input: Yearly salary
+      int daysPerYear   = 0; // User input: Days worked per year
+      int salaryPerDay  = 0; // Output:     Salary per day
+
+      System.out.println("Enter yearly salary:");
+      salaryPerYear = scnr.nextInt();
+      
+      System.out.println("Enter days worked per year:");
+      daysPerYear = scnr.nextInt();
+
+      // If daysPerYear is 0, then divide-by-zero causes program termination.
+      salaryPerDay = salaryPerYear / daysPerYear;
+
+      System.out.println("Salary per day is: " + salaryPerDay);
+
+      return;
+   }
+}
+
+Table 2.5.2: Precedence rules for arithmetic operators.
+Convention	Description	Explanation
+( )	Items within parentheses are evaluated first	
+In 2 * (A + 1), A + 1 is computed first, with the result then multiplied by 2.
+unary -	- used as a negative (unary minus) is next	In 2 * -A, -A is computed first, with the result then multiplied by 2.
+
+* / %	Next to be evaluated are *, /, and %, having equal precedence.	
+
++ -	Finally come + and - with equal precedence.	In B = 3 + 2 * A, 2 * A is evaluated first, with the result then added to 3, 
+because * has higher precedence than +. Note that spacing doesn't matter: B = 3+2 * A would still evaluate 2 * A first.
+
+If more than one operator of equal precedence could be evaluated, evaluation occurs left to right.	In B = A * 2 / 3, A * 2 is first evaluated, with the result then divided by 3.
+
+COMPOUND OPERATORS
+numAtoms += 5; is the SAME AS numAtoms = numAtoms + 5;
+numAtons *= 20; is the SAME AS numAtoms = numAtoms * 20;
+
+import java.util.Scanner;
+
+public class ComputingFinalResult {
+   public static void main (String [] args) {
+      int num1 = 0;
+      int num2 = 0;
+      int finalResult = 0;
+
+      num1 = 4;
+      num2 = 5;
+
+      finalResult = (num1 + num2) / 3;
+
+      System.out.print("Final result: ");
+      System.out.println(finalResult);
+
+      return;
+   }
+}
+
+import java.util.Scanner;
+
+public class ComputingChange {
+   public static void main (String [] args) {
+      int amountToChange = 0;
+      int numFives = 0;
+      int numOnes  = 0;
+
+      amountToChange = 19;
+      numFives = amountToChange / 5;
+
+      numOnes = amountToChange % 5;
+
+      System.out.print("numFives: ");
+      System.out.println(numFives);
+      System.out.print("numOnes: ");
+      System.out.println(numOnes);
+
+      return;
+   }
+}
+
+
+A drink costs 2 dollars. A taco costs 3 dollars. Given the number of each, compute total cost and assign totalCost with the result. 
+Ex: 4 drinks and 6 tacos yields totalCost of 26. 
+
+import java.util.Scanner;
+
+public class ComputingTotalCost {
+   public static void main (String [] args) {
+      int numDrinks;
+      int numTacos;
+      int totalCost;
+
+      numDrinks = 4;
+      numTacos  = 6;
+
+      totalCost = (numDrinks * 2) + (numTacos * 3);
+
+      System.out.print("Total cost: ");
+      System.out.println(totalCost);
+   }
+}
+
+#######################
+Floating-point numbers (double)
+A variable is sometimes needed to store a floating-point number like -1.05 or 0.001. 
+A variable declared as type double stores a floating-point number.
+
+double variableName = 0.0; // Initial value is optional but recommended
+
+A floating-point literal is a number with a fractional part, even if that fraction is 0, as in 1.0, 0.0, or 99.573. 
+Good practice is to always have a digit before the decimal point, as in 0.5, since .5 might mistakenly be viewed as 5.
+
+Variables of type double: Travel time example:
+
+
+import java.util.Scanner;
+
+public class TravelTime {
+   public static void main (String [] args) {
+      Scanner scnr = new Scanner(System.in);
+      double milesTravel = 0.0; // User input of miles to travel
+      double hoursFly    = 0.0; // Travel hours if flying those miles
+      double hoursDrive  = 0.0; // Travel hours if driving those miles
+
+      System.out.print("Enter a distance in miles:\n");
+      milesTravel = scnr.nextDouble();
+
+      hoursFly   = milesTravel / 500.0;
+      hoursDrive = milesTravel / 60.0;
+
+      System.out.println(milesTravel + " miles would take:");
+      System.out.println(hoursFly    + " hours to fly,");
+      System.out.println(hoursDrive  + " hours to drive.");
+
+      return;
+   }
+}
+
+Floating-point literal should have fractional part, even if 0.
+
+In general, a floating-point variable should be used to represent a quantity that is measured, such as a distance, temperature, 
+volume, weight, etc., whereas an integer variable should be used to represent a quantity that is counted, such as a number of cars, 
+students, cities, minutes, etc.
+
+public class SphereVolumeCalculator {
+   public static void main (String [] args) {
+      double piVal = 3.14159;
+      double sphereVolume = 0.0;
+      double sphereRadius = 0.0;
+
+      sphereRadius = 1.0;
+
+      sphereVolume = (sphereRadius * sphereRadius * sphereRadius) * piVal * (4.0/3.0);
+
+      System.out.println("Sphere volume: " + sphereVolume);
+      return;
+   }
+}
+
+public class GravityCalculation {
+   public static void main (String [] args) {
+      double G            = 6.673e-11;
+      double M            = 5.98e24;
+      double accelGravity = 0.0;
+      double distCenter   = 0.0;
+
+      distCenter = 6.38e6;
+
+      accelGravity = (G * M) / (distCenter * distCenter);
+      
+      System.out.println("accelGravity: " + accelGravity);
+      return;
+   }
+}
+
+2.7 Comments and whitespace
+A comment is text added to code by a programmer, intended to be read by humans to better understand the code, but ignored by the compiler. 
+Two kinds of comments exist: a single-line comment uses the // symbols, and a multi-line comment uses the /* and */ symbols:
+
+
+// Single-line comment. The compiler ignores any text to the right, like ;, "Hi", //, /* */, etc.
+
+/* Multi-line comment. The compiler ignores text until seeing the closing half of the comment, 
+   so ignores ;, or (), or "Hi", or //, or /*, or num = num + 1, etc. Programmers usually line up
+   the opening and closing symbols and indent the comment text, but neither is mandatory.
+*/
+
+import java.util.Scanner;
+
+/*
+   This program calculates the amount of pasta to cook, given the
+   number of people eating.
+
+   Author: Mario Boyardee
+   Date:   March 9, 2014
+*/
+
+public class PastaCalculator {
+   public static void main (String [] args) {
+      Scanner scnr = new Scanner(System.in);
+      int numPeople = 0;         // Number of people that will be eating
+      int totalOuncesPasta = 0;  // Total ounces of pasta to serve numPeople
+
+      // Get number of people
+      System.out.println("Enter number of people: ");
+      numPeople = scnr.nextInt();
+
+      // Calculate and print total ounces of pasta
+      totalOuncesPasta = numPeople * 3;  // Typical ounces per person
+      System.out.println("Cook " + totalOuncesPasta + " ounces of pasta.");
+
+      return;
+   }
+}
+
+A multi-line comment is allowed on a single line, e.g.,  /* Typical ounces per person */. However, good practice is to use // 
+for single-line comments, reserving /* */ for multi-line comments only. A multi-line comment is also known as a block comment.
+
+Whitespace refers to blank spaces between items within a statement, and to blank lines between statements. 
+A compiler ignores most whitespace.
+
+Bad use of whitespace:
+ 
+import java.util.Scanner;
+public class PastaCalculator {
+public static void main (String [] args) {
+Scanner scnr = new Scanner(System.in);int numPeople=0;int totalOuncesPasta=0;
+System.out.println("Enter number of people:");
+numPeople = scnr.nextInt(); totalOuncesPasta = numPeople * 3; 
+System.out.println("Cook "+totalOuncesPasta+" ounces of pasta.");return;}}
+
+Good use of whitespace:
+
+import java.util.Scanner;
+
+public class WhiteSpaceEx {
+   public static void main(String[] args) {
+      Scanner scnr = new Scanner(System.in);
+      int myFirstVar    = 0; // Some programmers like to align the
+      int yetAnotherVar = 0; // initial values. Not always possible.
+      int thirdVar      = 0;
+
+      // Above blank line separates variable declarations from the rest
+      System.out.print("Enter a number: ");
+      myFirstVar = scnr.nextInt();
+
+      // Above blank line separates user input statements from the rest
+      yetAnotherVar = myFirstVar;        // Aligned = operators, and these aligned
+      thirdVar      = yetAnotherVar + 1; // comments yield less visual clutter.
+      // Also notice the single-space on left and right of + and =
+      // (except when aligning the second = with the first =)
+
+      System.out.println("Final value is " + thirdVar); // Single-space each side of +
+
+      return; // The above blank line separates the return from the rest
+   }
+}
+
+#####################
+2.8 Calling Methods
+
+
+
+
+
+
+
+
+
+
+
+

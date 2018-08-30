@@ -1,0 +1,260 @@
+/*Simple Version*/
+
+public static void main(String[] args){
+	Scanner scnr = new Scanner(System.in);
+	int userNum = 0;
+	
+	System.out.println("Please enter a number: ");
+	userNum = Scnr.nextInt();
+		
+	if ((userNum >= 1) && (userNum <= 100)) {
+		System.out.println("Good Job! The number you entered is: " + userNum);
+		}
+	else {
+		System.out.println("The number entered was not between 1 and 100!");
+		}
+	return
+	}
+}
+
+/*Stepping Stone Version*/
+
+/*WILL BE CREATED AUTOMATICALLY IN NETBEANS:
+ *package SteppingStone;
+ *@author Joshua Pierce
+ *public class SteppingStone3_Branches {
+ */
+ 
+import java.util.Scanner;
+public static void main(String[] args) {
+	Scanner scnr = new Scanner(System.in);
+		FINAL int MAX_CUPS = 100;
+		int numberCups = -1;
+		
+		System.out.println("Please enter number of cups (between 1 and 100): ")
+	
+//The following branch uses the scanner method .hasNextInt() to 
+//check and see if the input is an integer:
+	
+		if (scnr.hasNextInt()) {
+           numberCups = scnr.nextInt();
+
+//Begin nested branching
+ 
+			if ((numberCups >= 1) && (numberCups <= MAX_CUPS)) {
+				System.out.println(numberCups + " is a valid number of cups!");
+			}
+			
+			else {
+				System.out.println(numberCups + " is not a valid number of cups.");
+				System.out.println("Please enter a valid number of cups between 1 and 100: ");
+				
+				if ((numberCups >= 1) && (numberCups <= MAX_CUPS)) {
+					System.out.println(numberCups + " is a valid number of cups!"); 
+				}
+				
+				else if (numberCups < 1) {
+					System.out.println(numberCups + " is less than 1. Sorry, you are out of attempts.");
+				}
+				
+				else {
+					System.out.println(numberCups + " is greater than 100. Sorry, you are out of attempts.");
+				}
+		else {
+           System.out.println("Error: That is not a number. Try again.");
+		}
+	return
+	}
+}		
+ 
+ /*
+  *ORIGINAL INGREDIENT CLASS
+  */
+  
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package Ingredient;
+
+import java.util.Scanner;
+
+/**
+ * @author josh
+ */
+public class Ingredient {
+
+    public static void main(String[] args) {
+        Scanner scnr = new Scanner(System.in);
+        
+        String nameOfIngredient = "";
+        String unitMeasurement = "";
+        double ingredientAmount = 0.0;
+        int numberOfCaloriesPerUnit = 0;
+        double totalCalories = 0.0;
+        
+        System.out.println("Please Enter Ingredient Name: ");
+        nameOfIngredient = scnr.nextLine(); 
+        
+        System.out.println("Please Enter Unit of Measurement for this Ingredient(non-plural): ");
+        unitMeasurement = scnr.next();
+        
+        System.out.println("Please enter the number of units of " + nameOfIngredient + " required: ");
+        ingredientAmount = scnr.nextDouble();
+        
+        System.out.println("Please enter the number of calories per unit of " + nameOfIngredient + " : ");
+        numberOfCaloriesPerUnit = scnr.nextInt();
+        
+        totalCalories = ingredientAmount * numberOfCaloriesPerUnit;
+        
+        System.out.println(nameOfIngredient + " uses " + ingredientAmount + " number of " + unitMeasurement + "'s" + " which contains " + totalCalories + " total calories.");
+    
+    }
+}
+ ###################################################################################################################
+/*
+ * UPDATED INGREDIENT CLASS
+ */
+ 
+ /* 
+  * For your Final Project, adapt your Ingredient java file to include
+  * data type validation steps for each of the variables in the class:
+  * 
+  * ingredientName (String)
+  * ingredientAmount (float)
+  * unitMeasurment (String)
+  * number of Calories (double)
+  */
+ 
+ package Ingredient;
+
+import java.util.Scanner;
+
+/**
+ * @author josh
+ */
+public class Ingredient {
+
+    public static void main(String[] args) {
+        Scanner scnr = new Scanner(System.in);
+		
+       <GO BACK AND CHANGE DATA TYPES TO THE ONES LISTED ABOVE> 
+	   
+        String nameOfIngredient = "";
+        String unitMeasurement = "";
+        int ingredientAmount = 0; 			
+        int numberOfCaloriesPerUnit = 0;
+        int totalCalories = 0;				
+		FINAL MAX_AMOUNT = 100;
+		FINAL MAX_CALORIES = 2000;
+        
+		//Prompt user for name of ingredient
+        System.out.println("Please Enter Ingredient Name: ");
+		if (scnr.hasNextString()) {
+			nameOfIngredient = scnr.nextLine(); 
+		}
+			
+		else {
+			System.out.println("Please enter a valid name (characters only): ");
+		}
+			
+		//Prompt user for unit of measurement
+        System.out.println("Please Enter Unit of Measurement for this Ingredient. You have the following options: ");
+		System.out.println("Cup(s)");
+		System.out.println("Tbsp");
+		System.out.println("Tsp");
+		System.out.println("Gram(s)");
+		
+		if (scnr.hasNextString()) {
+			unitMeasurement = scnr.next();
+		}
+			if ((unitMeasurement == "Cup(s)") || (unitMeasurement == "Tbsp") || (unitMeasurement == "Tsp") || (unitMeasurement == "Gram(s)")) {
+				System.out.println("You have selected " + unitMeasurement);
+			}
+			
+			else {
+				System.out.println("Please enter one of the preceding options.");
+			}
+			
+		else {
+			System.out.println("Please enter one of the preceding options.");
+		}
+		
+		//Prompt user for number of units 
+        System.out.println("Please enter the number of units of " + nameOfIngredient + " required (between 1 and 100: ");
+			
+		if (scnr.hasNextInt()) {
+			ingredientAmount = scnr.nextInt();
+				
+			if ((ingredientAmount >= 1) && (ingredientAmount <= MAX_AMOUNT)) {
+				System.out.println(ingredientAmount + " is a valid amount!" 	
+					
+			else {
+			System.out.println(ingredientAmount + " is not a valid amount.");
+			System.out.println("Please enter a valid number of units between 1 and 100: ");
+				
+				if ((ingredientAmount >= 1) && (ingredientAmount <= MAX_AMOUNT)) {
+					System.out.println(numberCups + " is a valid amount!"); 	
+			}
+				else if (ingredientAmount < 1) {
+					System.out.println(ingredientAmount + " is less than 1 unit. Sorry, you are out of attempts.");
+			}
+				else {
+					System.out.println(ingredientAmount + " is greater than 100 units. Sorry, you are out of attempts.");
+			}
+			
+		else {
+           System.out.println("Error: That is not a number. Try again.");
+		}
+	
+		//Prompt user for calories per unit
+        System.out.println("Please enter the number of calories per unit of " + nameOfIngredient + " (between 1 and 2000): ");
+        
+		if (scnr.hasNextInt()) {
+			numberOfCaloriesPerUnit = scnr.nextInt();
+			
+			if ((numberOfCaloriesPerUnit >= 1) && (numberOfCaloriesPerUnit <= MAX_CALORIES)) {
+				System.out.println(numberOfCaloriesPerUnit + " is a valid number of calories!" 	
+			
+			else {
+				System.out.println(numberOfCaloriesPerUnit + " is not a valid number of calories.");
+				System.out.println("Please enter a valid number of calories per unit between 1 and 2000: ");
+        
+					if ((numberOfCaloriesPerUnit >= 1) && (numberOfCaloriesPerUnit <= MAX_CALORIES)) {
+						System.out.println(numberOfCaloriesPerUnit + " is a valid number of calories!"); 	
+				}
+					else if (numberOfCaloriesPerUnit < 1) {
+						System.out.println(numberOfCaloriesPerUnit + " is less than 1. Sorry, you are out of attempts.");
+				}
+					else {
+						System.out.println(numberOfCaloriesPerUnit + " is greater than 2000. Sorry, you are out of attempts.");
+				}
+				
+		else {
+           System.out.println("Error: That is not a number. Try again.");
+		
+		//Calculate total calories
+        totalCalories = ingredientAmount * numberOfCaloriesPerUnit;
+        
+        System.out.println(nameOfIngredient + " uses " + ingredientAmount + " number of " + unitMeasurement + "'s" + " which contains " + totalCalories + " total calories.");
+		System.out.println("Ingredient has been successfully added.");
+		
+    }
+	
+	return
+}
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 

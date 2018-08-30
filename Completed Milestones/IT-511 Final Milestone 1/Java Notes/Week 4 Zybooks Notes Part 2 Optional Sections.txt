@@ -1,0 +1,426 @@
+/*Module 4 Control Structures: Branching
+ *Optional Sections
+ */
+---------------------------------------------------------------
+/*Switch Statements*/
+A switch statement can more clearly represent multi-branch behavior involving a variable being compared to constant values. 
+The program executes the first case whose constant expression matches the value of the switch expression, executes that case's statements, and then jumps to the end. If no case matches, then the default case statements are executed.
+Switch example: Estimates a dog's age in human years.
+import java.util.Scanner;
+
+/* Estimates dog's age in equivalent human years.
+   Source: www.dogyears.com
+*/
+
+public class DogYears {
+   public static void main(String[] args) {
+      Scanner scnr = new Scanner(System.in);
+      int dogAgeYears = 0;
+
+      System.out.print("Enter dog's age (in years): ");
+      dogAgeYears = scnr.nextInt();
+
+      switch (dogAgeYears) {
+         case 0:
+            System.out.println("That's 0..14 human years.");
+            break;
+
+         case 1:
+            System.out.println("That's 15 human years.");
+            break;
+
+         case 2:
+            System.out.println("That's 24 human years.");
+            break;
+
+         case 3:
+            System.out.println("That's 28 human years.");
+            break;
+
+         case 4:
+            System.out.println("That's 32 human years.");
+            break;
+
+         case 5:
+            System.out.println("That's 37 human years.");
+            break;
+
+         default:
+            System.out.println("Human years unknown.");
+            break;
+      }
+
+      return;
+   }
+}
+A switch statement can be written using a multi-branch if-else statement, 
+but the switch statement may make the programmer's intent clearer.
+
+if (dogYears == 0) {           // Like case 0
+   // Print 0..14 years
+}
+else if (dogYears == 1) {      // Like case 1
+   // Print 15 years
+}
+...
+else if (dogYears == 5) {      // Like case 5
+   // Print 37 years 
+}
+else {                        // Like default case
+   // Print unknown
+}
+
+GENERAL SYNTAX
+
+switch (expression) {
+   case constantExpr1: 
+      // Statements
+      break;
+
+   case constantExpr2:
+      // Statements
+      break;
+   
+   ...
+   
+   default: // If no other case matches
+      // Statements
+      break;
+}
+The switch statement's expression should be an integer, char, or string (discussed elsewhere). 
+The expression should not be a Boolean or a floating-point type. Each case must have a constant expression like 2 or 'q'; 
+a case expression cannot be a variable.
+
+Good practice is to always have a default case for a switch statement. 
+A programmer may be sure all cases are covered only to be surprised that some case was missing.
+
+6.5.3: Switch statement: Numbers to words.
+
+import java.util.Scanner;
+
+/* Estimates dog's age in equivalent human years.
+   Source: www.dogyears.com
+*/
+
+public class DogYears {
+   public static void main(String[] args) {
+      Scanner scnr = new Scanner(System.in);
+      int dogAgeYears = 0;
+
+      System.out.println("Enter dog's age (in years): ");
+      dogAgeYears = scnr.nextInt();
+
+      switch (dogAgeYears) {
+         case 0:
+            System.out.println("That's 0..14 human years.");
+            break;
+			
+Omitting the break statement for a case will cause the statements within the next case to be executed. 
+Such "falling through" to the next case can be useful when multiple cases, such as cases 0, 1, and 2, should 
+execute the same statements.
+
+The following extends the previous program for dog ages less than 1 year old. If the dog's age is 0, the program asks for 
+the dog's age in months. Within the  switch (dogAgeMonths) statement, "falling through" is used to execute the same display 
+statement for several values of dogAgeMonths. For example, if dogAgeMonths is 0, 1 or 2, the same statement executes.
+
+Figure 6.5.3: Switch example: Dog years with months.
+import java.util.Scanner;
+
+public class DogYearsMonths {
+   public static void main(String[] args) {
+      Scanner scnr = new Scanner(System.in);
+      int dogAgeYears  = 0;
+      int dogAgeMonths = 0;
+
+      System.out.print("Enter dog's age (in years): ");
+      dogAgeYears = scnr.nextInt();
+
+      if (dogAgeYears == 0) {
+         System.out.print("Enter dog's age in months: ");
+         dogAgeMonths = scnr.nextInt();
+
+         switch (dogAgeMonths) {
+            case 0:
+            case 1:
+            case 2:
+               System.out.println("That's 0..14 human months.");
+               break;
+
+            case 3:
+            case 4:
+            case 5:
+            case 6:
+               System.out.println("That's 14 months to 5 human years.");
+               break;
+
+            case 7:
+            case 8:
+               System.out.println("That's 5..9 human years.");
+               break;
+
+            case 9:
+            case 10:
+            case 11:
+            case 12:
+               System.out.println("That's 9..15 human years.");
+               break;
+
+            default:
+               System.out.println("Invalid input.");
+               break;
+         }
+      }
+      else {
+         System.out.println("FIXME: Do earlier dog years cases");
+         switch (dogAgeYears) {
+         }
+      }
+
+      return;
+   }
+}
+Rock-paper-scissors.
+Write a switch statement that checks nextChoice. If 0, print "Rock". If 1, print "Paper". If 2, print "Scissors". 
+For any other value, print "Unknown". End with newline. Do not get input from the user; nextChoice is assigned in main(). 
+import java.util.Scanner;
+
+public class Roshambo {
+   public static void main (String [] args) {
+      int nextChoice = 0;
+
+      nextChoice = 2;
+
+      switch(nextChoice) {
+         case 0:
+            System.out.println("Rock");
+            break;
+      
+         case 1:
+            System.out.println("Paper");
+            break;
+            
+         case 2:
+            System.out.println("Scissors");
+            break;
+      
+         default:
+            System.out.println("Unknown");
+            break;
+      }
+
+      return;
+   }
+}
+
+Challenge Activity6.5.2: Switch statement to convert letters to Greek letters.
+Write a switch statement that checks origLetter. If 'a' or 'A', print "Alpha". If 'b' or 'B', print "Beta". 
+For any other character, print "Unknown". Use fall-through as appropriate. End with newline. 
+import java.util.Scanner;
+
+public class ConvertToGreek {
+   public static void main (String [] args) {
+      char origLetter = '?';
+
+      origLetter = 'a';
+
+      switch(origLetter) {
+         case 'A':
+            System.out.println("Alpha");
+            break;
+            
+         case 'a':
+            System.out.println("Alpha");
+            break;
+            
+         case 'B':
+            System.out.println("Beta");
+            break;
+         
+         case 'b':
+            System.out.println("Beta");
+            break;
+          
+          default:
+            System.out.println("Unknown");
+            break;
+      }
+      
+      return;
+   }
+}
+Write code to print the location of any space in the 2-character string passCode. Each space detected should print a 
+separate statement followed by a newline. Sample output for the given program:
+Space at 1
+
+import java.util.Scanner;
+
+public class FindSpaces {
+   public static void main (String [] args) {
+      String passCode = "";
+
+      passCode = "A ";
+
+      if (Character.isWhitespace(passCode.charAt(0))) { 
+         System.out.println("Space at 0");
+      }
+      
+      if (Character.isWhitespace(passCode.charAt(1))) {
+         System.out.println("Space at 1");
+      }
+
+      return;
+   }
+}
+------------------------------------
+/*Character Operations*/
+6.10 Character operations
+The Character class provides several methods for working with characters.
+isLetter(c)	true if alphabetic: 
+a-z or A-Z
+
+isDigit(c)	true if digit: 0-9.
+
+isWhitespace(c)	true if whitespace
+isWhitespace(' ')  // true
+isWhitespace('\n') // true
+isWhitespace('x')  // false
+
+toUpperCase(c)	Uppercase version
+
+toLowerCase(c)	Lowercase version
+
+Challenge Activity6.10.1: String with digit.
+Set hasDigit to true if the 3-character passCode contains a digit. 
+public class CheckingPasscodes {
+   public static void main (String [] args) {
+      boolean hasDigit = false;
+      String passCode = "";
+      int valid = 0;
+
+      passCode = "abc";
+
+      if (Character.isDigit(passCode.charAt(0))) { 
+         hasDigit = true;
+      } 
+      
+      if (Character.isDigit(passCode.charAt(1))) { 
+         hasDigit = true;
+      } 
+
+      if (Character.isDigit(passCode.charAt(2))) { 
+         hasDigit = true; 
+      }
+
+      if (hasDigit) {
+         System.out.println("Has a digit.");
+      }
+      else {
+         System.out.println("Has no digit.");
+      }
+
+      return;
+   }
+}
+
+------------------------------------
+/*Floating-Point Comparison*/
+Floating-point numbers should not be compared using ==. Ex: Avoid float1 == float2. Reason: Some floating-point numbers cannot 
+be exactly represented in the limited available memory bits like 64 bits. Floating-point numbers expected to be equal may be 
+close but not exactly equal.
+
+loating-point numbers should be compared for "close enough" rather than exact equality. Ex: If (x - y) < 0.0001, x and y are 
+deemed equal. Because the difference may be negative, the absolute value is used: Math.abs(x - y) < 0.0001. Math.abs() is a 
+method in the Math class. The difference threshold indicating that floating-point numbers are equal is often called the epsilon. 
+Epsilon's value depends on the program's expected values, but 0.0001 is common.
+
+Figure 6.12.1: Example of comparing floating-point numbers for equality: Body temperature.
+
+import java.util.Scanner;
+import java.lang.Math;
+
+public class BodyTemperatureEx {
+   public static void main(String[] args) {
+      Scanner scnr = new Scanner(System.in);
+      double bodyTemp = 0.0;
+
+      System.out.print("Enter body temperature in Fahrenheit: ");
+      bodyTemp = scnr.nextDouble();
+
+      if (Math.abs(bodyTemp - 98.6) < 0.0001) {
+         System.out.println("Temperature is exactly normal.");
+      } 
+      else if (bodyTemp > 98.6) {
+         System.out.println("Temperature is above normal.");
+      } 
+      else {
+         System.out.println("Temperature is below normal.");
+      }
+
+      return;
+   }
+}
+To see the inexact value stored in a floating-point variable, the BigDecimal class can be used in an output statement.
+
+Figure 6.12.2: Observing the inexact values stored in floating-point variables.
+
+import java.math.BigDecimal;
+
+public class DoublePrecisionEx {
+   public static void main(String[] args) {
+      double sampleValue1 = 0.2;
+      double sampleValue2 = 0.3;
+      double sampleValue3 = 0.7;
+      double sampleValue4 = 0.0;
+      double sampleValue5 = 0.25;
+
+      System.out.println("sampleValue1 with System.out.println " + sampleValue1);
+      
+      // Uses BigDecimal to print floating-point values without rounding
+      System.out.println("sampleValue1 is " + new BigDecimal(sampleValue1));
+      System.out.println("sampleValue2 is " + new BigDecimal(sampleValue2));
+      System.out.println("sampleValue3 is " + new BigDecimal(sampleValue3));
+      System.out.println("sampleValue4 is " + new BigDecimal(sampleValue4));
+      System.out.println("sampleValue5 is " + new BigDecimal(sampleValue5));
+
+      return;
+   }
+}
+------------------------------------
+/*Short-Circuit Evaluation*/
+A logical operator evaluates operands from left to right. Short circuit evaluation skips evaluating later operands if the 
+result of the logical operator can already be determined. The logical AND operator short circuits to false if the first 
+operand evaluates to false, and skips evaluating the second operand. The logical OR operator short circuits to true if the 
+first operand is true, and skips evaluating the second operand.
+
+Table 6.13.1: Short circuit evaluation.
+Operator	Example	Short circuit evaluation
+operand1 && operand2	true && operand2 	If the first operand evaluates to true, operand2 is evaluated.
+false && operand2	If the first operand evaluates to false, the result of the AND operation is always false, so operand2 is not evaluated.
+operand1 || operand2	true || operand2	If the first operand evaluates to true, the result of the OR operation is always true, so operand2 is not evaluated.
+false || operand2	If the first operand evaluates to false, operand2 is evaluated.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

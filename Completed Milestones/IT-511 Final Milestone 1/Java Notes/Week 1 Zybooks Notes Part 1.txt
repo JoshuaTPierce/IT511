@@ -1,0 +1,208 @@
+/* 1.3 Basic Output to Console */
+
+The System.out.print construct supports printing. Printing text is achieved via: System.out.print("desired text");. Text in double quotes " " is known as a string literal. 
+Multiple print statements continue printing on the same output line. System.out.println (note the ln at the end, short for "line"), starts a new line after the printed output.
+
+Example of a String Literal, + a Variable, then starting a new line (println) with another string literal:
+
+public class Salary {
+   public static void main (String [] args) {
+      int wage = 20;
+
+      System.out.println("Wage is: " + wage); // The + separates items 
+      System.out.println("Goodbye."); 
+
+      return;
+   }
+}
+
+NOTE THE SPACE IN FRONT OF THE PLUS SIGN: otherwise first output line would be "Wage is20"
+
+
+/* 1.4 Enabling Basic User Input */
+
+import java.util.Scanner;
+
+A Scanner is a text parser that can read numbers, words, or phrases from an input source such as the 
+keyboard. Reading input is achieved by first creating a Scanner object via the statement 
+
+Scanner scnr = new Scanner(System.in) 
+
+where System.in corresponds to keyboard input. Then, input integers can be read using  
+
+hourlyWage = scnr.nextInt().
+
+Examples:
+
+import java.util.Scanner; // Enables user input
+
+public class Salary {
+   public static void main(String [] args) {
+      int hourlyWage   = 0;
+      int annualSalary = 0;
+
+      Scanner scnr = new Scanner(System.in); // Setup to scan chars from System.in
+
+      System.out.println("Enter hourly wage: ");
+      hourlyWage = scnr.nextInt();  // Read next integer from scanner
+
+      annualSalary = hourlyWage * 40 * 50;
+      System.out.print("Salary is ");
+      System.out.println(annualSalary);
+
+      return;
+   }
+}
+
+import java.util.Scanner;
+
+public class DogYears {
+   public static void main(String [] args) {
+      Scanner scnr = new Scanner(System.in);
+      int dogYears   = 0;
+      int humanYears = 0;
+
+      System.out.println("Enter dog years:");
+      dogYears = scnr.nextInt();
+
+      humanYears = 7 * dogYears;
+      System.out.print("A " + dogYears + " year old dog is about a ");
+      System.out.println(humanYears + " year old human.");
+
+      return;
+   }
+}
+
+Example: Multiple User Inputs:
+import java.util.Scanner;
+
+public class InputExample {
+   public static void main(String [] args) {
+      Scanner scnr = new Scanner(System.in);
+      int birthMonth;
+      int birthYear;
+
+      birthMonth = scnr.nextInt();
+      
+      birthYear = scnr.nextInt();
+      
+      System.out.println(birthMonth + "/" + birthYear);
+
+      return;
+   }
+}
+
+/* 1.5 Errors and Warnings */
+
+People make mistakes. Programmers thus make mistakes—lots of them. One kind of mistake, known as a syntax error, is to violate a programming language's rules on how symbols can be 
+combined to create a program. An example is forgetting to end a statement with a semicolon.
+
+Syntax Error = Language Error
+
+Good practice for fixing errors reported by the compiler.
+1. Focus on FIRST error message, ignoring the rest.
+2. Look at reported line of first error message. If error found, fix. Else, look at previous few lines.
+3. Compile, repeat.
+
+Good practice, especially for new programmers, is to compile after writing only a few lines of code, rather than writing tens of lines and then compiling.
+New programmers commonly write tens of lines before compiling, which may result in an overwhelming number of compilation errors and warnings.
+
+Because a syntax error is detected by the compiler, a syntax error is known as a type of compile-time error.
+
+New programmers commonly complain: "The program compiled perfectly but isn't working." Successfully compiling means the program doesn't have compile-time errors, 
+but the program may have other kinds of errors.
+
+A logic error, also called a runtime error or bug, is an error that occurs while a program runs.
+
+A compiler will sometimes report a warning, which doesn't stop the compiler from creating an executable program, but indicates a possible logic error. 
+For example, some compilers will report a warning like "Warning, dividing by 0 is not defined" if encountering code like:  totalItems = numItems / 0 (running that program does result in a 
+runtime error). Even though the compiler may create an executable program, good practice is to write programs that compile without warnings. 
+In fact, many programmers recommend the good practice of configuring compilers to print even more warnings. 
+
+More Examples:
+Calculating Monthly and Hourly Salary:
+
+public class Salary {                         
+
+   public static void main (String [] args) { 
+      int hourlyWage = 20;       
+                   
+      System.out.print("Annual salary is: ");         
+      System.out.println(hourlyWage * 40 * 50);   
+    
+      System.out.print("Monthly salary is: ");
+      System.out.println((hourlyWage * 40 * 50) / 1); 
+
+      return;
+   } 
+}
+
+import java.util.Scanner;
+
+public class ShowMarriedNames {
+
+   public static void main(String[] args) {
+      Scanner scnr = new Scanner(System.in);
+      String firstName1 = "";
+      String lastName1  = "";
+      String firstName2 = "";
+      String lastName2  = "";     
+      
+      System.out.println("What is the first person's first name?");
+      firstName1 = scnr.nextLine();
+      System.out.println("What is the first person's last name?");
+      lastName1  = scnr.nextLine();
+
+      System.out.println("What is the second person's first name?");
+      firstName2 = scnr.nextLine();
+      System.out.println("What is the second person's last name?");
+      lastName2  = scnr.nextLine();
+
+      System.out.println("Here are some common married-couple names:");
+      System.out.println(firstName1 + " " + lastName1 + " and " +
+                         firstName2 + " " + lastName2);
+      System.out.println(firstName1 + " and " + firstName2 + "-" + lastName1);
+      System.out.println(firstName1 + " and " + firstName2 + "-" + lastName2);
+      
+      // FIXME: Print two hyphenated last name options, with either last name
+      //        appearing first. (A hyphen can be written as "-")
+      
+      return;
+   }
+}
+
+import java.util.Scanner;
+
+public class ShowMarriedNames_Solution {
+
+   public static void main(String[] args) {
+      Scanner scnr = new Scanner(System.in);
+      String firstName1 = "";
+      String lastName1  = "";
+      String firstName2 = "";
+      String lastName2  = "";
+      
+      System.out.println("What is the first person's first name?");
+      firstName1 = scnr.nextLine();
+      System.out.println("What is the first person's last name?");
+      lastName1  = scnr.nextLine();
+
+      System.out.println("What is the second person's first name?");
+      firstName2 = scnr.nextLine();
+      System.out.println("What is the second person's last name?");
+      lastName2  = scnr.nextLine();
+
+      System.out.println("Here are some common married-couple names:");
+      System.out.println(firstName1 + " " + lastName1 + " and " +
+                         firstName2 + " " + lastName2);
+      System.out.println(firstName1 + " and " + firstName2 + " " + lastName1);
+      System.out.println(firstName1 + " and " + firstName2 + " " + lastName2);
+      System.out.println(firstName1 + " and " + firstName2 + " " + lastName1 +
+                         "-" + lastName2);
+      System.out.println(firstName1 + " and " + firstName2 + " " + lastName2 +
+                         "-" + lastName1);
+      return;
+   }
+}
+
+

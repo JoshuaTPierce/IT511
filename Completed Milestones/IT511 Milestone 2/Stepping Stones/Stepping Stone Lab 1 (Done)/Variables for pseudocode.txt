@@ -1,0 +1,49 @@
+/*Ingredient*/
+
+Define string nameOfIngredient, set to void
+
+Define float numberOfcups, set to void
+
+Define integer numberCaloriesPerCup, set to void
+
+Define double totalCalories, set to void
+
+	Function getNameOfIngredient
+	
+	Function getNumberOfCups
+
+	Function getCaloriesPerCup
+
+	Function calculate TotalCalories
+
+
+/*Recipe*/
+
+Define recipeIngredients as an ArrayList (void, no members)
+
+Define string recipeName, set to void
+
+Define integer servings, set to void
+
+Define double totalRecipeCalories, set to void
+
+	Function getRecipeIngredients
+
+	Function getRecipeName
+
+	Function getServings
+
+	Function calculate totalRecipeCalories	
+
+
+/*Recipe Box*/
+
+Define RecipeBox as an ArrayList (void, no members)
+
+Define listOfRecipes as an ArrayList (void, no members)
+
+
+
+	
+	
+

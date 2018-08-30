@@ -1,0 +1,277 @@
+/* Objects and Classes: An Early Introduction */
+
+In a program, an object consists of some internal data items plus operations that can be performed on that data. 
+An object's internal data are called private fields, as the data is private to the object. 
+The operations that can be called on an object are called public methods, as those operations can be called from outside the object.
+
+A class defines a type that groups data and methods to form an object. A class' public methods define the operations that can be performed on objects of that class type. 
+The class definition (discussed later) is like a blueprint explaining how to create objects and an instruction manual explaining how to use an object.
+
+public class AttendanceExample {
+   public static void main(String[] args) {
+      PeopleCounter attendeeCounter = new PeopleCounter();
+      
+      attendeeCounter.incrementCount();
+      attendeeCounter.incrementCount();
+      attendeeCounter.incrementCount();
+      
+      System.out.print("Attendee count: ");
+      attendeeCounter.printCount();
+
+      return;
+   }
+}
+
+To use objects, the programmer declared and created a new object of type PeopleCounter named attendeeCounter. 
+The program then called operations on the attendeeCounter object by invoking methods on the objects, such as attendeeCounter.incrementCount() and  attendeeCounter.printCount().
+
+Previous programs used objects for printing output, as in the statement System.out.print("Keep calm");. System.out is an object of type PrintStream that is automatically created when a 
+Java program starts. The print() method called on this object allows a program to print various output, such as the string "Keep calm".
+
+Question/Answer:
+Q: 	
+Declare and create a new object of type PeopleCounter named passengerCounter.
+A:
+PeopleCounter passengerCounter = new PeopleCounter();
+
+Q:
+Declare and create two objects of type PeopleCounter named entranceCount and exitCount.
+A:
+PeopleCounter entranceCount = new PeopleCounter();
+PeopleCounter exitCount = new PeopleCounter();
+//A program can create multiple objects of the same type.
+
+Q:
+Call the printCount() method on a PeopleCounter object named studentCounter.
+A:
+studentCounter.printCount();
+//The object name comes before the period, and the method being called on that object comes after the period.
+
+Class object -> object.method();
+
+People Counter Example:
+
+public class PeopleCounter {
+
+   // Variable to store number of people counted
+   private int numPeople;
+
+   // Default constructor initializes count to 0
+   public PeopleCounter() {
+      numPeople = 0;
+   }
+
+   // Increments counts by 1
+   public void incrementCount() {
+      numPeople = numPeople + 1;
+      return;
+   }
+
+   // Resets count to 0
+   public void resetCount() {
+      numPeople = 0;
+      return;
+   }
+
+   // Display current count
+   public void printCount() {
+      System.out.print(numPeople);
+      return;
+   }
+
+   // Returns current count
+   public int getCount() {
+      return numPeople;
+   }
+}
+
+/* Variables: Int */
+
+A variable represents a memory location used to store data. That location is like the "box" that you used above. The statement int userAge; declares a new variable named userAge. 
+The compiler allocates a memory location for userAge capable of storing an integer, hence the "int". When a statement executes that assigns a value to a variable, the processor 
+stores the value into the variable's memory location. Likewise, reading a variable's value reads the value from the variable's memory location.
+
+import java.util.Scanner;
+
+public class DeclaringVariables {
+   public static void main (String [] args) {
+
+      int numHouses = 25;
+
+      System.out.println(numHouses);
+
+      return;
+   }
+}
+
+Example:
+import java.util.Scanner;
+
+public class AgePrinter {
+   public static void main (String [] args) {
+      int userAge = 0; //THIS IS THE MAIN VARIABLE - DATA STORAGE IS CREATED
+      System.out.print("Enter your age: ");
+      Scanner scnr = new Scanner(System.in);
+      userAge = scnr.nextInt(); //THIS IS WHERE A VALUE IS STORED IN THAT DATA STORAGE
+      System.out.println(userAge + " is a great age."); //METHOD IS CALLED ON THE VARIABLE'S VALUE
+      return;
+   }
+}
+
+Basic integer variable declaration with initial value of 0.
+int variableName = 0;
+
+Declare a second integer variable avgLifespan, initialized to 70. Add a statement that prints "Average lifespan is 70" (don't type 70 there; print the avgLifespan variable).
+
+import java.util.Scanner;
+
+public class Age {
+   public static void main (String [] args) {
+      Scanner scnr = new Scanner(System.in);
+      int userAge = 0;
+      int avgLifespan = 70;
+
+      System.out.println("Enter your age: ");
+      userAge = scnr.nextInt();
+
+      System.out.println(userAge + " is a great age.");
+
+      System.out.println("Average lifespan is " + avgLifespan);
+      
+      return;
+   }
+}
+
+A common error is to read a variable that has not yet been assigned a value. If a local variable is declared but not initialized, the variable's memory location contains some unknown value, 
+commonly but not always 0. A program with an uninitialized variable may thus run correctly on system that has 0 in the memory location, but then fail on a different system—a very difficult 
+bug to fix. Programmers thus must ensure that a program assigns a variable before reading. A good practice is to initialize a variable in its declaration whenever practical. 
+The space allocated to a variable in memory is not infinite. An int variable can usually only hold numbers in the range -2,147,483,648 to 2,147,483,647. That's about ±2 billion.
+
+/* 2.3 Assignment Statements */
+
+Assignment statement:
+
+variableName = expression;
+
+An assignment statement like numApples = 8; stores (i.e. assigns) the right-side item's current value (in this case, 8) into the variable on left side (numApples).
+An expression may be a number like 80, a variable name like numApples, or a simple calculation like numApples + 1. Simple calculations can involve standard math operators like +, -, and *, 
+and parentheses as in 2 * (numApples - 1). 
+
+Example:
+public class Mice {
+   public static void main(String [] args) {
+      int litterSize    = 3; // Low end of litter size range
+      int yearlyLitters = 5; // Low end of litters per year
+      int annualMice    = 0;
+//Variables have been initialized
+      System.out.print("One female mouse may give birth to ");
+      annualMice = litterSize * yearlyLitters;
+      System.out.println(annualMice + " mice,");
+//Print string literal, declare a new value for annualMice, print new value and another string literal with the first string literal
+      litterSize    = 14; // High end - new variable value
+      yearlyLitters = 10; // High end - new variable value
+      System.out.print("and up to ");
+      annualMice = litterSize * yearlyLitters;
+      System.out.println(annualMice + " mice, in a year.");
+
+      return;
+   }
+}
+
+Output:
+One female mouse may give birth to 15 mice,
+and up to 140 mice, in a year.
+
+A common error among new programmers is to assume = means equals, as in mathematics. In contrast, = means "compute the value on the right, and then assign that value into the variable 
+on the left." Some languages use := instead of = to reduce confusion. Programmers sometimes speak numItems = numApples as "numItems EQUALS numApples", but this material strives to avoid 
+such inaccurate wording.
+
+Another common error by beginning programmers is to write an assignment statement in reverse, as in: numKids + numAdults = numPeople, or 9 = beansCount. 
+Those statements won't compile. But, writing numCats = numDogs in reverse will compile, leading to a hard-to-find bug.
+
+Commonly, a variable appears on both the right and left side of the = operator. If numItems is initially 5, then after numItems = numItems + 1, numItems will be 6. 
+The statement reads the value of numItems (5), adds 1, and stores the result of 6 in numItems—overwriting whatever value was previously in numItems.
+
+Another Example:
+Assigning to a variable overwrites its previous values: People-known example.
+
+import java.util.Scanner;
+
+public class PeopleKnown {
+   public static void main (String [] args) {
+      int yourFriends = 0;
+      int totalFriends = 0;
+
+      System.out.print("Enter the number of people you know: ");
+      Scanner scnr = new Scanner(System.in);
+      yourFriends = scnr.nextInt();
+
+      totalFriends = yourFriends;
+      System.out.println(" You know " + totalFriends + " people.");
+      totalFriends = totalFriends * yourFriends;
+      System.out.println(" Those people know " + totalFriends + " people.");
+      totalFriends = totalFriends * yourFriends;
+      System.out.println(" And they know " + totalFriends + " people.");
+
+      return;
+   }
+}
+
+Write a statement that assigns 3 to hoursLeft.
+ 
+public class AssignmentValue {
+   public static void main (String [] args) {
+      int hoursLeft = 0;
+
+      hoursLeft = 3;
+      
+      System.out.print(hoursLeft);
+      System.out.println(" hours left.");
+
+      return;
+   }
+}
+
+Write a statement that assigns numCoins with numNickels + numDimes. Ex: 5 nickels and 6 dimes results in 11 coins. 
+
+public class AssigningSum {
+   public static void main (String [] args) {
+      int numCoins;
+      int numNickels;
+      int numDimes;
+
+      numNickels = 5;
+      numDimes = 6;
+
+      numCoins = numNickels + numDimes;
+
+      System.out.print("There are ");
+      System.out.print(numCoins);
+      System.out.println(" coins");
+
+      return;
+   }
+}
+
+Write a statement that increases numPeople by 5. Ex: If numPeople is initially 10, the output is: There are 15 people. 
+
+public class AssigningNumberToVariable {
+   public static void main (String [] args) {
+      int numPeople = 0;
+
+      numPeople = 10;
+
+      numPeople = numPeople + 5;
+
+      System.out.print("There are ");
+      System.out.print(numPeople);
+      System.out.println(" people.");
+
+      return;
+   }
+}
+
+
+
+
+
